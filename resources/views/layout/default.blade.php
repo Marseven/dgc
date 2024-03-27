@@ -99,7 +99,7 @@
                                 data-rd-navbar-toggle=".rd-navbar-nav-wrap"><span></span></button>
                             <button class="rd-navbar-collapse-toggle"
                                 data-rd-navbar-toggle=".rd-navbar-collapse"><span></span></button>
-                            <div class="rd-navbar-brand"><a class="brand-name" href="index.html"><img
+                            <div class="rd-navbar-brand"><a class="brand-name" href="{{ route('home') }}"><img
                                         class="brand-device" src="{{ asset('front/images/dgc_wb.png') }}" width="100"
                                         alt="Home service"><img class="brand-mobile"
                                         src="{{ asset('front/images/dgc_wb.png') }}" width="100"
@@ -180,9 +180,9 @@
             <section class="section-75 section-sm-80 section-md-100 section-xl-150">
                 <div class="container">
                     <div class="row text-md-left row-55">
-                        <div class="col-md-6 col-xl-3 col-xxl-4"><a href="index.html"><img class="img-responsive"
-                                    src="{{ asset('front/images/dgc_wb.png') }}" alt="DGC" width="100"
-                                    height="58" /></a>
+                        <div class="col-md-6 col-xl-3 col-xxl-4"><a href="{{ route('home') }}"><img
+                                    class="img-responsive" src="{{ asset('front/images/dgc_wb.png') }}"
+                                    alt="DGC" width="100" height="58" /></a>
                             <p class="offset-top-20 offset-md-top-35 inset-xxl-right-30">La Direction Générale du
                                 Commerce est une entité du Ministère des Petites et Moyennes Entreprises, de l'Artisanat
                                 et du Commerce.

@@ -6,7 +6,7 @@
         <div class="container">
             <div class="row">
                 <ul class="list-breadcrumb">
-                    <li><a href="index.html">Accueil</a></li>
+                    <li><a href="{{ route('home') }}">Accueil</a></li>
                     <li>Déclarion d'importation de la société</li>
                 </ul>
             </div>
