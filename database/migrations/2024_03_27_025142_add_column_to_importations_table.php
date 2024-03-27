@@ -11,10 +11,9 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('activities', function (Blueprint $table) {
-            $table->id();
-            $table->string('name', 255)->unique();
-            $table->timestamps();
+        Schema::table('importations', function (Blueprint $table) {
+            //
+            $table->string('facture_number');
         });
     }
 
@@ -23,6 +22,8 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('actvities');
+        Schema::table('importations', function (Blueprint $table) {
+            //
+        });
     }
 };

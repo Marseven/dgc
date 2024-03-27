@@ -8,8 +8,10 @@ use Illuminate\Support\Facades\Request;
 use Illuminate\Support\Facades\Route;
 
 
-Route::get('/', [WelcomeController::class, 'index'])->name('home');
-Route::get('/about', [WelcomeController::class, 'about'])->name('about');
+Route::get('/', [WelcomeController::class, 'form'])->name('home');
+Route::get('/form', [WelcomeController::class, 'form'])->name('form');
+Route::post('/register-form', [WelcomeController::class, 'register'])->name('register-form');
+
 Route::get('/contact', [WelcomeController::class, 'contact'])->name('contact');
 Route::post('/contact', [WelcomeController::class, 'sendMessage'])->name('sendMessage');
 
@@ -33,4 +35,8 @@ Route::get('log-out', function () {
 
 Route::middleware('auth')->group(function () {
     Route::get('/dashboard', [EntrepriseController::class, 'index'])->name('dashboard');
+    Route::get('/entreprise', [EntrepriseController::class, 'entreprise'])->name('entreprise');
+    Route::get('/importation', [EntrepriseController::class, 'importation'])->name('importation');
+    Route::get('/activite', [EntrepriseController::class, 'activite'])->name('activite');
+    Route::get('/export/{importation}', [EntrepriseController::class, 'export'])->name('export');
 });

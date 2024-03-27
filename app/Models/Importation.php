@@ -5,12 +5,12 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Entreprise extends Model
+class Importation extends Model
 {
     use HasFactory;
 
-    public function activity()
+    public function entreprise()
     {
-        return $this->belongsTo(Activity::class);
+        return $this->belongsTo(Entreprise::class);
     }
 }
