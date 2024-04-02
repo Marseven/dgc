@@ -118,7 +118,7 @@ class EntrepriseController extends Controller
 
             <form action="' . url('update/importation/' . $request->id) . '" method="POST">
                 <div class="modal-body">
-                <input type="hidden" name="_token" value="' . csrf_token() . '">
+                        <input type="hidden" name="_token" value="' . csrf_token() . '">
                         <div class="mb-3">
                             <div class="input-style-1">
                                 <label class="form-label" for="type_product">Nature des marchandises *</label>
