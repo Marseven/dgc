@@ -40,5 +40,5 @@ Route::middleware('auth')->group(function () {
     Route::get('/activite', [EntrepriseController::class, 'activite'])->name('activite');
     Route::get('/export/{importation}', [EntrepriseController::class, 'export'])->name('export');
     Route::post('/update/importation/{importation}', [EntrepriseController::class, 'updateImportation'])->name('update-importation');
-    Route::get('/get/importation', [EntrepriseController::class, 'ajaxItem'])->name('get-importation');
+    Route::post('/get/importation', [EntrepriseController::class, 'ajaxItem'])->name('get-importation');
 });
