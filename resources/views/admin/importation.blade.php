@@ -27,6 +27,7 @@
     </div>
     <!-- Container-fluid starts-->
     @include('layout.alert')
+
     <div class="container-fluid">
         <div class="row">
             <div class="col-sm-12">

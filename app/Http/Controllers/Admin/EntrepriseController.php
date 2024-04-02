@@ -252,7 +252,7 @@ class EntrepriseController extends Controller
         }
 
         if ($importation->save()) {
-            return back()->with('success', "La déclaration a été mise avec succès.");
+            return back()->with('success', "La déclaration a été mise à jour avec succès.");
         } else {
             return back()->with('error', "Une erreur s'est produite.");
         }
