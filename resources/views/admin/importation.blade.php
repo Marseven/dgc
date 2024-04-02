@@ -70,8 +70,8 @@
                                                 <ul class="action">
 
                                                     <li class="edit">
-                                                        <a href="#" class="btn btn-info modal_edit_action"
-                                                            data-bs-toggle="modal" data-id="{{ $importation->id }}"
+                                                        <a href="#" class="modal_edit_action" data-bs-toggle="modal"
+                                                            data-id="{{ $importation->id }}"
                                                             data-bs-target="#cardModaView">
                                                             <i class="icon-pencil"></i>
                                                         </a>
