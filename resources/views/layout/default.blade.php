@@ -7,6 +7,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <link rel="icon" href="{{ asset('front/images/dgc.png') }}" type="image/x-icon">
     <link rel="stylesheet" type="text/css"
         href="//fonts.googleapis.com/css?family=Poppins:400,500,700%7CNoto+Sans:400,700">

@@ -13,6 +13,7 @@
     <meta name="author" content="pixelstrap">
     <link rel="icon" href="{{ asset('front/images/dgc.png') }}" type="image/x-icon">
     <link rel="shortcut icon" href="{{ asset('front/images/dgc.png') }}" type="image/x-icon">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>Direction Général du Commerce | Gabon</title>
     <!-- Google font-->
     <link href="https://fonts.googleapis.com/css?family=Rubik:400,400i,500,500i,700,700i&amp;display=swap"
@@ -83,7 +84,8 @@
                 </form>
                 <div class="header-logo-wrapper col-auto p-0">
                     <div class="logo-wrapper"><a href="{{ route('dashboard') }}"><img class="img-fluid"
-                                src="{{ asset('front/images/dgc_wb.png') }}" width="75" alt=""></a></div>
+                                src="{{ asset('front/images/dgc_wb.png') }}" width="75" alt=""></a>
+                    </div>
                     <div class="toggle-sidebar"><i class="status_toggle middle sidebar-toggle"
                             data-feather="align-center"></i></div>
                 </div>
