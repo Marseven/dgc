@@ -127,7 +127,7 @@
         </p>
         <p style="margin-bottom:0pt; line-height:normal">
             <span style="height:0pt; display:block; position:absolute; z-index:-2"><img
-                    src="{{ asset('admin/images/image002.jpg') }}" width="540" height="62" alt=""
+                    src="{{ asset('admin/images/image002.png') }}" width="540" height="62" alt=""
                     style="margin-top:-5.4pt; margin-left:44.6pt; position:absolute" /></span><span
                 style="color:#0070c0">&#xa0;</span>
         </p>
