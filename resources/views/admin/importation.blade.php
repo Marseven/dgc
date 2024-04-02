@@ -68,17 +68,22 @@
                                             <td>{{ $importation->created_at }}</td>
                                             <td>
                                                 <ul class="action">
-                                                    <li class="edit"> <a
-                                                            href="{{ url('export/' . $importation->id) }}"><i
-                                                                class="icon-download"></i></a>
+                                                    <li class="edit">
+                                                        <a href="{{ url('export/' . $importation->id) }}">
+                                                            <button style="padding: 10px !important" type="button"
+                                                                class="btn btn-success">
+                                                                <i class="icon-download"></i>
+                                                            </button>
+                                                        </a>
                                                     </li>
-
-                                                    <button style="padding: 10px !important" type="button"
-                                                        class="btn btn-secondary modal_edit_action" data-bs-toggle="modal"
-                                                        data-id="{{ $importation->id }}" data-bs-target="#cardModaView">
-                                                        <i class="icon-pencil"></i>
-                                                    </button>
-
+                                                    <li class="edit">
+                                                        <button style="padding: 10px !important" type="button"
+                                                            class="btn btn-info modal_edit_action" data-bs-toggle="modal"
+                                                            data-id="{{ $importation->id }}"
+                                                            data-bs-target="#cardModaView">
+                                                            <i class="icon-pencil"></i>
+                                                        </button>
+                                                    </li>
                                                 </ul>
                                             </td>
                                         </tr>
