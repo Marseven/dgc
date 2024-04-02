@@ -143,8 +143,8 @@
                     //get data value params
                     var body = data.body;
                     //dynamic title
-                    $('#cardModal .modal-content').html(body); //url to delete item
-                    $('#cardModal').modal('show');
+                    $('#cardModalView .modal-content').html(body); //url to delete item
+                    $('#cardModalView').modal('show');
                 }
             });
 
