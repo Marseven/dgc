@@ -18,8 +18,8 @@
                                 <svg class="stroke-icon">
                                     <use href="{{ asset('admin/svg/icon-sprite.svg#stroke-home') }}"></use>
                                 </svg></a></li>
-                        <li class="breadcrumb-item">Importations</li>
-                        <li class="breadcrumb-item active">Importations</li>
+                        <li class="breadcrumb-item">Déclarations</li>
+                        <li class="breadcrumb-item active">Déclarations</li>
                     </ol>
                 </div>
             </div>
