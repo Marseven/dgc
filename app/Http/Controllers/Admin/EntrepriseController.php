@@ -195,13 +195,6 @@ class EntrepriseController extends Controller
                                 <input class="form-control" id="transitaire" type="text" value="' . $importation->transitaire . '" name="transitaire" required>
                             </div>
                         </div>
-
-                        <div class="mb-3">
-                            <div class="input-style-1">
-                                <label class="form-label ">Raison / Motif</label>
-                                <textarea class="form-control" name="reason" type="text" required>' . $importation->reason . '</textarea>
-                            </div>
-                        </div>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-dark" data-bs-dismiss="modal">Fermer</button>
