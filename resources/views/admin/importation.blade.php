@@ -72,7 +72,7 @@
                                                     <li class="edit">
                                                         <a href="#" class="modal_edit_action" data-bs-toggle="modal"
                                                             data-id="{{ $importation->id }}"
-                                                            data-bs-target="#cardModaView">
+                                                            data-bs-target="#cardModalView">
                                                             <i class="icon-pencil"></i>
                                                         </a>
                                                     </li>
