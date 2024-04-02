@@ -110,13 +110,13 @@ class EntrepriseController extends Controller
         } elseif ($request->action == "edit") {
 
             $body = '<div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabelOne">Mettre à jour la transaction N° : ' . $importation->id . '</h5>
+                <h5 class="modal-title" id="exampleModalLabelOne">Mettre à jour la déclaration N° : ' . $importation->id . '</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
 
                 </button>
             </div>
 
-            <form action="' . url('update/importation/' . $request->id) . '" method="POST">
+            <form action="' . url('update/importation/' . $importation->id) . '" method="POST">
                 <div class="modal-body">
                         <input type="hidden" name="_token" value="' . csrf_token() . '">
                         <div class="mb-3">
