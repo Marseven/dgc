@@ -135,6 +135,13 @@ class EntrepriseController extends Controller
 
                         <div class="mb-3">
                             <div class="input-style-1">
+                                <label class="form-label" for="country_from">Pays de Provenance *</label>
+                                <input class="form-control" id="country_from" type="text" value="' . $importation->country_from . '" name="country_from" required>
+                            </div>
+                        </div>
+
+                        <div class="mb-3">
+                            <div class="input-style-1">
                                 <label class="form-label" for="destination">Destination *</label>
                                 <input class="form-control" id="destination" type="text" value="' . $importation->destination . '" name="destination" required>
                             </div>
