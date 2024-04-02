@@ -73,6 +73,12 @@
                                                                 class="icon-download"></i></a>
                                                     </li>
 
+                                                    <button style="padding: 10px !important" type="button"
+                                                        class="btn btn-secondary modal_edit_action" data-bs-toggle="modal"
+                                                        data-id="{{ $importation->id }}" data-bs-target="#cardModaView">
+                                                        <i class="icon-pencil"></i>
+                                                    </button>
+
                                                 </ul>
                                             </td>
                                         </tr>
@@ -86,6 +92,23 @@
         </div>
     </div>
     <!-- Container-fluid Ends-->
+
+    <div class="modal fade" id="cardModalView" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabelOne"></h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+                    </button>
+                </div>
+                <div class="modal-body">
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-dark" data-bs-dismiss="modal">Fermer</button>
+                </div>
+            </div>
+        </div>
+    </div>
 @endsection
 
 @push('scripts')
@@ -98,6 +121,31 @@
                 },
 
             });
+        });
+
+        $(document).on("click", ".modal_edit_action", function() {
+            var id = $(this).data('id');
+
+            $.ajax({
+                headers: {
+                    'X-CSRF-TOKEN': jQuery('meta[name="csrf-token"]').attr('content')
+                },
+                type: "POST",
+                url: "{{ route('get-importation') }}",
+                dataType: 'json',
+                data: {
+                    "id": id,
+                    "action": "edit",
+                },
+                success: function(data) {
+                    //get data value params
+                    var body = data.body;
+                    //dynamic title
+                    $('#cardModal .modal-content').html(body); //url to delete item
+                    $('#cardModal').modal('show');
+                }
+            });
+
         });
     </script>
 @endpush

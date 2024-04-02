@@ -65,44 +65,47 @@
             <div class="col-xxl-auto col-xl-3 col-sm-6 box-col-6">
                 <div class="row">
                     <div class="col-xl-12">
-                        <div class="card small-widget">
-                            <div class="card-body primary"> <span class="f-light">Entreprises</span>
-                                <div class="d-flex align-items-end gap-1">
-                                    <h4>{{ $entreprises }}</h4>
-                                </div>
-                                <div class="bg-gradient">
-                                    <svg class="stroke-icon svg-fill">
-                                        <use href="../assets/svg/icon-sprite.svg#new-order"></use>
-                                    </svg>
+                        <a href="{{ route('entreprise') }}">
+                            <div class="card small-widget">
+                                <div class="card-body primary"> <span class="f-light">Entreprises</span>
+                                    <div class="d-flex align-items-end gap-1">
+                                        <h4>{{ $entreprises }}</h4>
+                                    </div>
+                                    <div class="bg-gradient">
+                                        <svg class="stroke-icon svg-fill">
+                                            <use href="../assets/svg/icon-sprite.svg#new-order"></use>
+                                        </svg>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-
+                        </a>
                     </div>
                 </div>
             </div>
             <div class="col-xxl-auto col-xl-3 col-sm-6 box-col-6">
                 <div class="row">
                     <div class="col-xl-12">
-                        <div class="card small-widget">
-                            <div class="card-body primary"> <span class="f-light">Déclarations</span>
-                                <div class="d-flex align-items-end gap-1">
-                                    <h4>{{ $importations }}</h4>
-                                </div>
-                                <div class="bg-gradient">
-                                    <svg class="stroke-icon svg-fill">
-                                        <use href="../assets/svg/icon-sprite.svg#new-order"></use>
-                                    </svg>
+                        <a href="{{ route('importation') }}">
+                            <div class="card small-widget">
+                                <div class="card-body primary"> <span class="f-light">Déclarations</span>
+                                    <div class="d-flex align-items-end gap-1">
+                                        <h4>{{ $importations }}</h4>
+                                    </div>
+                                    <div class="bg-gradient">
+                                        <svg class="stroke-icon svg-fill">
+                                            <use href="../assets/svg/icon-sprite.svg#new-order"></use>
+                                        </svg>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-
+                        </a>
                     </div>
                 </div>
             </div>
             <div class="col-xxl-auto col-xl-12 col-sm-6 box-col-6">
                 <div class="row">
                     <div class="col-xxl-12 col-xl-6 box-col-12">
+                        <a href="{{ route('activite') }}"></a>
                         <div class="card small-widget">
                             <div class="card-body primary"> <span class="f-light">Activités</span>
                                 <div class="d-flex align-items-end gap-1">

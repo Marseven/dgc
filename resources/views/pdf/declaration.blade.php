@@ -59,8 +59,7 @@
     <div>
         <p style="margin-bottom:0pt; text-align:justify; line-height:normal; font-size:9pt">
             <span style="height:0pt; text-align:left; display:block; position:absolute; z-index:-1"><img
-                    src="https://myfiles.space/user_files/temporary/66037df0270699.32504053/1711504879_declaration-d-importation-vierge/1711504879_declaration-d-importation-vierge-1.jpeg"
-                    width="118" height="75" alt="RG"
+                    src="{{ asset('admin/images/image001.jpg') }}" width="118" height="75" alt="RG"
                     style="margin-top:3.7pt; margin-left:427.15pt; position:absolute" /></span><span
                 style="font-family:'Bookman Old Style'; color:#171717">MINISTERE DU COMMERCE,</span>
         </p>
@@ -128,8 +127,7 @@
         </p>
         <p style="margin-bottom:0pt; line-height:normal">
             <span style="height:0pt; display:block; position:absolute; z-index:-2"><img
-                    src="https://myfiles.space/user_files/temporary/66037df0270699.32504053/1711504879_declaration-d-importation-vierge/1711504879_declaration-d-importation-vierge-2.png"
-                    width="540" height="62" alt=""
+                    src="{{ asset('admin/images/image002.jpg') }}" width="540" height="62" alt=""
                     style="margin-top:-5.4pt; margin-left:44.6pt; position:absolute" /></span><span
                 style="color:#0070c0">&#xa0;</span>
         </p>

@@ -192,7 +192,7 @@
                                         </svg>
                                         <svg class="fill-icon">
                                             <use href="{{ asset('admin/svg/icon-sprite.svg#fill-project') }}"></use>
-                                        </svg><span>Importations </span></a>
+                                        </svg><span>Déclarations </span></a>
                                 </li>
 
                                 <li class="sidebar-main-title">

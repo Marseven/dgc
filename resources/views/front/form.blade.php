@@ -7,7 +7,7 @@
             <div class="row">
                 <ul class="list-breadcrumb">
                     <li><a href="{{ route('home') }}">Accueil</a></li>
-                    <li>Déclarion d'importation de la société</li>
+                    <li>Déclarion de stock de la société</li>
                 </ul>
             </div>
         </div>
@@ -18,7 +18,7 @@
         <div class="container text-left">
             @include('layout.alert')
             <br>
-            <h2>Déclaration d’importation de la société</h2>
+            <h2>Déclaration de stock de la société</h2>
             <form method="post" action="{{ route('register-form') }}" enctype="multipart/form-data">
                 @csrf
                 <br>
