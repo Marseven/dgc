@@ -7,7 +7,7 @@
             <div class="row">
                 <ul class="list-breadcrumb">
                     <li><a href="{{ route('home') }}">Accueil</a></li>
-                    <li>Déclarion d’importation</li>
+                    <li>Déclaration d’importation</li>
                 </ul>
             </div>
         </div>
