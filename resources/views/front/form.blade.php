@@ -18,7 +18,7 @@
         <div class="container text-left">
             @include('layout.alert')
             <br>
-            <h2>Déclaration de stock de la société</h2>
+            <h2>Déclaration prévisionnel d’importation</h2>
             <form method="post" action="{{ route('register-form') }}" enctype="multipart/form-data">
                 @csrf
                 <br>
