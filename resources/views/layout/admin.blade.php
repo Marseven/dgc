@@ -273,7 +273,7 @@
                                     <!--begin:Menu item-->
                                     <li class="sidebar-list"><i class="fa fa-thumb-tack"> </i>
                                         <a class="sidebar-link sidebar-title" href="{{ url('log-viewer') }}">
-                                            <i data-feather="list" class="mx-1"></i><span>Moyen logistique
+                                            <i data-feather="list" class="mx-1"></i><span>Log
                                             </span></a>
                                     </li>
                                 @endHasPrivilige
