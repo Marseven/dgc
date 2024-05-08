@@ -100,7 +100,7 @@
                                 data-rd-navbar-toggle=".rd-navbar-nav-wrap"><span></span></button>
                             <button class="rd-navbar-collapse-toggle"
                                 data-rd-navbar-toggle=".rd-navbar-collapse"><span></span></button>
-                            <div class="rd-navbar-brand"><a class="brand-name" href="{{ route('home') }}"><img
+                            <div class="rd-navbar-brand"><a class="brand-name" href="{{ url('/') }}"><img
                                         class="brand-device" src="{{ asset('front/images/dgc_wb.png') }}" width="100"
                                         alt="Home service"><img class="brand-mobile"
                                         src="{{ asset('front/images/dgc_wb.png') }}" width="100"
@@ -163,10 +163,8 @@
                         <div class="rd-navbar-nav-wrap">
                             <!-- RD Navbar Nav-->
                             <ul class="rd-navbar-nav">
-                                <li class="active"><a href="{{ route('home') }}">Accueil</a></li>
-                                <li><a href="#">A Propos</a></li>
-                                <li><a href="#">Contacts</a></li>
-                                <li><a href="{{ route('form') }}">Faire un déclaration</a></li>
+                                <li><a href="{{ url('/') }}">Déclaration d'importation</a></li>
+                                <li><a href="{{ url('form/stock') }}">Déclaration de stock</a></li>
                             </ul>
                         </div>
                     </div>
@@ -181,7 +179,7 @@
             <section class="section-75 section-sm-80 section-md-100 section-xl-150">
                 <div class="container">
                     <div class="row text-md-left row-55">
-                        <div class="col-md-6 col-xl-3 col-xxl-4"><a href="{{ route('home') }}"><img
+                        <div class="col-md-6 col-xl-3 col-xxl-4"><a href="{{ url('/') }}"><img
                                     class="img-responsive" src="{{ asset('front/images/dgc_wb.png') }}"
                                     alt="DGC" width="100" height="58" /></a>
                             <p class="offset-top-20 offset-md-top-35 inset-xxl-right-30">La Direction Générale du
@@ -189,22 +187,11 @@
                                 et du Commerce.
                             </p>
                         </div>
-                        <div class="col-sm-6 col-md-3 col-xl-2 col-lg-3"><span
-                                class="small text-spacing-340 text-white text-uppercase font-weight-bold page-footer-classic-title">A
-                                PROPOS</span>
-                            <ul class="list list-marked offset-top-30 list-xs offset-md-top-40">
-                                <li><a class="text-white" href="#">Notre Direction</a></li>
-                                <li><a class="text-white" href="#">Nos Actions</a></li>
-                                <li><a class="text-white" href="#">Notre Histoire</a></li>
-                                <li><a class="text-white" href="#">Recrutement</a></li>
-                            </ul>
-                        </div>
+
                         <div class="col-sm-6 col-md-3 col-xl-2 col-lg-3"><span
                                 class="small text-spacing-340 text-white text-uppercase font-weight-bold page-footer-classic-title">INFORMATION</span>
                             <ul class="list list-marked offset-top-30 list-xs offset-md-top-40">
-                                <li><a class="text-white" href="#">Actualité</a></li>
                                 <li><a class="text-white" href="#">Contact</a></li>
-                                <li><a class="text-white" href="#">Site Map</a></li>
                                 <li><a class="text-white" href="#">Politique de Confidentialité</a></li>
                             </ul>
                         </div>

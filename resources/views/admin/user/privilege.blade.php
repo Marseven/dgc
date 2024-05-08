@@ -5,21 +5,21 @@
 @endpush
 
 @section('content')
+    <!-- Container fluid -->
     <div class="container-fluid">
         <div class="page-title">
             <div class="row">
                 <div class="col-6">
-                    <h4>
-                        Liste des activités</h4>
+                    <h4>Privilèges</h4>
                 </div>
                 <div class="col-6">
                     <ol class="breadcrumb">
-                        <li class="breadcrumb-item"><a href="{{ route('home') }}">
+                        <li class="breadcrumb-item"><a href="{{ route('dashboard') }}">
                                 <svg class="stroke-icon">
                                     <use href="{{ asset('admin/svg/icon-sprite.svg#stroke-home') }}"></use>
                                 </svg></a></li>
-                        <li class="breadcrumb-item">Paramètres</li>
-                        <li class="breadcrumb-item active">Activités</li>
+                        <li class="breadcrumb-item">Gestion des utilisateurs</li>
+                        <li class="breadcrumb-item active">Privilèges</li>
                     </ol>
                 </div>
             </div>
@@ -33,31 +33,29 @@
                 <div class="card">
                     <div class="card-body">
                         <div class="list-product-header">
-
+                            <div>
+                            </div>
                         </div>
                         <div class="list-product">
-                            <table class="table" id="activite">
+                            <table class="table" id="kt_datatable">
                                 <thead>
                                     <tr>
-                                        <th> <span class="f-light f-w-600">ID</span></th>
-                                        <th> <span class="f-light f-w-600">Libellé</span></th>
-                                        <th> <span class="f-light f-w-600">Action</span></th>
+                                        <th>#</th>
+                                        <th>Type d'utilisateur</th>
+                                        <th>Libellé</th>
+                                        <th>Description</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach ($activites as $activite)
+                                    @foreach ($privileges as $privilege)
                                         <tr>
-                                            <td>{{ $activite->id }}</td>
-                                            <td>{{ $activite->name }}</td>
-                                            <td>
-                                                <ul class="action">
-                                                    <li class="edit"> <a href="#"><i
-                                                                class="icon-pencil-alt"></i></a></li>
-                                                    <li class="delete"><a href="#"><i class="icon-trash"></i></a></li>
-                                                </ul>
-                                            </td>
+                                            <td>{{ $privilege->id }}</td>
+                                            <td>{{ $privilege->user_type['name'] }}</td>
+                                            <td>{{ $privilege['name'] }}</td>
+                                            <td>{{ $privilege['description'] }}</td>
                                         </tr>
                                     @endforeach
+                                    </tr>
                                 </tbody>
                             </table>
                         </div>
@@ -70,14 +68,16 @@
 @endsection
 
 @push('scripts')
+    <!--begin::Page Vendors(used by this page)-->
     <script src="{{ asset('admin/js/datatable/datatables/jquery.dataTables.min.js') }}"></script>
+    <!--end::Page Vendors-->
+
     <script>
         $(document).ready(function() {
-            $('#activite').DataTable({
+            $('#kt_datatable').DataTable({
                 language: {
                     url: "https://cdn.datatables.net/plug-ins/1.10.25/i18n/French.json"
-                },
-
+                }
             });
         });
     </script>

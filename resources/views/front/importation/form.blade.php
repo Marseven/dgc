@@ -6,7 +6,7 @@
         <div class="container">
             <div class="row">
                 <ul class="list-breadcrumb">
-                    <li><a href="{{ route('home') }}">Accueil</a></li>
+                    <li><a href="{{ url('/') }}">Accueil</a></li>
                     <li>Déclaration d’importation</li>
                 </ul>
             </div>
@@ -19,7 +19,7 @@
             @include('layout.alert')
             <br>
             <h2>Déclaration Prévisionnelle d’importation</h2>
-            <form method="post" action="{{ route('register-form') }}" enctype="multipart/form-data">
+            <form method="post" action="{{ route('importation') }}" enctype="multipart/form-data">
                 @csrf
                 <br>
                 <h3 style="font-weight: 700">Société</h3>

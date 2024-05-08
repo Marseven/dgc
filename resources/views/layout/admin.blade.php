@@ -1,5 +1,5 @@
 @php
-    $user = Auth::user();
+    $user = App\Models\User::with('roles')->find(Auth::user()->id);
 @endphp
 <!DOCTYPE html>
 <html lang="en">
@@ -112,14 +112,19 @@
                         <li class="profile-nav onhover-dropdown pe-0 py-0">
                             <div class="media profile-media"><img class="b-r-10"
                                     src="{{ asset('admin/images/dashboard/profile.png') }}" alt="">
-                                <div class="media-body"><span>{{ $user->name }}</span>
-                                    <p class="mb-0">Admin <i class="middle fa fa-angle-down"></i></p>
+                                <div class="media-body"><span>{{ $user['last_name'] }}</span>
+                                    <p class="mb-0">
+                                        {{ $user->roles->count() != 0 ? $user->roles->first()['name'] : 'Admin' }} <i
+                                            class="middle fa fa-angle-down"></i>
+                                    </p>
                                 </div>
                             </div>
                             <ul class="profile-dropdown onhover-show-div">
-                                <li><a href="#"><i data-feather="user"></i><span>Profil </span></a></li>
-                                <li><a href="{{ url('log-out') }}"><i data-feather="log-in">
-                                        </i><span>Logout</span></a></li>
+                                <li><a href="{{ route('admin.profil.user') }}"><i
+                                            data-feather="user"></i><span>Profil
+                                        </span></a>
+                                </li>
+                                <li><a href="{{ url('log-out') }}"><span>Déconnexion</span></a></li>
                             </ul>
                         </li>
                     </ul>
@@ -141,7 +146,7 @@
                                 data-feather="grid"> </i></div>
                     </div>
                     <div class="logo-icon-wrapper"><a href="{{ route('dashboard') }}"><img class="img-fluid"
-                                src="{{ asset('front/images/dgc_wb.png') }}" width="75" alt=""></a>
+                                src="{{ asset('front/images/dgc_wb.png') }}" width="45" alt=""></a>
                     </div>
                     <nav class="sidebar-main">
                         <div class="left-arrow" id="left-arrow"><i data-feather="arrow-left"></i></div>
@@ -160,7 +165,7 @@
                                 </li>
                                 <li class="sidebar-main-title">
                                     <div>
-                                        <h6 class="lan-1">Général</h6>
+                                        <h6 class="">Générale</h6>
                                     </div>
                                 </li>
                                 <li class="sidebar-list"><i class="fa fa-thumb-tack"></i>
@@ -170,47 +175,108 @@
                                         </svg>
                                         <svg class="fill-icon">
                                             <use href="{{ asset('admin/svg/icon-sprite.svg#fill-home') }}"></use>
-                                        </svg><span class="lan-3">Tableau de Bord </span></a>
+                                        </svg><span class="">Tableau de Bord </span></a>
 
                                 </li>
                                 <li class="sidebar-main-title">
-                                    <div>
-                                        <h6 class="lan-8">Déclarations</h6>
-                                    </div>
-                                </li>
-                                <li class="sidebar-list"><i class="fa fa-thumb-tack"> </i>
-                                    <a class="sidebar-link sidebar-title" href="{{ route('entreprise') }}">
-                                        <svg class="stroke-icon">
-                                            <use href="{{ asset('admin/svg/icon-sprite.svg#stroke-project') }}"></use>
-                                        </svg>
-                                        <svg class="fill-icon">
-                                            <use href="{{ asset('admin/svg/icon-sprite.svg#fill-project') }}"></use>
-                                        </svg><span>Entreprises </span></a>
-                                </li>
-                                <li class="sidebar-list"><i class="fa fa-thumb-tack"> </i>
-                                    <a class="sidebar-link sidebar-title" href="{{ route('importation') }}">
-                                        <svg class="stroke-icon">
-                                            <use href="{{ asset('admin/svg/icon-sprite.svg#stroke-project') }}"></use>
-                                        </svg>
-                                        <svg class="fill-icon">
-                                            <use href="{{ asset('admin/svg/icon-sprite.svg#fill-project') }}"></use>
-                                        </svg><span>Déclarations </span></a>
-                                </li>
 
-                                <li class="sidebar-main-title">
-                                    <div>
-                                        <h6 class="lan-8">Paramètres</h6>
-                                    </div>
+                                    <h6 class="">Déclarations</h6>
+
                                 </li>
-                                <li class="sidebar-list"><i class="fa fa-thumb-tack"> </i>
-                                    <a class="sidebar-link sidebar-title" href="{{ route('activite') }}">
-                                        <svg class="stroke-icon">
-                                            <use href="{{ asset('admin/svg/icon-sprite.svg#stroke-project') }}"></use>
-                                        </svg>
-                                        <svg class="fill-icon">
-                                            <use href="{{ asset('admin/svg/icon-sprite.svg#fill-project') }}"></use>
-                                        </svg><span>Activités </span></a>
-                                </li>
+                                @hasPrivilige('VOIR_IMPORTATION')
+                                    <li class="sidebar-list"><i class="fa fa-thumb-tack"> </i>
+                                        <a class="sidebar-link sidebar-title" href="{{ route('admin.importation') }}">
+                                            <i data-feather="package" class="mx-1"></i><span>Importations </span></a>
+                                    </li>
+                                @endHasPrivilige
+
+                                @hasPrivilige('VOIR_STOCK')
+                                    <li class="sidebar-list"><i class="fa fa-thumb-tack"> </i>
+                                        <a class="sidebar-link sidebar-title" href="{{ route('admin.stock') }}">
+                                            <i data-feather="database" class="mx-1"></i><span>Stocks </span></a>
+                                    </li>
+                                @endHasPrivilige
+
+                                @hasPrivilige('VOIR_ENTREPRISE')
+                                    <li class="sidebar-list"><i class="fa fa-thumb-tack"> </i>
+                                        <a class="sidebar-link sidebar-title" href="{{ route('admin.entreprise') }}">
+                                            <i data-feather="home" class="mx-1"></i><span>Entreprises </span></a>
+                                    </li>
+                                @endHasPrivilige
+
+                                @hasPrivilige('VOIR_UTILISATEUR')
+                                    <li class="sidebar-main-title">
+
+                                        <h6 class="">Utilisateurs</h6>
+
+                                    </li>
+                                    @hasPrivilige('VOIR_UTILISATEUR')
+                                        <li class="sidebar-list"><i class="fa fa-thumb-tack"> </i>
+                                            <a class="sidebar-link sidebar-title" href="{{ route('admin.list.user') }}">
+                                                <i data-feather="users" class="mx-1"></i><span>Liste des utilisateurs
+                                                </span></a>
+                                        </li>
+                                    @endHasPrivilige
+
+                                    @hasPrivilige('VOIR_ROLE')
+                                        <li class="sidebar-list"><i class="fa fa-thumb-tack"> </i>
+                                            <a class="sidebar-link sidebar-title" href="{{ route('admin.list.role') }}">
+                                                <i data-feather="user-check" class="mx-1"></i><span>Rôles </span></a>
+                                        </li>
+                                    @endHasPrivilige
+
+                                    @hasPrivilige('VOIR_PERMISSION')
+                                        <li class="sidebar-list"><i class="fa fa-thumb-tack"> </i>
+                                            <a class="sidebar-link sidebar-title" href="{{ route('admin.list.privilege') }}">
+                                                <i data-feather="user-plus" class="mx-1"></i><span>Privilèges </span></a>
+                                        </li>
+                                    @endHasPrivilige
+
+                                    @hasPrivilige('VOIR_UTILISATEUR_TYPE')
+                                        <li class="sidebar-list"><i class="fa fa-thumb-tack"> </i>
+                                            <a class="sidebar-link sidebar-title" href="{{ route('admin.list.user-type') }}">
+                                                <i data-feather="user" class="mx-1"></i><span>Types d'utilisateur
+                                                </span></a>
+                                        </li>
+                                    @endHasPrivilige
+                                @endHasPrivilige
+
+                                @hasPrivilige('VOIR_PARAMETRE')
+                                    <li class="sidebar-main-title">
+
+                                        <h6 class="">Paramètres</h6>
+
+                                    </li>
+                                    <li class="sidebar-list"><i class="fa fa-thumb-tack"> </i>
+                                        <a class="sidebar-link sidebar-title" href="{{ route('admin.activite') }}">
+                                            <i data-feather="briefcase" class="mx-1"></i><span>Activités </span></a>
+                                    </li>
+                                    <li class="sidebar-list"><i class="fa fa-thumb-tack"> </i>
+                                        <a class="sidebar-link sidebar-title" href="{{ route('admin.declaration') }}">
+                                            <i data-feather="archive" class="mx-1"></i><span>Type de déclaration
+                                            </span></a>
+                                    </li>
+                                    <li class="sidebar-list"><i class="fa fa-thumb-tack"> </i>
+                                        <a class="sidebar-link sidebar-title" href="{{ route('admin.product') }}">
+                                            <i data-feather="box" class="mx-1"></i><span>Type de produit
+                                            </span></a>
+                                    </li>
+
+                                    <li class="sidebar-list"><i class="fa fa-thumb-tack"> </i>
+                                        <a class="sidebar-link sidebar-title" href="{{ route('admin.logistic') }}">
+                                            <i data-feather="anchor" class="mx-1"></i><span>Moyen logistique
+                                            </span></a>
+                                    </li>
+                                @endHasPrivilige
+
+                                @hasPrivilige('VOIR_LOG')
+                                    <!--begin:Menu item-->
+                                    <li class="sidebar-list"><i class="fa fa-thumb-tack"> </i>
+                                        <a class="sidebar-link sidebar-title" href="{{ url('log-viewer') }}">
+                                            <i data-feather="list" class="mx-1"></i><span>Moyen logistique
+                                            </span></a>
+                                    </li>
+                                @endHasPrivilige
                             </ul>
                         </div>
                         <div class="right-arrow" id="right-arrow"><i data-feather="arrow-right"></i></div>
@@ -235,16 +301,21 @@
     </div>
     <!-- latest jquery-->
     <script src="{{ asset('admin/js/jquery.min.js') }}"></script>
+
     <!-- Bootstrap js-->
     <script src="{{ asset('admin/js/bootstrap/bootstrap.bundle.min.js') }}"></script>
+
     <!-- feather icon js-->
     <script src="{{ asset('admin/js/icons/feather-icon/feather.min.js') }}"></script>
     <script src="{{ asset('admin/js/icons/feather-icon/feather-icon.js') }}"></script>
+
     <!-- scrollbar js-->
     <script src="{{ asset('admin/js/scrollbar/simplebar.js') }}"></script>
     <script src="{{ asset('admin/js/scrollbar/custom.js') }}"></script>
+
     <!-- Sidebar jquery-->
     <script src="{{ asset('admin/js/config.js') }}"></script>
+
     <!-- Plugins JS start-->
     <script src="{{ asset('admin/js/sidebar-menu.js') }}"></script>
     <script src="{{ asset('admin/js/sidebar-pin.js') }}"></script>
@@ -265,6 +336,7 @@
     <script src="{{ asset('admin/js/height-equal.js') }}"></script>
     <script src="{{ asset('admin/js/animation/wow/wow.min.js') }}"></script>
     <!-- Plugins JS Ends-->
+
     <!-- Theme js-->
     <script src="{{ asset('admin/js/script.js') }}"></script>
 

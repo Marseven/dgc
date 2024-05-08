@@ -117,7 +117,7 @@ class FileController extends Controller
         }
     }
 
-    static function nominee(UploadedFile $request)
+    static function stock(UploadedFile $request)
     {
         $result = [];
 
@@ -134,12 +134,12 @@ class FileController extends Controller
             $extension = $request->getClientOriginalExtension();
 
             //filename to store
-            $filenametostore = $filename . '_' . time() . '_profil.' . $extension;
+            $filenametostore = $filename . '_' . time() . '_stock.' . $extension;
 
             //Upload File
-            $request->move(public_path('/upload/nominee/'),  $filenametostore);
+            $request->move(public_path('/upload/stock/'),  $filenametostore);
 
-            $filePath_traite = '/upload/nominee/' . $filenametostore;
+            $filePath_traite = '/upload/stock/' . $filenametostore;
 
             $result['state'] = true;
             $result['url'] =  $filePath_traite;
@@ -155,7 +155,7 @@ class FileController extends Controller
         }
     }
 
-    static function facture(UploadedFile $request)
+    static function importation(UploadedFile $request)
     {
         $result = [];
 
@@ -172,12 +172,12 @@ class FileController extends Controller
             $extension = $request->getClientOriginalExtension();
 
             //filename to store
-            $filenametostore = $filename . '_' . time() . '_facture.' . $extension;
+            $filenametostore = $filename . '_' . time() . '_importation.' . $extension;
 
             //Upload File
-            $request->move(public_path('/upload/facture/'),  $filenametostore);
+            $request->move(public_path('/upload/importation/'),  $filenametostore);
 
-            $filePath_traite = '/upload/facture/' . $filenametostore;
+            $filePath_traite = '/upload/importation/' . $filenametostore;
 
             $result['state'] = true;
             $result['url'] =  $filePath_traite;

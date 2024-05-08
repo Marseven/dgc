@@ -35910,3 +35910,7 @@ ul ul, ul ol, ol ul, ol ol {
 		bottom: 40px;
 	}
 }
+
+html .page .offset-md-top-35 {
+    color: #FFF !important;
+}

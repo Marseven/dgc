@@ -9,7 +9,8 @@
         "barryvdh/laravel-dompdf": "^2.1",
         "laravel/framework": "^11.0",
         "laravel/tinker": "^2.9",
-        "laravel/ui": "^4.5"
+        "laravel/ui": "^4.5",
+        "opcodesio/log-viewer": "^3.8"
     },
     "require-dev": {
         "fakerphp/faker": "^1.23",

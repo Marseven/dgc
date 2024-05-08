@@ -7,6 +7,7 @@ use App\Http\Controllers\FileController;
 use App\Models\Activity;
 use App\Models\Entreprise;
 use App\Models\Importation;
+use App\Models\Stock;
 use Illuminate\Http\Request;
 
 class EntrepriseController extends Controller
@@ -16,190 +17,299 @@ class EntrepriseController extends Controller
     {
         $entreprises = Entreprise::count();
         $importations = Importation::count();
-        $activites = Activity::count();
-        return view('admin.dashboard', compact('entreprises', 'importations', 'activites'));
+        $stocks = Stock::count();
+        return view('admin.dashboard', compact('entreprises', 'importations', 'stocks'));
     }
 
     public function entreprise()
     {
         $entreprises = Entreprise::all();
-        return view('admin.entreprise', compact('entreprises'));
+        return view('admin.entreprise.entreprise', compact('entreprises'));
     }
 
-    public function importation()
+    public function ajaxList(Request $request)
     {
-        $importations = Importation::all();
-        return view('admin.importation', compact('importations'));
-    }
 
-    public function activite()
-    {
-        $activites = Activity::all();
-        return view('admin.activite', compact('activites'));
-    }
+        $draw = $request->get('draw');
+        $start = $request->get("start");
+        $rowperpage = $request->get("length"); // Rows display per page
 
-    public function export($id)
-    {
-        $importation = Importation::with('entreprise', 'entreprise.activity')->find($id);
+        $columnIndex_arr = $request->get('order');
+        $columnName_arr = $request->get('columns');
+        $order_arr = $request->get('order');
+        $search_arr = $request->get('search');
 
-        $pdf = app('dompdf.wrapper');
-        $pdf->getDomPDF()->set_option("enable_php", true);
-        $pdf->loadView('pdf.declaration', compact('importation'));
+        $columnIndex = $columnIndex_arr[0]['column']; // Column index
+        $columnName = $columnName_arr[$columnIndex]['data']; // Column name
+        $columnSortOrder = $order_arr[0]['dir']; // asc or desc
+        $searchValue = $search_arr['value']; // Search value
+        $_GET['search'] = $search_arr['value'];
 
-        $outputPath = 'Declaration_' . $id . '.pdf';
+        // Total records
+        $totalRecords = Entreprise::select('count(*) as allcount')->where('deleted', NULL)->count();
+        $totalRecordswithFilter = Entreprise::select('count(*) as allcount')
+            ->where(function ($query) {
+                $searchValue = isset($_GET['search']) ? $_GET['search'] : '';
+                $query->where('entreprises.company_name', 'like', '%' . $searchValue . '%')
+                    ->orWhere('entreprises.phone', 'like', '%' . $searchValue . '%')
+                    ->orWhere('entreprises.email', 'like', '%' . $searchValue . '%')
+                    ->orWhere('entreprises.number_commercant', 'like', '%' . $searchValue . '%');
+            })->where('deleted', NULL)->count();
 
-        return $pdf->download($outputPath);
+        // Fetch records
+        $records = Entreprise::orderBy($columnName, $columnSortOrder)
+            ->where(function ($query) {
+                $searchValue = isset($_GET['search']) ? $_GET['search'] : '';
+                $query->where('entreprises.company_name', 'like', '%' . $searchValue . '%')
+                    ->orWhere('entreprises.phone', 'like', '%' . $searchValue . '%')
+                    ->orWhere('entreprises.email', 'like', '%' . $searchValue . '%')
+                    ->orWhere('entreprises.number_commercant', 'like', '%' . $searchValue . '%');
+            })->where('deleted', NULL)
+            ->select('entreprises.*')
+            ->skip($start)
+            ->take($rowperpage)
+            ->get();
+
+        $data_arr = array();
+
+        foreach ($records as $record) {
+
+            $id = $record->id;
+
+            $record->load(['activity']);
+
+            $localisation = $record->localisation ?? $record->hood;
+
+            $actions = '
+                        <button style="padding: 10px !important" type="button"
+                        class="btn btn-info modal_view_action"
+                        data-bs-toggle="modal"
+                        data-id="' . $record->id . '"
+                        data-bs-target="#cardModalView">
+                            <i class="icon-eye"></i>
+                            </button>
+                        <button style="padding: 10px !important" type="button"
+                            class="btn btn-primary modal_edit_action"
+                            data-bs-toggle="modal"
+                            data-id="' . $record->id . '"
+                            data-bs-target="#cardModalView">
+                                <i class="icon-pencil"></i>
+                                </button>';
+
+            $data_arr[] = array(
+                "id" => $id,
+                "company_name" => $record->company_name,
+                "phone" => $record->phone,
+                "postal_code" => $record->postal_code,
+                "activity" => $record->activity->name,
+                "localisation" => $localisation,
+                "created_at" => $record->created_at,
+                "actions" => $actions,
+            );
+        }
+
+        $response = array(
+            "draw" => intval($draw),
+            "iTotalRecords" => $totalRecords,
+            "iTotalDisplayRecords" => $totalRecordswithFilter,
+            "aaData" => $data_arr,
+        );
+
+        return response()->json($response);
     }
 
     public function ajaxItem(Request $request)
     {
-        $importation = Importation::find($request->id);
+        $entreprise = Entreprise::find($request->id);
+        $entreprise->load(['activity']);
 
         $title = "";
         if ($request->action == "view") {
-            $importation->load(['user', 'service', 'cashbox', 'rubrique']);
-
-            $title = "Transaction N°" . $importation->id;
-            $body = ' <div class="row"><div class="col-6 mb-5"><h6 class="text-uppercase fs-5 ls-2">Type</h6>
-                <p class="text-uppercase mb-0">' . $importation->type . '</p>
+            $body = '
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabelOne">Entreprise N° ' . $entreprise->id . '</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+                </button>
             </div>
-            <div class="row"><div class="col-6 mb-5"><h6 class="text-uppercase fs-5 ls-2">Rubrique</h6>
-                <p class="text-uppercase mb-0">' . $importation->rubrique->name . '</p>
-            </div>
-            <div class="col-6 mb-5">
-                <h6 class="text-uppercase fs-5 ls-2">Description </h6>
-                <p class="mb-0">' . $importation->reason . '</p>
-            </div>
-            <div class="col-6 mb-5">
-                <h6 class="text-uppercase fs-5 ls-2">Montant
-                </h6>
-                <p class="mb-0">' . Controller::format_amount($importation->amount) . ' FCFA</p>
-            </div>
-            <div class="col-6 mb-5">
-                <h6 class="text-uppercase fs-5 ls-2">Date
-                </h6>
-                <p class="mb-0">' .  date_format(date_create($importation->date_cash), 'd-m-Y') . '</p>
-            </div>
-            <div class="col-6 mb-5">
-                <h6 class="text-uppercase fs-5 ls-2">Service
-                </h6>
-                <p class="mb-0">' . $importation->service->name . '</p>
+            <div class="modal-body">
+                <div class="row"><div class="col-6 mb-5"><h6 class="text-uppercase fs-5 ls-2">Raison Sociale</h6>
+                    <p class="text-uppercase mb-0">' . $entreprise->company_name . '</p>
+                </div>
+                <div class="row"><div class="col-6 mb-5"><h6 class="text-uppercase fs-5 ls-2">Activité</h6>
+                    <p class="text-uppercase mb-0">' . $entreprise->activity->name . '</p>
+                </div>
+                <div class="col-6 mb-5">
+                    <h6 class="text-uppercase fs-5 ls-2">Téléphone </h6>
+                    <p class="mb-0">' . $entreprise->phone . '</p>
+                </div>
+                <div class="col-6 mb-5">
+                    <h6 class="text-uppercase fs-5 ls-2">Email </h6>
+                    <p class="mb-0">' . ($entreprise->email ?? "-") . '</p>
+                </div>
+                <div class="col-6 mb-5">
+                    <h6 class="text-uppercase fs-5 ls-2">Localisation </h6>
+                    <p class="mb-0">' . ($entreprise->localisation ?? "-") . '</p>
+                </div>
+                <div class="col-6 mb-5">
+                    <h6 class="text-uppercase fs-5 ls-2">BP </h6>
+                    <p class="mb-0">' . $entreprise->postal_code . '</p>
+                </div>
+                <div class="col-6 mb-5">
+                    <h6 class="text-uppercase fs-5 ls-2">Commune </h6>
+                    <p class="mb-0">' . ($entreprise->commune ?? "-") . '</p>
+                </div>
+                <div class="col-6 mb-5">
+                    <h6 class="text-uppercase fs-5 ls-2">Quartier </h6>
+                    <p class="mb-0">' . ($entreprise->hood ?? "-") . '</p>
+                </div>
+                <div class="col-6 mb-5">
+                    <h6 class="text-uppercase fs-5 ls-2">Fiche circuit </h6>
+                    <p class="mb-0">' . ($entreprise->business_circuit ?? "-") . '</p>
+                </div>
+                <div class="col-6 mb-5">
+                    <h6 class="text-uppercase fs-5 ls-2">N° Commerçant </h6>
+                    <p class="mb-0">' . $entreprise->number_commercant . '</p>
+                </div>
+                <div class="col-6 mb-5">
+                    <h6 class="text-uppercase fs-5 ls-2">N° Statistique </h6>
+                    <p class="mb-0">' . ($entreprise->number_statistic ?? "-") . '</p>
+                </div>
+                <div class="col-6 mb-5">
+                    <h6 class="text-uppercase fs-5 ls-2">RCCM </h6>
+                    <p class="mb-0">' . $entreprise->rccm . '</p>
+                </div>
+                <div class="col-6 mb-5">
+                    <h6 class="text-uppercase fs-5 ls-2">NIF </h6>
+                    <p class="mb-0">' . ($entreprise->nif ?? "-") . '</p>
+                </div>
+                <div class="col-6 mb-5">
+                    <h6 class="text-uppercase fs-5 ls-2">Forme Juridique </h6>
+                    <p class="mb-0">' . ($entreprise->legal_status ?? "-") . '</p>
+                </div>
+                <div class="col-6 mb-5">
+                    <h6 class="text-uppercase fs-5 ls-2">Date de création
+                    </h6>
+                    <p class="mb-0">' . ($entreprise->date_create != null ?  date_format(date_create($entreprise->date_create), 'd-m-Y') : date_format(date_create($entreprise->created_at), 'd-m-Y')) . '</p>
+                </div>
             </div>
             ';
-            if ($importation->piece_url) {
-                $body .= '<div class="col-6 mb-5">
-                    <h6 class="text-uppercase fs-5 ls-2">Pièce Jointe
-                    </h6>
-                    <p class="mb-0"><a target="_blank" href="' . asset($importation->piece_url) . '"
-                    class="btn btn-light btn-active-light-primary btn-flex btn-center btn-sm"
-                    data-kt-menu-trigger="click"
-                    data-kt-menu-placement="bottom-end">Télécharger
-                    <i class="ki-duotone ki-cloud-download">
-                        <span class="path1"></span>
-                        <span class="path2"></span>
-                    </i></a></p>
-                </div>';
-            }
-            $body .= '<div class="col-6 mb-5">
-                <h6 class="text-uppercase fs-5 ls-2">Ajouté par
-                </h6>
-                <p class="mb-0">' . $importation->user->lastname . ' ' . $importation->user->firstname . '</p>
-            </div>';
-
-            $body .= '</div>';
         } elseif ($request->action == "edit") {
-
+            $activities = Activity::where('type', 'entreprise')->where('deleted', NULL)->get();
             $body = '<div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabelOne">Mettre à jour la déclaration N° : ' . $importation->id . '</h5>
+                <h5 class="modal-title" id="exampleModalLabelOne">Mettre à jour l\'entreprise N° ' . $entreprise->id . '</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
-
                 </button>
             </div>
 
-            <form action="' . url('update/importation/' . $importation->id) . '" method="POST">
+            <form action="' . url('update/entreprise/' . $entreprise->id) . '" method="POST">
                 <div class="modal-body">
                         <input type="hidden" name="_token" value="' . csrf_token() . '">
                         <div class="mb-3">
                             <div class="input-style-1">
-                                <label class="form-label" for="type_product">Nature des marchandises *</label>
-                                <input class="form-control" id="type_product" type="text" value="' . $importation->type_product . '" name="type_product" required>
+                                <label class="form-label" for="company_name">Raison Sociale *</label>
+                                <input class="form-control" id="company_name" type="text" value="' . $entreprise->company_name . '" name="company_name" required>
+                            </div>
+                        </div>
+
+                        <div class="mb-3">
+                            <label>Activité de l\'entreprise : </label>
+                            <select name="activity_id" class="form-control form-control-solid form-control-lg">';
+
+            foreach ($activities as $activity) {
+                $body .= '<option ' . ($activity->id == $entreprise->activity->id ? 'selected' : '') . ' value="' . $activity->id . '">' . $activity->name . '</option>';
+            }
+
+            $body .= '    </select>
+                        </div>
+
+                        <div class="mb-3">
+                            <div class="input-style-1">
+                                <label class="form-label" for="phone">Téléphone *</label>
+                                <input class="form-control" id="phone" type="text" value="' . $entreprise->phone . '" name="phone" required>
                             </div>
                         </div>
 
                         <div class="mb-3">
                             <div class="input-style-1">
-                                <label class="form-label" for="country_origin">Pays d\'origine *</label>
-                                <input class="form-control" id="country_origin" type="text" value="' . $importation->country_origin . '" name="country_origin" required>
+                                <label class="form-label" for="email">Email *</label>
+                                <input class="form-control" id="email" type="email" value="' . $entreprise->email . '" name="email" required>
                             </div>
                         </div>
 
                         <div class="mb-3">
                             <div class="input-style-1">
-                                <label class="form-label" for="country_from">Pays de Provenance *</label>
-                                <input class="form-control" id="country_from" type="text" value="' . $importation->country_from . '" name="country_from" required>
+                                <label class="form-label" for="postal_code">BP *</label>
+                                <input class="form-control" id="postal_code" type="text" value="' . $entreprise->postal_code . '" name="postal_code" required>
                             </div>
                         </div>
 
                         <div class="mb-3">
                             <div class="input-style-1">
-                                <label class="form-label" for="destination">Destination *</label>
-                                <input class="form-control" id="destination" type="text" value="' . $importation->destination . '" name="destination" required>
+                                <label class="form-label" for="localisation">Localisation </label>
+                                <input class="form-control" id="localisation" type="text" value="' . $entreprise->localisation . '" name="localisation">
                             </div>
                         </div>
 
                         <div class="mb-3">
                             <div class="input-style-1">
-                                <label class="form-label" for="dock_loading">Port d\'embarquement *</label>
-                                <input class="form-control" id="dock_loading" type="text" value="' . $importation->type_product . '" name="dock_loading" required>
+                                <label class="form-label" for="commune">Commune </label>
+                                <input class="form-control" id="commune" type="text" value="' . $entreprise->commune . '" name="commune">
                             </div>
                         </div>
 
                         <div class="mb-3">
                             <div class="input-style-1">
-                                <label class="form-label" for="dock_unloading">Port de débarquement *</label>
-                                <input class="form-control" id="dock_unloading" type="text" value="' . $importation->dock_unloading . '" name="dock_unloading" required>
+                                <label class="form-label" for="hood">Quartier</label>
+                                <input class="form-control" id="hood" type="text" value="' . $entreprise->hood . '" name="hood">
                             </div>
                         </div>
 
                         <div class="mb-3">
                             <div class="input-style-1">
-                                <label class="form-label" for="value">Valeur de la marchandise *</label>
-                                <input class="form-control" id="value" type="text" value="' . $importation->value . '" name="value" required>
+                                <label class="form-label" for="business_circuit">Fiche Circuit</label>
+                                <input class="form-control" id="business_circuit" type="text" value="' . $entreprise->business_circuit . '" name="business_circuit">
                             </div>
                         </div>
 
                         <div class="mb-3">
                             <div class="input-style-1">
-                                <label class="form-label" for="type_transaport">Moyen de transport *</label>
-                                <input class="form-control" id="type_transaport" type="text" value="' . $importation->type_transaport . '" name="type_transaport" required>
+                                <label class="form-label" for="number_commercant">N° Commerçant *</label>
+                                <input class="form-control" id="number_commercant" type="text" value="' . $entreprise->number_commercant . '" name="number_commercant" required>
                             </div>
                         </div>
 
                         <div class="mb-3">
                             <div class="input-style-1">
-                                <label class="form-label" for="facture_number">N° de Facture pro-forma *</label>
-                                <input class="form-control" id="facture_number" type="text" value="' . $importation->facture_number . '" name="facture_number" required>
+                                <label class="form-label" for="number_statistic">N° Statistique *</label>
+                                <input class="form-control" id="number_statistic" type="text" value="' . $entreprise->number_statistic . '" name="number_statistic">
                             </div>
                         </div>
 
                         <div class="mb-3">
                             <div class="input-style-1">
-                                <label class="form-label" for="weight">Tonnage *</label>
-                                <input class="form-control" id="weight" type="number" value="' . $importation->weight . '" name="weight" required>
+                                <label class="form-label" for="rccm">RCCM *</label>
+                                <input class="form-control" id="rccm" type="text" value="' . $entreprise->rccm . '" name="rccm" required>
                             </div>
                         </div>
 
                         <div class="mb-3">
                             <div class="input-style-1">
-                                <label class="form-label" for="quantity">Quantité *</label>
-                                <input class="form-control" id="quantity" type="number" value="' . $importation->quantity . '" name="quantity" required>
+                                <label class="form-label" for="nif">NIF</label>
+                                <input class="form-control" id="nif" type="text" value="' . $entreprise->nif . '" name="nif">
                             </div>
                         </div>
 
                         <div class="mb-3">
                             <div class="input-style-1">
-                                <label class="form-label" for="transitaire">Transitaire *</label>
-                                <input class="form-control" id="transitaire" type="text" value="' . $importation->transitaire . '" name="transitaire" required>
+                                <label class="form-label" for="legal_status">Forme Juridique</label>
+                                <input class="form-control" id="legal_status" type="text" value="' . $entreprise->legal_status . '" name="legal_status">
+                            </div>
+                        </div>
+
+                        <div class="mb-3">
+                            <div class="input-style-1">
+                                <label class="form-label" for="date_create">Date de Création</label>
+                                <input class="form-control" id="date_create" type="date" value="' . $entreprise->date_create . '" name="date_create">
                             </div>
                         </div>
                     </div>
@@ -209,9 +319,8 @@ class EntrepriseController extends Controller
                     </div>
             </form>';
         } else {
-
             $body = '
-            <form method="POST" action="' . url('admin/importation/' . $request->id) . '">
+            <form method="POST" action="' . url('admin/entreprise/' . $request->id) . '">
                 <input type="hidden" name="_token" value="' . csrf_token() . '">
                 <input type="hidden" name="delete" value="true">
                 <button class="btn btn-danger" type="submit">Supprimer</button>
@@ -226,32 +335,25 @@ class EntrepriseController extends Controller
         return response()->json($response);
     }
 
-    public function updateImportation(Request $request, Importation $importation)
+    public function update(Request $request, Entreprise $entreprise)
     {
-        $importation->type_product = $request->type_product;
-        $importation->country_origin = $request->country_origin;
-        $importation->country_from = $request->country_from;
-        $importation->destination = $request->destination;
-        $importation->dock_loading = $request->dock_loading;
-        $importation->dock_unloading = $request->dock_unloading;
-        $importation->value = $request->value;
-        $importation->type_transaport = $request->type_transaport;
-        $importation->weight = $request->weight;
-        $importation->quantity = $request->quantity;
-        $importation->facture_number = $request->facture_number;
-        $importation->transitaire = $request->transitaire;
+        $entreprise->company_name = $request->company_name;
+        $entreprise->postal_code = $request->postal_code;
+        $entreprise->phone = $request->phone;
+        $entreprise->localisation = $request->localisation;
+        $entreprise->number_commercant = $request->number_commercant;
+        $entreprise->number_statistic = $request->number_statistic;
+        $entreprise->rccm = $request->rccm;
+        $entreprise->activity_id = $request->activity_id;
+        $entreprise->email = $request->email;
+        $entreprise->commune = $request->commune;
+        $entreprise->hood = $request->hood;
+        $entreprise->business_circuit = $request->business_circuit;
+        $entreprise->nif = $request->nif;
+        $entreprise->date_create = $request->date_create;
+        $entreprise->legal_status = $request->legal_status;
 
-        if ($request->file('facture_url')) {
-            $picture = FileController::facture($request->file('facture_url'));
-            if ($picture['state'] == false) {
-                return back()->withErrors($picture['message']);
-            }
-
-            $url = $picture['url'];
-            $importation->facture_url =  $url;
-        }
-
-        if ($importation->save()) {
+        if ($entreprise->save()) {
             return back()->with('success', "La déclaration a été mise à jour avec succès.");
         } else {
             return back()->with('error', "Une erreur s'est produite.");

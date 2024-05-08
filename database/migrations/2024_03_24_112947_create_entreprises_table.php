@@ -16,9 +16,9 @@ return new class extends Migration
             $table->string('company_name')->unique();
             $table->string('postal_code');
             $table->string('phone', 15);
-            $table->string('localisation');
+            $table->string('localisation')->nullable();
             $table->string('number_commercant');
-            $table->string('number_statistic');
+            $table->string('number_statistic')->nullable();
             $table->string('rccm');
             $table->foreignId('activity_id')->references('id')->on('activities');
             $table->timestamps();
