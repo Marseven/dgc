@@ -50,6 +50,7 @@ Route::middleware('auth')->group(function () {
     */
     Route::prefix('admin')->namespace('Admin')->middleware([Admin::class])->group(function () {
         Route::get('/dashboard', [EntrepriseController::class, 'index'])->name('dashboard');
+        Route::get('/', [EntrepriseController::class, 'index']);
 
         //user_type
         Route::get('user-types', [UserController::class, 'userType'])->name('admin.list.user-type');
