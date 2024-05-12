@@ -33,7 +33,6 @@ class ImportationController extends Controller
                 'number_commercant' => ['required'],
                 'number_statistic' => ['required'],
                 'rccm' => ['required'],
-                'activity_id' => ['required'],
             ];
 
             $validator = Validator::make($request->all(), $rules);

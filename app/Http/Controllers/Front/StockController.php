@@ -45,7 +45,6 @@ class StockController extends Controller
                 'email' => ['required'],
                 'legal_status' => ['required'],
                 'date_create' => ['required'],
-                'activity_id' => ['required'],
             ];
 
             $validator = Validator::make($request->all(), $rules);
