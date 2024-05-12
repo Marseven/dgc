@@ -100,7 +100,7 @@
                                                 </tr>
                                                 <tr>
                                                     <td>Nature de l'activité</td>
-                                                    <td>{{ $stock->entreprise->activity == null ? $stock->entreprise->activity_ent->name : $stock->activity }}
+                                                    <td>{{ $stock->entreprise->activity == null ? $stock->entreprise->activity_ent->name : $stock->entreprise->activity }}
                                                     </td>
                                                 </tr>
                                                 <tr>
