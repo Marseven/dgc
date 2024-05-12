@@ -322,7 +322,7 @@ class ImportationController extends Controller
 
     public function export($id)
     {
-        $importation = Importation::with('entreprise', 'entreprise.activity')->find($id);
+        $importation = Importation::with('entreprise', 'entreprise.activity_ent')->find($id);
 
         $pdf = app('dompdf.wrapper');
         $pdf->getDomPDF()->set_option("enable_php", true);
