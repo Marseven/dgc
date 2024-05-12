@@ -1,6 +1,9 @@
 @extends('layout.default')
 
 @push('styles')
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/formvalidation/0.6.2-dev/css/formValidation.min.css"
+        integrity="sha512-B9GRVQaYJ7aMZO3WC2UvS9xds1D+gWQoNiXiZYRlqIVszL073pHXi0pxWxVycBk0fnacKIE3UHuWfSeETDCe7w=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
 @endpush
 
 @section('content')
@@ -87,7 +90,8 @@
                             </div>
                             <div class="form-wrap postfix-xl-right-40">
                                 <label class="form-label" for="number_commercant">N° Carte Commerçant *</label>
-                                <input class="form-input" id="number_commercant" type="text" name="number_commercant">
+                                <input class="form-input" id="number_commercant" type="text"
+                                    name="number_commercant">
                             </div>
                         </div>
                         <div class="col-xl-4">
