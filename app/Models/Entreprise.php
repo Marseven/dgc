@@ -9,7 +9,7 @@ class Entreprise extends Model
 {
     use HasFactory;
 
-    public function activity()
+    public function activity_id()
     {
         return $this->belongsTo(Activity::class);
     }
