@@ -1,5 +1,11 @@
 @extends('layout.default')
 
+@push('styles')
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/formvalidation/0.6.2-dev/js/formValidation.min.js"
+        integrity="sha512-DlXWqMPKer3hZZMFub5hMTfj9aMQTNDrf0P21WESBefJSwvJguz97HB007VuOEecCApSMf5SY7A7LkQwfGyVfg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+@endpush
+
 @section('content')
     <section class="breadcrumb-classic bg-image"
         style="background-image: url('{{ asset('front/images/breadcrumbs-parallax-07.png') }}')">
@@ -19,7 +25,7 @@
             @include('layout.alert')
             <br>
             <h2>Déclaration prévisionnelle de stock</h2>
-            <form method="post" action="{{ route('stock') }}" enctype="multipart/form-data">
+            <form id="stack_form" method="post" action="{{ route('stock') }}" enctype="multipart/form-data">
                 @csrf
                 <br>
                 <h3 style="font-weight: 700">Société</h3>
@@ -194,6 +200,34 @@
 
 @push('scripts')
     <script>
+        document.addEventListener('DOMContentLoaded', function(e) {
+            FormValidation.formValidation(document.getElementById('stack_form'), {
+                fields: {
+                    file_product_url: {
+                        validators: {
+                            notEmpty: {
+                                message: "Fichier obligatoire"
+                            },
+                            file: {
+                                extension: 'pdf',
+                                type: 'application/pdf',
+                                message: "S'il vous plaît veuillez téléverser un fichier PDF.",
+                                maxSize: 1048576,
+                            },
+                        }
+                    },
+                },
+                plugins: {
+                    trigger: new FormValidation.plugins.Trigger,
+                    bootstrap: new FormValidation.plugins.Bootstrap5({
+                        rowSelector: ".fv-row",
+                        eleInvalidClass: "",
+                        eleValidClass: ""
+                    })
+                }
+            });
+        });
+
         function viewSociete() {
             var entreprise_id = document.getElementById("entreprise_id");
             var societe = document.getElementById("societe");
