@@ -144,8 +144,8 @@
                         </div>
 
                         <div class="form-wrap postfix-xl-right-40">
-                            <label class="form-label" for="activity_id">Nature de l'activité *</label>
-                            <select class="form-input" id="activity_id" name="activity_id">
+                            <label class="form-label" for="st_activity_id">Nature de l'activité *</label>
+                            <select class="form-input" id="st_activity_id" name="st_activity_id">
                                 <option>Choisissez une activité</option>
                                 @foreach ($activities_st as $activity)
                                     <option value="{{ $activity->id }}">{{ $activity->name }}</option>

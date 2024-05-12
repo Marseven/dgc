@@ -83,7 +83,7 @@ class StockController extends Controller
         $stock->service = $request->service;
         $stock->referent = $request->referent;
         $stock->referent_contact = $request->referent_contact;
-        $stock->activity_id = $request->activity_id;
+        $stock->activity_id = $request->st_activity_id;
         $stock->declaration_type_id = $request->declaration_type_id;
 
         if ($request->product_type_id == "autre") {
