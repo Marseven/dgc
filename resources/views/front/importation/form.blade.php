@@ -135,7 +135,7 @@
                             <input class="form-input" id="facture_number" type="text" name="facture_number" required>
                         </div>
                         <div class="form-wrap postfix-xl-right-40">
-                            <label class="form-label" for="facture_url">Téléverser la facture pro-forma *</label>
+                            <label class="form-label" for="facture_url">Téléverser les documents *</label>
                             <br><br>
                             <input class="form-control" id="facture_url" type="file" name="facture_url" required>
                         </div>
