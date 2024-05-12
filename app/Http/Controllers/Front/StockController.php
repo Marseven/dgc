@@ -7,7 +7,7 @@ use App\Http\Controllers\FileController;
 use App\Models\Activity;
 use App\Models\DeclarationType;
 use App\Models\Entreprise;
-use App\Models\stock;
+use App\Models\Stock;
 use App\Models\Logistic;
 use App\Models\ProductType;
 use Illuminate\Http\Request;
