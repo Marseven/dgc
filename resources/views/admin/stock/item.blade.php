@@ -100,7 +100,8 @@
                                                 </tr>
                                                 <tr>
                                                     <td>Nature de l'activité</td>
-                                                    <td>{{ $stock->entreprise->activity->name }}</td>
+                                                    <td>{{ $stock->activity ?? $stock->entreprise->activity->name }}
+                                                    </td>
                                                 </tr>
                                                 <tr>
                                                     <td>Commune/Arrondissement</td>

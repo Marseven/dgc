@@ -222,7 +222,7 @@
             <span style="font-family:'Bookman Old Style'">Activité</span><span
                 style="font-family:'Bookman Old Style'">&#xa0;</span><strong><span
                     style="font-family:'Bookman Old Style'; ">:
-                    {{ $importation->entreprise->activity->name }}</span></strong>
+                    {{ $importation->activity ?? $importation->entreprise->activity->name }}</span></strong>
         </p>
         <p style="margin-bottom:3pt; line-height:normal; font-size:10pt">
             <span style="font-family:'Bookman Old Style'">N° Statistique</span><strong><span

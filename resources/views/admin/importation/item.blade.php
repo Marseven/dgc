@@ -99,7 +99,8 @@
                                                 </tr>
                                                 <tr>
                                                     <td>Nature de l'activité</td>
-                                                    <td>{{ $importation->entreprise->activity->name }}</td>
+                                                    <td>{{ $importation->activity ?? $importation->entreprise->activity->name }}
+                                                    </td>
                                                 </tr>
                                                 <tr>
                                                     <td>Localisation</td>

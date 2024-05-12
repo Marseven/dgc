@@ -52,7 +52,12 @@ class ImportationController extends Controller
             $entreprise->number_commercant = $request->number_commercant;
             $entreprise->number_statistic = $request->number_statistic;
             $entreprise->rccm = $request->rccm;
-            $entreprise->activity_id = $request->activity_id;
+
+            if ($request->activity_id) {
+                $entreprise->activity_id = $request->activity_id;
+            } else {
+                $entreprise->activity = $request->activity;
+            }
             $entreprise->save();
         }
 

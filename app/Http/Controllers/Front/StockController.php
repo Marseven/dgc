@@ -69,7 +69,12 @@ class StockController extends Controller
             $entreprise->nif = $request->nif;
             $entreprise->date_create = $request->date_create;
             $entreprise->legal_status = $request->legal_status;
-            $entreprise->activity_id = $request->activity_id;
+
+            if ($request->activity_id) {
+                $entreprise->activity_id = $request->activity_id;
+            } else {
+                $entreprise->activity = $request->activity;
+            }
 
             $entreprise->save();
         }
@@ -81,7 +86,13 @@ class StockController extends Controller
         $stock->referent_contact = $request->referent_contact;
         $stock->activity_id = $request->activity_id;
         $stock->declaration_type_id = $request->declaration_type_id;
-        $stock->product_type_id = $request->product_type_id;
+
+        if ($request->product_type_id == "autre") {
+            $stock->type_product = $request->type_product;
+        } else {
+            $stock->product_type_id = $request->product_type_id;
+        }
+
         $stock->logistic_id = $request->logistic_id;
         $stock->province = $request->province;
         $stock->ville = $request->ville;

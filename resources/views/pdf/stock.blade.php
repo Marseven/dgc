@@ -113,7 +113,7 @@
             ECONOMIQUE</h2>
         <br>
         <p>RAISON SOCIALE : <strong>{{ $stock->entreprise->company_name }}</strong> </p>
-        <p>NATURE DE L’ACTIVITE : <strong>{{ $stock->entreprise->activity->name }}</strong> </p>
+        <p>NATURE DE L’ACTIVITE : <strong>{{ $stock->activity ?? $stock->entreprise->activity->name }}</strong> </p>
         <p>COMMUNE/ARRONDISSEMENT : <strong>{{ $stock->entreprise->commune }}</strong> QUARTIER :
             <strong>{{ $stock->entreprise->hood }}</strong>
         </p>

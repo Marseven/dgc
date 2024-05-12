@@ -7,7 +7,7 @@
             <div class="row">
                 <ul class="list-breadcrumb">
                     <li><a href="{{ url('/') }}">Accueil</a></li>
-                    <li>Déclaration d’importation</li>
+                    <li>Déclaration Prévisionnelle d’importation</li>
                 </ul>
             </div>
         </div>
@@ -44,7 +44,7 @@
                     <div class="row" style="margin-top: 0px;">
                         <div class="col-xl-4 col-lg-6">
                             <div class="form-wrap postfix-xl-right-40">
-                                <label class="form-label" for="company_name">Société *</label>
+                                <label class="form-label" for="company_name">Raison sociale *</label>
                                 <input class="form-input" id="company_name" type="text" name="company_name">
                             </div>
                             <div class="form-wrap postfix-xl-right-40">
@@ -66,13 +66,8 @@
                                 <input class="form-input" id="number_commercant" type="text" name="number_commercant">
                             </div>
                             <div class="form-wrap postfix-xl-right-40">
-                                <label class="form-label" for="activity_id">Activité *</label>
-                                <select class="form-input" id="activity_id" name="activity_id">
-                                    <option>Choisissez une activité</option>
-                                    @foreach ($activities as $activity)
-                                        <option value="{{ $activity->id }}">{{ $activity->name }}</option>
-                                    @endforeach
-                                </select>
+                                <label class="form-label" for="activity">Activité *</label>
+                                <input class="form-input" id="activity" type="text" name="activity">
                             </div>
                         </div>
                         <div class="col-xl-4">
@@ -135,7 +130,7 @@
                             <input class="form-input" id="facture_number" type="text" name="facture_number" required>
                         </div>
                         <div class="form-wrap postfix-xl-right-40">
-                            <label class="form-label" for="facture_url">Facture pro-forma *</label>
+                            <label class="form-label" for="facture_url">Téléverser la facture pro-forma *</label>
                             <br><br>
                             <input class="form-control" id="facture_url" type="file" name="facture_url" required>
                         </div>

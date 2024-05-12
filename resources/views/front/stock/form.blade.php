@@ -7,7 +7,7 @@
             <div class="row">
                 <ul class="list-breadcrumb">
                     <li><a href="{{ url('/') }}">Accueil</a></li>
-                    <li>Déclaration de stock</li>
+                    <li>Déclaration Prévisionnelle de stock</li>
                 </ul>
             </div>
         </div>
@@ -18,7 +18,7 @@
         <div class="container text-left">
             @include('layout.alert')
             <br>
-            <h2>Déclaration de stock</h2>
+            <h2>Déclaration prévisionnelle de stock</h2>
             <form method="post" action="{{ route('stock') }}" enctype="multipart/form-data">
                 @csrf
                 <br>
@@ -52,13 +52,8 @@
                                 <input class="form-input" id="company_name" type="text" name="company_name">
                             </div>
                             <div class="form-wrap postfix-xl-right-40">
-                                <label class="form-label" for="activity_id">Activité *</label>
-                                <select class="form-input" id="activity_id" name="activity_id">
-                                    <option>Choisissez une activité</option>
-                                    @foreach ($activities as $activity)
-                                        <option value="{{ $activity->id }}">{{ $activity->name }}</option>
-                                    @endforeach
-                                </select>
+                                <label class="form-label" for="activity">Activité *</label>
+                                <input class="form-input" id="activity" type="text" name="activity">
                             </div>
                             <div class="form-wrap postfix-xl-right-40">
                                 <label class="form-label" for="commune">Commune *</label>
@@ -163,12 +158,14 @@
                         </div>
                         <div class="form-wrap postfix-xl-right-40">
                             <label class="form-label" for="product_type_id">Type de produits *</label>
-                            <select class="form-input" id="product_type_id" name="product_type_id">
+                            <select class="form-input" id="product_type_id" name="product_type_id" onChange="other()">
                                 <option>Choisissez un type de produit</option>
                                 @foreach ($products as $product)
                                     <option value="{{ $product->id }}">{{ $product->name }}</option>
                                 @endforeach
+                                <option value="autre">Autre</option>
                             </select>
+                            <input class="form-input" id="type_product" type="text" name="type_product" required>
                         </div>
                         <div class="form-wrap postfix-xl-right-40">
                             <label class="form-label" for="logistic_id">Moyen logistiques utilisés *</label>
@@ -181,7 +178,8 @@
                         </div>
 
                         <div class="form-wrap postfix-xl-right-40">
-                            <label class="form-label" for="file_product_url">Données sur les stocks *</label>
+                            <label class="form-label" for="file_product_url">Téléverser le fichier de données sur les
+                                stocks *</label>
                             <br><br>
                             <input class="form-control" id="file_product_url" type="file" name="file_product_url"
                                 required>
@@ -204,6 +202,17 @@
                 societe.style.display = "block";
             } else {
                 societe.style.display = "none";
+            }
+        }
+
+        function other() {
+            var product_type_id = document.getElementById("product_type_id");
+            var type_product = document.getElementById("type_product");
+
+            if (product_type_id.value == "autre") {
+                type_product.style.display = "block";
+            } else {
+                type_product.style.display = "none";
             }
         }
     </script>
