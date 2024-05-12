@@ -73,7 +73,7 @@ class StockController extends Controller
 
         foreach ($records as $record) {
 
-            $record->load(['entreprise', 'entreprise.activity_ent', 'type_declaration', 'type_product', 'logistic', 'activity_st']);
+            $record->load(['entreprise', 'entreprise.activity_ent', 'type_declaration_st', 'type_product_st', 'logistic', 'activity_st']);
 
             $id = $record->id;
 
@@ -94,8 +94,8 @@ class StockController extends Controller
                 "id" => $id,
                 "societe" => $record->entreprise->company_name,
                 "activity" => $record->activity_st->name,
-                "declaration" => $record->type_declaration->name,
-                "product" => $record->type_product->name,
+                "declaration" => $record->type_declaration_st->name,
+                "product" => $record->type_product_st->name,
                 "ville" => $record->ville,
                 "logistic" => $record->logistic->name,
                 "created_at" => date_format(date_create($record->created_at), 'd-m-Y'),

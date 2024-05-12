@@ -20,12 +20,12 @@ class Stock extends Model
         return $this->belongsTo(Activity::class, 'activity_id', 'id');
     }
 
-    public function type_declaration(): BelongsTo
+    public function type_declaration_st(): BelongsTo
     {
         return $this->belongsTo(DeclarationType::class, 'declaration_type_id', 'id');
     }
 
-    public function type_product(): BelongsTo
+    public function type_product_st(): BelongsTo
     {
         return $this->belongsTo(ProductType::class, 'product_type_id', 'id');
     }
