@@ -55,7 +55,7 @@ class StockController extends Controller
             }
 
 
-            $entreprise = Entreprise::where('company_name', $request->company_name)->first();
+            $entreprise = Entreprise::where('company_name', $request->company_name)->get()->first();
 
             if ($entreprise == null) {
                 $entreprise = new Entreprise();
