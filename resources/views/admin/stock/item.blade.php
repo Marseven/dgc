@@ -320,7 +320,7 @@
                                 <label class="form-label" for="activity_id">Nature de l'activité *</label>
                                 <select class="form-control" id="activity_id" name="activity_id">
                                     @foreach ($activities_st as $activity)
-                                        <option @if ($activity->id == $stock->activity->id) selected @endif
+                                        <option @if ($activity->id == $stock->activity_st->id) selected @endif
                                             value="{{ $activity->id }}">{{ $activity->name }}</option>
                                     @endforeach
                                 </select>
@@ -332,7 +332,7 @@
                                 <label class="form-label" for="declaration_type_id">Type de déclaration *</label>
                                 <select class="form-control" id="declaration_type_id" name="declaration_type_id">
                                     @foreach ($declarations as $declaration)
-                                        <option @if ($declaration->id == $stock->type_declaration->id) selected @endif
+                                        <option @if ($declaration->id == $stock->type_declaration_st->id) selected @endif
                                             value="{{ $declaration->id }}">{{ $declaration->name }}</option>
                                     @endforeach
                                 </select>
@@ -344,7 +344,7 @@
                                 <label class="form-label" for="product_type_id">Type de produits *</label>
                                 <select class="form-control" id="product_type_id" name="product_type_id">
                                     @foreach ($products as $product)
-                                        <option @if ($product->id == $stock->type_product->id) selected @endif
+                                        <option @if ($product->id == $stock->type_product_st->id) selected @endif
                                             value="{{ $product->id }}">{{ $product->name }}</option>
                                     @endforeach
                                 </select>
