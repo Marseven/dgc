@@ -135,11 +135,6 @@
                             <input class="form-input" id="facture_number" type="text" name="facture_number" required>
                         </div>
                         <div class="form-wrap postfix-xl-right-40">
-                            <label class="form-label" for="facture_url">Téléverser les documents *</label>
-                            <br><br>
-                            <input class="form-control" id="facture_url" type="file" name="facture_url" required>
-                        </div>
-                        <div class="form-wrap postfix-xl-right-40">
                             <label class="form-label" for="weight">Tonnage *</label>
                             <input class="form-input" id="weight" type="number" name="weight" required>
                         </div>
@@ -150,6 +145,11 @@
                         <div class="form-wrap postfix-xl-right-40">
                             <label class="form-label" for="transitaire">Transitaire *</label>
                             <input class="form-input" id="transitaire" type="text" name="transitaire" required>
+                        </div>
+                        <div class="form-wrap postfix-xl-right-40">
+                            <label class="form-label" for="facture_url">Téléverser les documents *</label>
+                            <br><br>
+                            <input class="form-control" id="facture_url" type="file" name="facture_url" required>
                         </div>
                     </div>
                 </div>
