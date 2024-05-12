@@ -33,7 +33,7 @@ class StockController extends Controller
             $entreprise = Entreprise::find($request->entreprise_id);
         } else {
             $rules = [
-                'company_name' => ['required', 'unique:entreprises'],
+                'company_name' => ['required'],
                 'postal_code' => ['required'],
                 'phone' => ['required'],
                 'commune' => ['required'],
@@ -54,7 +54,12 @@ class StockController extends Controller
                 return back()->with('error', $errors->first());
             }
 
-            $entreprise = new Entreprise();
+
+            $entreprise = Entreprise::where('company_name', $request->company_name)->first();
+
+            if ($entreprise == null) {
+                $entreprise = new Entreprise();
+            }
 
             $entreprise->company_name = $request->company_name;
             $entreprise->postal_code = $request->postal_code;
