@@ -171,7 +171,8 @@
                                 @endforeach
                                 <option value="autre">Autre</option>
                             </select>
-                            <input class="form-input" id="type_product" type="text" name="type_product" required>
+                            <input class="form-input" id="type_product" type="text" name="type_product"
+                                placeholder="Type de produit" style="display:none">
                         </div>
                         <div class="form-wrap postfix-xl-right-40">
                             <label class="form-label" for="logistic_id">Moyen logistiques utilisés *</label>
