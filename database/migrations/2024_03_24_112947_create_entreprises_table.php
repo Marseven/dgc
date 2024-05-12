@@ -20,7 +20,7 @@ return new class extends Migration
             $table->string('number_commercant');
             $table->string('number_statistic')->nullable();
             $table->string('rccm');
-            $table->foreignId('activity_id')->references('id')->on('activities');
+            $table->foreignId('activity_id')->nullable()->references('id')->on('activities');
             $table->timestamps();
         });
     }

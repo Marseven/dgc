@@ -16,11 +16,11 @@ return new class extends Migration
             $table->string('service');
             $table->string('referent');
             $table->string('referent_contact');
-            $table->integer('activity_id')->references('id')->on('activities');
+            $table->integer('activity_id')->nullable()->references('id')->on('activities');
             $table->integer('entreprise_id')->references('id')->on('entreprises');
-            $table->integer('declaration_type_id')->references('id')->on('declaration_types');
-            $table->integer('product_type_id')->references('id')->on('product_types');
-            $table->integer('logistic_id')->references('id')->on('logistics');
+            $table->integer('declaration_type_id')->nullable()->references('id')->on('declaration_types');
+            $table->integer('product_type_id')->nullable()->references('id')->on('product_types');
+            $table->integer('logistic_id')->nullable()->references('id')->on('logistics');
             $table->string('province');
             $table->string('ville');
             $table->timestamps();
