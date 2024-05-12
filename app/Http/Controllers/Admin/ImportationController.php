@@ -98,7 +98,7 @@ class ImportationController extends Controller
                 "value" => $record->value,
                 "weight" => $record->weight,
                 "transitaire" => $record->transitaire,
-                "created_at" => $record->created_at,
+                "created_at" => date_format(date_create($record->created_at), 'd-m-Y'),
                 "actions" => $actions,
             );
         }
