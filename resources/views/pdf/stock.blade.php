@@ -136,7 +136,7 @@
         <br>
         <ul style="list-style-type: none; padding: 0; margin: 0;">
             @foreach ($activities_st as $activity)
-                <li style="display: inline-block; margin-right: 10px;">{{ $activity->name }} @if ($activity->id == $stock->activity->id)
+                <li style="display: inline-block; margin-right: 10px;">{{ $activity->name }} @if ($activity->id == $stock->activity_st->id)
                         <img src="{{ asset('admin/images/image2.png') }}" alt="">
                     @else
                         <img src="{{ asset('admin/images/image1.png') }}" alt="">
@@ -151,7 +151,7 @@
         <br>
         <ul style="list-style-type: none; padding: 0; margin: 0;">
             @foreach ($declarations as $declaration)
-                <li style="display: inline-block; margin-right: 10px;">{{ $declaration->name }} @if ($declaration->id == $stock->type_declaration->id)
+                <li style="display: inline-block; margin-right: 10px;">{{ $declaration->name }} @if ($declaration->id == $stock->type_declaration_st->id)
                         <img src="{{ asset('admin/images/image2.png') }}" alt="">
                     @else
                         <img src="{{ asset('admin/images/image1.png') }}" alt="">
@@ -166,7 +166,7 @@
         <br>
         <ul style="list-style-type: none; padding: 0; margin: 0;">
             @foreach ($products as $product)
-                <li style="display: inline-block; margin-right: 10px;">{{ $product->name }} @if ($product->id == $stock->type_product->id)
+                <li style="display: inline-block; margin-right: 10px;">{{ $product->name }} @if ($product->id == $stock->type_product_st->id)
                         <img src="{{ asset('admin/images/image2.png') }}" alt="">
                     @else
                         <img src="{{ asset('admin/images/image1.png') }}" alt="">
@@ -192,7 +192,7 @@
         <br>
         <ul style="list-style-type: none; padding: 0; margin: 0;">
             @foreach ($logistics as $logistic)
-                <li style="display: inline-block; margin-right: 10px;">{{ $logistic->name }} @if ($logistic->id == $stock->logistic->id)
+                <li style="display: inline-block; margin-right: 10px;">{{ $logistic->name }} @if ($logistic->id == $stock->logistic_st->id)
                         <img src="{{ asset('admin/images/image2.png') }}" alt="">
                     @else
                         <img src="{{ asset('admin/images/image1.png') }}" alt="">

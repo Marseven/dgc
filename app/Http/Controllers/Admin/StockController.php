@@ -269,7 +269,7 @@ class StockController extends Controller
 
     public function export($id)
     {
-        $stock = Stock::with('entreprise', 'type_declaration', 'type_product', 'logistic', 'activity')->find($id);
+        $stock = Stock::with('entreprise', 'type_declaration_st', 'type_product_st', 'logistic_st', 'activity_st')->find($id);
         $activities_st = Activity::where('type', 'stock')->where('deleted', NULL)->get();
         $declarations = DeclarationType::where('deleted', NULL)->get();
         $products = ProductType::where('deleted', NULL)->get();
