@@ -199,8 +199,8 @@
                                                     <td>{{ $importation->facture_number }}</td>
                                                 </tr>
                                                 <tr>
-                                                    <td>Facture pro-forma</td>
-                                                    <td><a href="{{ asset($stock->facture_url) }}" target="_blank">
+                                                    <td>Documents</td>
+                                                    <td><a href="{{ asset($importation->facture_url) }}" target="_blank">
                                                             <button style="padding: 10px !important" type="button"
                                                                 class="btn btn-primary">
                                                                 Télécharger <i class="icon-download"></i>
