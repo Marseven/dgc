@@ -48,6 +48,7 @@ class ImportationController extends Controller
             $entreprise->company_name = $request->company_name;
             $entreprise->postal_code = $request->postal_code;
             $entreprise->phone = $request->phone;
+            $entreprise->email = $request->email;
             $entreprise->localisation = $request->localisation;
             $entreprise->number_commercant = $request->number_commercant;
             $entreprise->number_statistic = $request->number_statistic;

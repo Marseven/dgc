@@ -200,7 +200,7 @@
                                                 </tr>
                                                 <tr>
                                                     <td>Type de produits</td>
-                                                    <td>{{ $stock->type_product->name }}</td>
+                                                    <td>{{ $stock->type_product ?? $stock->type_product->name }}</td>
                                                 </tr>
                                                 <tr>
                                                     <td>Province</td>

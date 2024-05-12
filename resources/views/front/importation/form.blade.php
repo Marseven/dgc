@@ -48,29 +48,34 @@
                                 <input class="form-input" id="company_name" type="text" name="company_name">
                             </div>
                             <div class="form-wrap postfix-xl-right-40">
+                                <label class="form-label" for="activity">Activité *</label>
+                                <input class="form-input" id="activity" type="text" name="activity">
+                            </div>
+                            <div class="form-wrap postfix-xl-right-40">
                                 <label class="form-label" for="localisation">Localisation *</label>
                                 <input class="form-input" id="localisation" type="text" name="localisation">
                             </div>
+
+                        </div>
+                        <div class="col-xl-4 col-lg-6">
                             <div class="form-wrap postfix-xl-right-40">
                                 <label class="form-label" for="postal_code">BP *</label>
                                 <input class="form-input" id="postal_code" type="text" name="postal_code">
                             </div>
-                        </div>
-                        <div class="col-xl-4 col-lg-6">
                             <div class="form-wrap postfix-xl-right-40">
                                 <label class="form-label" for="phone">Téléphone *</label>
                                 <input class="form-input" id="phone" type="tel" name="phone">
                             </div>
                             <div class="form-wrap postfix-xl-right-40">
-                                <label class="form-label" for="number_commercant">N° Carte de commerçant *</label>
-                                <input class="form-input" id="number_commercant" type="text" name="number_commercant">
-                            </div>
-                            <div class="form-wrap postfix-xl-right-40">
-                                <label class="form-label" for="activity">Activité *</label>
-                                <input class="form-input" id="activity" type="text" name="activity">
+                                <label class="form-label" for="email">Email *</label>
+                                <input class="form-input" id="email" type="email" name="email">
                             </div>
                         </div>
                         <div class="col-xl-4">
+                            <div class="form-wrap postfix-xl-right-40">
+                                <label class="form-label" for="number_commercant">N° Carte de commerçant *</label>
+                                <input class="form-input" id="number_commercant" type="text" name="number_commercant">
+                            </div>
                             <div class="form-wrap postfix-xl-right-40">
                                 <label class="form-label" for="number_statistic">N° Statistique *</label>
                                 <input class="form-input" id="number_statistic" type="text" name="number_statistic">

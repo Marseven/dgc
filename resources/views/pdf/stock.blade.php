@@ -156,6 +156,7 @@
                     @endif
                 </li>
             @endforeach
+
         </ul>
 
         <br><br>
@@ -170,6 +171,11 @@
                     @endif
                 </li>
             @endforeach
+            @if ($stock->type_product != null)
+                <li style="display: inline-block; margin-right: 10px;"> Autre <img
+                        src="{{ asset('admin/images/image2.png') }}" alt=""> ({{ $stock->type_product }})
+                </li>
+            @endif
         </ul>
 
         <br><br><br><br>
