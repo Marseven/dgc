@@ -114,7 +114,7 @@
         <br>
         <p>RAISON SOCIALE : <strong>{{ $stock->entreprise->company_name }}</strong> </p>
         <p>NATURE DE L’ACTIVITE :
-            <strong>{{ $stock->activity == null ? $stock->entreprise->activity_id->name : $stock->activity }}</strong>
+            <strong>{{ $stock->activity == null ? $stock->entreprise->activity_ent->name : $stock->activity }}</strong>
         </p>
         <p>COMMUNE/ARRONDISSEMENT : <strong>{{ $stock->entreprise->commune }}</strong> QUARTIER :
             <strong>{{ $stock->entreprise->hood }}</strong>

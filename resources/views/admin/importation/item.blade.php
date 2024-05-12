@@ -99,7 +99,7 @@
                                                 </tr>
                                                 <tr>
                                                     <td>Nature de l'activité</td>
-                                                    <td>{{ $importation->activity == null ? $importation->entreprise->activity_id->name : $importation->activity }}
+                                                    <td>{{ $importation->activity == null ? $importation->entreprise->activity_ent->name : $importation->activity }}
                                                     </td>
                                                 </tr>
                                                 <tr>
