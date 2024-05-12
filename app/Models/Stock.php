@@ -15,7 +15,7 @@ class Stock extends Model
         return $this->belongsTo(Entreprise::class, 'entreprise_id', 'id');
     }
 
-    public function activity(): BelongsTo
+    public function activity_st(): BelongsTo
     {
         return $this->belongsTo(Activity::class, 'activity_id', 'id');
     }
