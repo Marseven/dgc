@@ -16,7 +16,7 @@ class ImportationController extends Controller
     public function index()
     {
         $activities = Activity::where('type', 'entreprise')->where('deleted', NULL)->get();
-        $entreprises = Entreprise::where('business_circuit', NULL)->get();
+        $entreprises = Entreprise::whereNot('localisation', NULL)->get();
         return view('front.importation.form', compact('activities', 'entreprises'));
     }
 
