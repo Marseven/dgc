@@ -30,7 +30,7 @@ class Stock extends Model
         return $this->belongsTo(ProductType::class, 'product_type_id', 'id');
     }
 
-    public function logistic(): BelongsTo
+    public function logistic_st(): BelongsTo
     {
         return $this->belongsTo(Logistic::class, 'logistic_id', 'id');
     }
