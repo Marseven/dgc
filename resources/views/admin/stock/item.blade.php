@@ -192,15 +192,15 @@
                                                 </tr>
                                                 <tr>
                                                     <td>Nature de l'activité</td>
-                                                    <td>{{ $stock->activity->name }}</td>
+                                                    <td>{{ $stock->activity_st->name }}</td>
                                                 </tr>
                                                 <tr>
                                                     <td>Type de déclaration</td>
-                                                    <td>{{ $stock->type_declaration->name }}</td>
+                                                    <td>{{ $stock->type_declaration_st->name }}</td>
                                                 </tr>
                                                 <tr>
                                                     <td>Type de produits</td>
-                                                    <td>{{ $stock->type_product == null ? $stock->type_product->name : $stock->type_product }}
+                                                    <td>{{ $stock->type_product == null ? $stock->type_product_st->name : $stock->type_product }}
                                                     </td>
                                                 </tr>
                                                 <tr>
@@ -213,7 +213,7 @@
                                                 </tr>
                                                 <tr>
                                                     <td>Moyen logistique utilisé</td>
-                                                    <td>{{ $stock->logistic->name }}</td>
+                                                    <td>{{ $stock->logistic_st->name }}</td>
                                                 </tr>
                                                 <tr>
                                                     <td>Données sur le stock</td>
