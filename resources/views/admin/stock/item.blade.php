@@ -372,7 +372,7 @@
                                 <label class="form-label" for="logistic_id">Moyen logistique utilisé*</label>
                                 <select class="form-control" id="logistic_id" name="logistic_id">
                                     @foreach ($logistics as $logistic)
-                                        <option @if ($logistic->id == $stock->logistic->id) selected @endif
+                                        <option @if ($logistic->id == $stock->logistic_st->id) selected @endif
                                             value="{{ $logistic->id }}">{{ $logistic->name }}</option>
                                     @endforeach
                                 </select>
