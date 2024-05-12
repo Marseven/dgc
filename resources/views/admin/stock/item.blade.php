@@ -100,7 +100,7 @@
                                                 </tr>
                                                 <tr>
                                                     <td>Nature de l'activité</td>
-                                                    <td>{{ $stock->activity ?? $stock->entreprise->activity->name }}
+                                                    <td>{{ $stock->activity == null ? $stock->entreprise->activity->name : $stock->activity }}
                                                     </td>
                                                 </tr>
                                                 <tr>
@@ -200,7 +200,8 @@
                                                 </tr>
                                                 <tr>
                                                     <td>Type de produits</td>
-                                                    <td>{{ $stock->type_product ?? $stock->type_product->name }}</td>
+                                                    <td>{{ $stock->type_product == null ? $stock->type_product->name : $stock->type_product }}
+                                                    </td>
                                                 </tr>
                                                 <tr>
                                                     <td>Province</td>
