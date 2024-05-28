@@ -98,13 +98,25 @@
                                                     <td>{{ $importation->entreprise->email }}</td>
                                                 </tr>
                                                 <tr>
+                                                    <td>Gérant ou Représentant</td>
+                                                    <td>{{ $importation->entreprise->gerant }}</td>
+                                                </tr>
+                                                <tr>
                                                     <td>Nature de l'activité</td>
                                                     <td>{{ $importation->entreprise->activity == null ? $importation->entreprise->activity_ent->name : $importation->entreprise->activity }}
                                                     </td>
                                                 </tr>
                                                 <tr>
-                                                    <td>Localisation</td>
-                                                    <td>{{ $importation->entreprise->localisation }}</td>
+                                                    <td>Commune</td>
+                                                    <td>{{ $importation->entreprise->commune }}</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Arrondissement</td>
+                                                    <td>{{ $importation->entreprise->arrond }}</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Quartier</td>
+                                                    <td>{{ $importation->entreprise->hood }}</td>
                                                 </tr>
                                                 <tr>
                                                     <td>BP</td>
@@ -113,6 +125,18 @@
                                                 <tr>
                                                     <td>Téléphone</td>
                                                     <td>{{ $importation->entreprise->phone }}</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Email</td>
+                                                    <td>{{ $importation->entreprise->email }}</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>N° Fiche Circuit</td>
+                                                    <td>{{ $importation->entreprise->business_circuit }}</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>N° Agément de commerce</td>
+                                                    <td>{{ $importation->entreprise->number_agrement }}</td>
                                                 </tr>
                                                 <tr>
                                                     <td>N° Statistique</td>
@@ -126,6 +150,24 @@
                                                     <td>RCCM</td>
                                                     <td>{{ $importation->entreprise->rccm }}</td>
                                                 </tr>
+                                                <tr>
+                                                    <td>Nom & Adresse du fournisseur</td>
+                                                    <td>{{ $importation->entreprise->provider . ', ' . $importation->entreprise->adress_provider }}
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Transitaire</td>
+                                                    <td>{{ $importation->entreprise->rccm }}</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Téléphone du transitaire</td>
+                                                    <td>{{ $importation->entreprise->phone_transitaire }}</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Adresse du transitaire</td>
+                                                    <td>{{ $importation->entreprise->adress_transitaire }}</td>
+                                                </tr>
+
 
                                             </tbody>
                                         </table>
@@ -187,6 +229,10 @@
                                                     <td>{{ $importation->dock_unloading }}</td>
                                                 </tr>
                                                 <tr>
+                                                    <td>Zone Géographique</td>
+                                                    <td>{{ $importation->zone }}</td>
+                                                </tr>
+                                                <tr>
                                                     <td>Valeur de la marchandise</td>
                                                     <td>{{ $importation->value }}</td>
                                                 </tr>
@@ -217,6 +263,18 @@
                                                 <tr>
                                                     <td>Transitaire</td>
                                                     <td>{{ $importation->transitaire }}</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Téléphone du Transitaire</td>
+                                                    <td>{{ $importation->phone_transitaire }}</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Date de départ</td>
+                                                    <td>{{ $importation->date_start }}</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Date d'arrivée</td>
+                                                    <td>{{ $importation->date_end }}</td>
                                                 </tr>
                                             </tbody>
                                         </table>
@@ -307,6 +365,20 @@
 
                         <div class="mb-3">
                             <div class="input-style-1">
+                                <label class="form-label" for="zone">Zone Géographique *</label>
+                                <select class="form-input" id="zone" name="zone" required>
+                                    <option {{ $importation->zone == 'CEMAC' ? 'selected' : '' }}>CEMAC</option>
+                                    <option {{ $importation->zone == 'CEEAC' ? 'selected' : '' }}>CEEAC</option>
+                                    <option {{ $importation->zone == 'UE' ? 'selected' : '' }}>UE</option>
+                                    <option {{ $importation->zone == 'Amérique' ? 'selected' : '' }}>Amérique</option>
+                                    <option {{ $importation->zone == 'Asie' ? 'selected' : '' }}>Asie</option>
+                                    <option {{ $importation->zone == 'Autres' ? 'selected' : '' }}>Autres</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="mb-3">
+                            <div class="input-style-1">
                                 <label class="form-label" for="value">Valeur de la marchandise *</label>
                                 <input class="form-control" id="value" type="text"
                                     value="{{ $importation->value }}" name="value" required>
@@ -350,6 +422,27 @@
                                 <label class="form-label" for="transitaire">Transitaire *</label>
                                 <input class="form-control" id="transitaire" type="text"
                                     value="{{ $importation->transitaire }}" name="transitaire" required>
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <div class="input-style-1">
+                                <label class="form-label" for="phone_transitaire">Téléphone du Transitaire *</label>
+                                <input class="form-input" id="phone_transitaire" type="tel"
+                                    value="{{ $importation->phone_transitaire }}" name="phone_transitaire" required>
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <div class="input-style-1">
+                                <label class="form-label" for="date_start">Date de départ *</label>
+                                <input class="form-input" id="date_start" type="date"
+                                    value="{{ $importation->date_start }}" name="date_start" required>
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <div class="input-style-1">
+                                <label class="form-label" for="date_end">Date d'arrivée *</label>
+                                <input class="form-input" id="date_end" type="date"
+                                    value="{{ $importation->date_end }}" name="date_end" required>
                             </div>
                         </div>
                     </div>

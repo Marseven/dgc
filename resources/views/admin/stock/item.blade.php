@@ -76,8 +76,8 @@
 
                                             <button class="btn btn-info" type="button" data-bs-toggle="modal"
                                                 data-bs-target="#cardModalView">Modifier</button>
-                                            <button class="btn btn-success" type="button" data-bs-toggle="modal"
-                                                data-bs-target="#securityModal">Note de l'administration</button>
+                                            {{-- <button class="btn btn-success" type="button" data-bs-toggle="modal"
+                                                data-bs-target="#securityModal">Note de l'administration</button> --}}
                                             <a href="{{ url('admin/export/stock/' . $stock->id) }}"><button
                                                     class="btn btn btn-primary me-2" type="button">Imprimer</button></a>
 
@@ -126,6 +126,10 @@
                                                 <tr>
                                                     <td>Carte commerçant</td>
                                                     <td>{{ $stock->entreprise->number_commercant }}</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Agrément de commerce</td>
+                                                    <td>{{ $stock->entreprise->number_agrement }}</td>
                                                 </tr>
                                                 <tr>
                                                     <td>RCCM</td>
@@ -179,10 +183,6 @@
                                             </thead>
                                             <tbody>
                                                 <tr>
-                                                    <td>Service / Département</td>
-                                                    <td>{{ $stock->service }}</td>
-                                                </tr>
-                                                <tr>
                                                     <td>Nom du référent</td>
                                                     <td>{{ $stock->referent }}</td>
                                                 </tr>
@@ -212,6 +212,14 @@
                                                     <td>{{ $stock->ville }}</td>
                                                 </tr>
                                                 <tr>
+                                                    <td>Commune</td>
+                                                    <td>{{ $stock->commune }}</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Département</td>
+                                                    <td>{{ $stock->departement }}</td>
+                                                </tr>
+                                                <tr>
                                                     <td>Moyen logistique utilisé</td>
                                                     <td>{{ $stock->logistic_st->name }}</td>
                                                 </tr>
@@ -233,8 +241,8 @@
                             <div class="col-sm-12 text-center mt-3">
                                 <button class="btn btn-info" type="button" data-bs-toggle="modal"
                                     data-bs-target="#cardModalView">Modifier</button>
-                                <button class="btn btn-success" type="button" data-bs-toggle="modal"
-                                    data-bs-target="#securityModal">Note de l'administration</button>
+                                {{-- <button class="btn btn-success" type="button" data-bs-toggle="modal"
+                                    data-bs-target="#securityModal">Note de l'administration</button> --}}
                                 <a href="{{ url('admin/export/stock/' . $stock->id) }}"><button
                                         class="btn btn btn-primary me-2" type="button">Imprimer</button></a>
                             </div>
@@ -291,13 +299,6 @@
                 <form action="{{ url('admin/update/stock/' . $stock->id) }}" method="POST">
                     @csrf
                     <div class="modal-body">
-                        <div class="mb-3">
-                            <div class="input-style-1">
-                                <label class="form-label" for="service">Service/Département *</label>
-                                <input class="form-control" id="service" type="text" value="{{ $stock->service }}"
-                                    name="service" required>
-                            </div>
-                        </div>
 
                         <div class="mb-3">
                             <div class="input-style-1">
@@ -364,6 +365,22 @@
                                 <label class="form-label" for="ville">Ville *</label>
                                 <input class="form-control" id="ville" type="text" value="{{ $stock->ville }}"
                                     name="ville" required>
+                            </div>
+                        </div>
+
+                        <div class="mb-3">
+                            <div class="input-style-1">
+                                <label class="form-label" for="commune">Commune *</label>
+                                <input class="form-control" id="commune" type="text" value="{{ $stock->commune }}"
+                                    name="commune" required>
+                            </div>
+                        </div>
+
+                        <div class="mb-3">
+                            <div class="input-style-1">
+                                <label class="form-label" for="departement">Département *</label>
+                                <input class="form-control" id="departement" type="text"
+                                    value="{{ $stock->departement }}" name="departement" required>
                             </div>
                         </div>
 

@@ -76,9 +76,7 @@ class EntrepriseController extends Controller
 
             $id = $record->id;
 
-            $record->load(['activity']);
-
-            $localisation = $record->localisation ?? $record->hood;
+            $hood = $record->hood;
 
             $actions = '
                         <button style="padding: 10px !important" type="button"
@@ -101,8 +99,8 @@ class EntrepriseController extends Controller
                 "company_name" => $record->company_name,
                 "phone" => $record->phone,
                 "postal_code" => $record->postal_code,
-                "activity" => $record->activity->name,
-                "localisation" => $localisation,
+                "activity" => $record->activity,
+                "hood" => $hood,
                 "created_at" => $record->created_at,
                 "actions" => $actions,
             );
@@ -121,7 +119,6 @@ class EntrepriseController extends Controller
     public function ajaxItem(Request $request)
     {
         $entreprise = Entreprise::find($request->id);
-        $entreprise->load(['activity']);
 
         $title = "";
         if ($request->action == "view") {
@@ -136,7 +133,7 @@ class EntrepriseController extends Controller
                     <p class="text-uppercase mb-0">' . $entreprise->company_name . '</p>
                 </div>
                 <div class="row"><div class="col-6 mb-5"><h6 class="text-uppercase fs-5 ls-2">Activité</h6>
-                    <p class="text-uppercase mb-0">' . $entreprise->activity->name . '</p>
+                    <p class="text-uppercase mb-0">' . $entreprise->activity . '</p>
                 </div>
                 <div class="col-6 mb-5">
                     <h6 class="text-uppercase fs-5 ls-2">Téléphone </h6>
@@ -147,16 +144,16 @@ class EntrepriseController extends Controller
                     <p class="mb-0">' . ($entreprise->email ?? "-") . '</p>
                 </div>
                 <div class="col-6 mb-5">
-                    <h6 class="text-uppercase fs-5 ls-2">Localisation </h6>
-                    <p class="mb-0">' . ($entreprise->localisation ?? "-") . '</p>
-                </div>
-                <div class="col-6 mb-5">
                     <h6 class="text-uppercase fs-5 ls-2">BP </h6>
                     <p class="mb-0">' . $entreprise->postal_code . '</p>
                 </div>
                 <div class="col-6 mb-5">
                     <h6 class="text-uppercase fs-5 ls-2">Commune </h6>
                     <p class="mb-0">' . ($entreprise->commune ?? "-") . '</p>
+                </div>
+                <div class="col-6 mb-5">
+                    <h6 class="text-uppercase fs-5 ls-2">Arrondissement </h6>
+                    <p class="mb-0">' . ($entreprise->arrond ?? "-") . '</p>
                 </div>
                 <div class="col-6 mb-5">
                     <h6 class="text-uppercase fs-5 ls-2">Quartier </h6>
@@ -173,6 +170,10 @@ class EntrepriseController extends Controller
                 <div class="col-6 mb-5">
                     <h6 class="text-uppercase fs-5 ls-2">N° Statistique </h6>
                     <p class="mb-0">' . ($entreprise->number_statistic ?? "-") . '</p>
+                </div>
+                <div class="col-6 mb-5">
+                    <h6 class="text-uppercase fs-5 ls-2">N° Agrément de commerce </h6>
+                    <p class="mb-0">' . ($entreprise->number_agrement ?? "-") . '</p>
                 </div>
                 <div class="col-6 mb-5">
                     <h6 class="text-uppercase fs-5 ls-2">RCCM </h6>
@@ -213,13 +214,7 @@ class EntrepriseController extends Controller
 
                         <div class="mb-3">
                             <label>Activité de l\'entreprise : </label>
-                            <select name="activity_id" class="form-control form-control-solid form-control-lg">';
-
-            foreach ($activities as $activity) {
-                $body .= '<option ' . ($activity->id == $entreprise->activity->id ? 'selected' : '') . ' value="' . $activity->id . '">' . $activity->name . '</option>';
-            }
-
-            $body .= '    </select>
+                            <input class="form-control" id="activity" type="text" name="activity" value="' . $entreprise->activity . '">
                         </div>
 
                         <div class="mb-3">
@@ -243,17 +238,18 @@ class EntrepriseController extends Controller
                             </div>
                         </div>
 
-                        <div class="mb-3">
-                            <div class="input-style-1">
-                                <label class="form-label" for="localisation">Localisation </label>
-                                <input class="form-control" id="localisation" type="text" value="' . $entreprise->localisation . '" name="localisation">
-                            </div>
-                        </div>
 
                         <div class="mb-3">
                             <div class="input-style-1">
                                 <label class="form-label" for="commune">Commune </label>
                                 <input class="form-control" id="commune" type="text" value="' . $entreprise->commune . '" name="commune">
+                            </div>
+                        </div>
+
+                        <div class="mb-3">
+                            <div class="input-style-1">
+                                <label class="form-label" for="arrond">Arrondissement </label>
+                                <input class="form-control" id="arrond" type="text" value="' . $entreprise->arrond . '" name="arrond">
                             </div>
                         </div>
 
@@ -282,6 +278,13 @@ class EntrepriseController extends Controller
                             <div class="input-style-1">
                                 <label class="form-label" for="number_statistic">N° Statistique *</label>
                                 <input class="form-control" id="number_statistic" type="text" value="' . $entreprise->number_statistic . '" name="number_statistic">
+                            </div>
+                        </div>
+
+                        <div class="mb-3">
+                            <div class="input-style-1">
+                                <label class="form-label" for="number_agrement">N° Agrément de commerce *</label>
+                                <input class="form-control" id="number_agrement" type="text" value="' . $entreprise->number_agrement . '" name="number_agrement">
                             </div>
                         </div>
 
@@ -340,7 +343,7 @@ class EntrepriseController extends Controller
         $entreprise->company_name = $request->company_name;
         $entreprise->postal_code = $request->postal_code;
         $entreprise->phone = $request->phone;
-        $entreprise->localisation = $request->localisation;
+        $entreprise->arrond = $request->arrond;
         $entreprise->number_commercant = $request->number_commercant;
         $entreprise->number_statistic = $request->number_statistic;
         $entreprise->rccm = $request->rccm;
@@ -349,6 +352,7 @@ class EntrepriseController extends Controller
         $entreprise->commune = $request->commune;
         $entreprise->hood = $request->hood;
         $entreprise->business_circuit = $request->business_circuit;
+        $entreprise->numbre_agrement = $request->numbre_agrement;
         $entreprise->nif = $request->nif;
         $entreprise->date_create = $request->date_create;
         $entreprise->legal_status = $request->legal_status;

@@ -20,7 +20,7 @@ class StockController extends Controller
     {
         $activities = Activity::where('type', 'entreprise')->where('deleted', NULL)->get();
         $activities_st = Activity::where('type', 'stock')->where('deleted', NULL)->get();
-        $entreprises = Entreprise::whereNot('business_circuit', NULL)->get();
+        $entreprises = Entreprise::whereNot('nif', NULL)->get();
         $declarations = DeclarationType::where('deleted', NULL)->get();
         $products = ProductType::where('deleted', NULL)->get();
         $logistics = Logistic::where('deleted', NULL)->get();
@@ -51,7 +51,7 @@ class StockController extends Controller
 
             if ($validator->fails()) {
                 $errors = $validator->errors();
-                return back()->with('error', $errors->first());
+                return back()->with('error', $errors->first())->withInput();
             }
 
 
@@ -69,6 +69,7 @@ class StockController extends Controller
             $entreprise->hood = $request->hood;
             $entreprise->number_commercant = $request->number_commercant;
             $entreprise->business_circuit = $request->business_circuit;
+            $entreprise->number_agrement = $request->number_agrement;
             $entreprise->rccm = $request->rccm;
             $entreprise->nif = $request->nif;
             $entreprise->date_create = $request->date_create;
@@ -85,7 +86,6 @@ class StockController extends Controller
 
         $stock = new Stock();
 
-        $stock->service = $request->service;
         $stock->referent = $request->referent;
         $stock->referent_contact = $request->referent_contact;
         $stock->activity_id = $request->st_activity_id;
@@ -100,12 +100,14 @@ class StockController extends Controller
         $stock->logistic_id = $request->logistic_id;
         $stock->province = $request->province;
         $stock->ville = $request->ville;
+        $stock->commune = $request->commune;
+        $stock->departement = $request->departement;
         $stock->entreprise_id = $entreprise->id;
 
         if ($request->file('file_product_url')) {
             $picture = FileController::stock($request->file('file_product_url'));
             if ($picture['state'] == false) {
-                return back()->withErrors($picture['message']);
+                return back()->withErrors($picture['message'])->withInput();
             }
 
             $url = $picture['url'];

@@ -240,7 +240,7 @@ class StockController extends Controller
 
     public function update(Request $request, Stock $stock)
     {
-        $stock->service = $request->service;
+
         $stock->referent = $request->referent;
         $stock->referent_contact = $request->referent_contact;
         $stock->activity_id = $request->activity_id;
@@ -249,6 +249,8 @@ class StockController extends Controller
         $stock->logistic_id = $request->logistic_id;
         $stock->province = $request->province;
         $stock->ville = $request->ville;
+        $stock->commune = $request->commune;
+        $stock->departement = $request->departement;
 
         if ($request->file('file_product_url')) {
             $picture = FileController::stock($request->file('file_product_url'));

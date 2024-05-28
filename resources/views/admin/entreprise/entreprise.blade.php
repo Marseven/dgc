@@ -46,7 +46,7 @@
                                         <th> <span class="f-light f-w-600">Téléphone</span></th>
                                         <th> <span class="f-light f-w-600">BP</span></th>
                                         <th> <span class="f-light f-w-600">Activité</span></th>
-                                        <th> <span class="f-light f-w-600">Localisation</span></th>
+                                        <th> <span class="f-light f-w-600">Quartier</span></th>
                                         <th> <span class="f-light f-w-600">Date de Création</span></th>
                                         <th> <span class="f-light f-w-600">Actions</span></th>
                                     </tr>
@@ -112,7 +112,7 @@
                         data: 'activity'
                     },
                     {
-                        data: 'localisation'
+                        data: 'hood'
                     },
                     {
                         data: 'created_at'

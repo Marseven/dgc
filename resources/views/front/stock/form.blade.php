@@ -51,7 +51,7 @@
                         <div class="col-xl-4 col-lg-6">
                             <div class="form-wrap postfix-xl-right-40">
                                 <label class="form-label" for="legal_status">Forme Juridique *</label>
-                                <input class="form-input" id="legal_status" type="text" name="legal_status" required>
+                                <input class="form-input" id="legal_status" type="text" name="legal_status">
                             </div>
                             <div class="form-wrap postfix-xl-right-40">
                                 <label class="form-label" for="company_name">Société *</label>
@@ -96,6 +96,10 @@
                         </div>
                         <div class="col-xl-4">
                             <div class="form-wrap postfix-xl-right-40">
+                                <label class="form-label" for="number_agrement">N° Agrément de Commerce *</label>
+                                <input class="form-input" id="number_agrement" type="text" name="number_agrement">
+                            </div>
+                            <div class="form-wrap postfix-xl-right-40">
                                 <label class="form-label" for="nif">N° NIF *</label>
                                 <input class="form-input" id="nif" type="text" name="nif">
                             </div>
@@ -114,15 +118,11 @@
                 <br><br>
                 <h3 style="font-weight: 700">Stock</h3>
                 <p>Pour les données sur stock vous devrez fournir un fichier PDF en pièce jointe dans ce formulaire. <a
-                        href="{{ asset('front/doc/Modele_Declaration_de_Stock_Produit_Annexe.docx') }}"
-                        target="_blank">Télécharger le modèle de fichier.</a> </p>
+                        href="{{ asset('front/doc/DONNEES_SUR_LES_STOCKS.xlsx') }}" target="_blank">Télécharger le modèle
+                        de fichier.</a> </p>
                 <br>
                 <div class="row" style="margin-top: 0px;">
                     <div class="col-xl-4 col-lg-6">
-                        <div class="form-wrap postfix-xl-right-40">
-                            <label class="form-label" for="service">Service/Département *</label>
-                            <input class="form-input" id="service" type="text" name="service" required>
-                        </div>
                         <div class="form-wrap postfix-xl-right-40">
                             <label class="form-label" for="referent">Nom du référent stock *</label>
                             <input class="form-input" id="referent" type="text" name="referent" required>
@@ -132,8 +132,6 @@
                             <input class="form-input" id="referent_contact" type="tel" name="referent_contact"
                                 required>
                         </div>
-                    </div>
-                    <div class="col-xl-4 col-lg-6">
                         <div class="form-wrap postfix-xl-right-40">
                             <label class="form-label" for="province">Province *</label>
                             <input class="form-input" id="province" type="text" name="province" required>
@@ -142,7 +140,17 @@
                             <label class="form-label" for="ville">Ville *</label>
                             <input class="form-input" id="ville" type="text" name="ville" required>
                         </div>
+                    </div>
+                    <div class="col-xl-4 col-lg-6">
 
+                        <div class="form-wrap postfix-xl-right-40">
+                            <label class="form-label" for="commune">Commune *</label>
+                            <input class="form-input" id="commune" type="text" name="commune" required>
+                        </div>
+                        <div class="form-wrap postfix-xl-right-40">
+                            <label class="form-label" for="departement">Département *</label>
+                            <input class="form-input" id="departement" type="text" name="departement" required>
+                        </div>
                         <div class="form-wrap postfix-xl-right-40">
                             <label class="form-label" for="st_activity_id">Nature de l'activité *</label>
                             <select class="form-input" id="st_activity_id" name="st_activity_id">
@@ -152,8 +160,6 @@
                                 @endforeach
                             </select>
                         </div>
-                    </div>
-                    <div class="col-xl-4">
                         <div class="form-wrap postfix-xl-right-40">
                             <label class="form-label" for="declaration_type_id">Type de déclaration *</label>
                             <select class="form-input" id="declaration_type_id" name="declaration_type_id">
@@ -163,6 +169,8 @@
                                 @endforeach
                             </select>
                         </div>
+                    </div>
+                    <div class="col-xl-4">
                         <div class="form-wrap postfix-xl-right-40">
                             <label class="form-label" for="product_type_id">Type de produits *</label>
                             <select class="form-input" id="product_type_id" name="product_type_id" onChange="other()">
