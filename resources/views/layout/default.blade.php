@@ -85,7 +85,7 @@
                     data-md-layout="rd-navbar-static" data-md-device-layout="rd-navbar-fixed"
                     data-lg-layout="rd-navbar-static" data-lg-device-layout="rd-navbar-static"
                     data-lg-stick-up-offset="252px">
-                    <div class="rd-navbar-inner"><span class="small">Bienvenu à la Direction Générale du Commerce du
+                    <div class="rd-navbar-inner"><span class="small">Bienvenue à la Direction Générale du Commerce du
                             Gabon</span>
                         <ul class="list-inline list-inline-lg offset-top-0">
                             <li><a class="ioon icon-sm icon-silver-chalice fa-facebook" href="#"></a></li>
