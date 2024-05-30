@@ -140,6 +140,36 @@ class ImportationController extends Controller
             $importation->facture_url =  $url;
         }
 
+        if ($request->file('business_url')) {
+            $picture = FileController::importation($request->file('business_url'));
+            if ($picture['state'] == false) {
+                return back()->withErrors($picture['message'])->withInput();
+            }
+
+            $url = $picture['url'];
+            $importation->business_url =  $url;
+        }
+
+        if ($request->file('cni_url')) {
+            $picture = FileController::importation($request->file('cni_url'));
+            if ($picture['state'] == false) {
+                return back()->withErrors($picture['message'])->withInput();
+            }
+
+            $url = $picture['url'];
+            $importation->cni_url =  $url;
+        }
+
+        if ($request->file('tresor_url')) {
+            $picture = FileController::importation($request->file('tresor_url'));
+            if ($picture['state'] == false) {
+                return back()->withErrors($picture['message'])->withInput();
+            }
+
+            $url = $picture['url'];
+            $importation->tresor_url =  $url;
+        }
+
         if ($importation->save()) {
             return back()->with('success', "La déclaration a été mise à jour avec succès.");
         } else {

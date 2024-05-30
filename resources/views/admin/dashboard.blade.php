@@ -28,7 +28,7 @@
                         <div class="media media-wrapper justify-content-between">
                             <div class="media-body">
                                 <div class="greeting-user">
-                                    <h4 class="f-w-600">Bienvenu Sur l'espace d'administration de la DGC</h4>
+                                    <h4 class="f-w-600">Bienvenue Sur l'espace d'administration de la DGC</h4>
                                 </div>
                             </div>
                             <div>
