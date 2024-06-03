@@ -7,7 +7,7 @@
             <div class="row">
                 <ul class="list-breadcrumb">
                     <li><a href="{{ url('/') }}">Accueil</a></li>
-                    <li>Déclaration Prévisionnelle d’importation</li>
+                    <li>Déclaration Prévisionnelle d’importation et d'exportation</li>
                 </ul>
             </div>
         </div>
@@ -18,7 +18,7 @@
         <div class="container text-left">
             @include('layout.alert')
             <br>
-            <h2>Déclaration Prévisionnelle d’importation</h2>
+            <h2>Déclaration Prévisionnelle d’importation et d'exportation</h2>
             <form method="post" action="{{ route('importation') }}" enctype="multipart/form-data">
                 @csrf
                 <br>
