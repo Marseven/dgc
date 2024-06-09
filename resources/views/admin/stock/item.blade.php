@@ -96,7 +96,7 @@
                                             <tbody>
                                                 <tr>
                                                     <td>Raison Sociale</td>
-                                                    <td>{{ $stock->entreprise->email }}</td>
+                                                    <td>{{ $stock->entreprise->company_name }}</td>
                                                 </tr>
                                                 <tr>
                                                     <td>Nature de l'activité</td>

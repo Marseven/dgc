@@ -95,7 +95,7 @@
                                             <tbody>
                                                 <tr>
                                                     <td>Raison Sociale</td>
-                                                    <td>{{ $importation->entreprise->email }}</td>
+                                                    <td>{{ $importation->entreprise->company_name }}</td>
                                                 </tr>
                                                 <tr>
                                                     <td>Gérant ou Représentant</td>
