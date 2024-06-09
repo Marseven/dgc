@@ -186,7 +186,7 @@
                                 @hasPrivilige('VOIR_IMPORTATION')
                                     <li class="sidebar-list"><i class="fa fa-thumb-tack"> </i>
                                         <a class="sidebar-link sidebar-title" href="{{ route('admin.importation') }}">
-                                            <i data-feather="package" class="mx-1"></i><span>Importations / Exportations
+                                            <i data-feather="package" class="mx-1"></i><span>Import / Export
                                             </span></a>
                                     </li>
                                 @endHasPrivilige
