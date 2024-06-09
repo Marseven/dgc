@@ -174,11 +174,6 @@
                         </div>
                     </div>
                     <div class="col-xl-4 col-lg-6">
-
-                        <div class="form-wrap postfix-xl-right-40">
-                            <label class="form-label" for="dock_unloading">Port de débarquement *</label>
-                            <input class="form-input" id="dock_unloading" type="text" name="dock_unloading" required>
-                        </div>
                         <div class="form-wrap postfix-xl-right-40">
                             <label class="form-label" for="value">Valeur de la marchandise *</label>
                             <input class="form-input" id="value" type="number" name="value" required>
