@@ -101,7 +101,7 @@ class EntrepriseController extends Controller
                 "postal_code" => $record->postal_code,
                 "activity" => $record->activity,
                 "hood" => $hood,
-                "created_at" => $record->created_at,
+                "created_at" => date_format(date_create($record->created_at), 'd-m-Y'),
                 "actions" => $actions,
             );
         }

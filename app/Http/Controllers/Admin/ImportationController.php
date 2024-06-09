@@ -78,7 +78,7 @@ class ImportationController extends Controller
 
             $actions = '
                         <a href="' . url('admin/importation/' . $record->id) . '">
-                            <button style="padding: 10px !important" type="button" class="btn btn-secondary">
+                            <button style="padding: 10px !important" type="button" class="btn btn-info">
                                 <i class="icon-eye"></i>
                             </button>
                         </a>
