@@ -220,28 +220,28 @@
                             <input class="form-input" id="date_end" type="date" name="date_end" required>
                         </div>
                         <div class="form-wrap postfix-xl-right-40">
-                            <label class="form-label" for="business_url">Téléverser la fiche circuit *</label>
+                            <label class="form-label" for="business_url">Téléverser la fiche circuit</label>
                             <br><br>
-                            <input class="form-control" id="business_url" type="file" name="business_url" required>
+                            <input class="form-control" id="business_url" type="file" name="business_url">
                         </div>
                         <div class="form-wrap postfix-xl-right-40">
-                            <label class="form-label" for="cni_url">Téléverser la pièce du gérant valide *</label>
+                            <label class="form-label" for="cni_url">Téléverser la pièce du gérant valide</label>
                             <br><br>
-                            <input class="form-control" id="cni_url" type="file" name="cni_url" required>
+                            <input class="form-control" id="cni_url" type="file" name="cni_url">
                         </div>
                         <div class="form-wrap postfix-xl-right-40">
-                            <label class="form-label" for="tresor_url">Téléverser la facture de paiement au Trésor Public
-                                *</label>
+                            <label class="form-label" for="tresor_url">Téléverser la facture de paiement au Trésor
+                                Public</label>
                             <br><br>
-                            <input class="form-control" id="tresor_url" type="file" name="tresor_url" required>
+                            <input class="form-control" id="tresor_url" type="file" name="tresor_url">
                         </div>
                         <br>
                         <div class="form-wrap postfix-xl-right-40">
                             <label class="form-label" for="facture_url">Téléverser Bon de commande, facture pro forma ou
                                 tous autres documents justifiant de la nature, l'origine, la quantité et la valeur de la
-                                marchandise *</label>
+                                marchandise</label>
                             <br><br><br>
-                            <input class="form-control" id="facture_url" type="file" name="facture_url" required>
+                            <input class="form-control" id="facture_url" type="file" name="facture_url">
                         </div>
                     </div>
                 </div>
