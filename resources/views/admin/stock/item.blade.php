@@ -17,7 +17,7 @@
                                 <svg class="stroke-icon">
                                     <use href="{{ asset('admin/svg/icon-sprite.svg#stroke-home') }}"></use>
                                 </svg></a></li>
-                        <li class="breadcrumb-item">Déclaration</li>
+                        <li class="breadcrumb-item">Stock</li>
                         <li class="breadcrumb-item active">N°{{ $stock->id }}</li>
                     </ol>
                 </div>
