@@ -135,7 +135,7 @@
                                                     <td>{{ $importation->entreprise->business_circuit }}</td>
                                                 </tr>
                                                 <tr>
-                                                    <td>N° Agément de commerce</td>
+                                                    <td>N° Agrément de commerce</td>
                                                     <td>{{ $importation->entreprise->number_agrement }}</td>
                                                 </tr>
                                                 <tr>
