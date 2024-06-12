@@ -13,17 +13,6 @@
                     <div class="login-main">
                         <form class="theme-form" method="POST" action="{{ route('password.email') }}">
                             @csrf
-                            <!--begin::Heading-->
-                            <div class="text-center mb-11">
-                                <!--begin::Title-->
-                                <a href="{{ url('/') }}">
-                                    <img style="margin-right: 10px;" width="30%"
-                                        src="{{ asset('media/logos/logo_eaceia.png') }}" class="header-logo__image"
-                                        alt="Exa Conseil">
-                                </a>
-                                <!--end::Title-->
-                            </div>
-                            <!--begin::Heading-->
 
                             @include('layout.alert')
 
