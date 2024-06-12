@@ -73,7 +73,7 @@
                                     </div>
                                     <div class="col-md-8">
                                         <div class="text-md-end" id="project">
-                                            <button class="btn btn-info" type="button" data-bs-toggle="modal"
+                                            <button class="btn btn-secondary" type="button" data-bs-toggle="modal"
                                                 data-bs-target="#cardModal">Statut</button>
                                             <button class="btn btn-info" type="button" data-bs-toggle="modal"
                                                 data-bs-target="#cardModalView">Modifier</button>
@@ -303,7 +303,7 @@
                         <div class="mb-3">
                             <div class="input-style-1">
                                 <label for="status">Statut *</label>
-                                <select class="form-input" id="status" name="status" onchange="message_rejectd()"
+                                <select class="form-control" id="status" name="status" onchange="message_rejectd()"
                                     required>
                                     <option value="pending">En cours</option>
                                     <option value="rejected">Rejetté</option>

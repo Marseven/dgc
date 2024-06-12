@@ -74,7 +74,7 @@
                                     </div>
                                     <div class="col-md-8">
                                         <div class="text-md-end" id="project">
-                                            <button class="btn btn-info" type="button" data-bs-toggle="modal"
+                                            <button class="btn btn-secondary" type="button" data-bs-toggle="modal"
                                                 data-bs-target="#cardModal">Statut</button>
                                             <button class="btn btn-info" type="button" data-bs-toggle="modal"
                                                 data-bs-target="#cardModalView">Modifier</button>
@@ -356,7 +356,7 @@
                         <div class="mb-3">
                             <div class="input-style-1">
                                 <label for="status">Statut *</label>
-                                <select class="form-input" id="status" name="status" onchange="message_rejectd()"
+                                <select class="form-control" id="status" name="status" onchange="message_rejectd()"
                                     required>
                                     <option value="pending">En cours</option>
                                     <option value="rejected">Rejetté</option>
@@ -447,7 +447,7 @@
                         <div class="mb-3">
                             <div class="input-style-1">
                                 <label for="zone">Zone Géographique *</label>
-                                <select class="form-input" id="zone" name="zone" required>
+                                <select class="form-control" id="zone" name="zone" required>
                                     <option {{ $importation->zone == 'CEMAC' ? 'selected' : '' }}>CEMAC</option>
                                     <option {{ $importation->zone == 'CEEAC' ? 'selected' : '' }}>CEEAC</option>
                                     <option {{ $importation->zone == 'UE' ? 'selected' : '' }}>UE</option>
@@ -508,21 +508,21 @@
                         <div class="mb-3">
                             <div class="input-style-1">
                                 <label for="phone_transitaire">Téléphone du Transitaire *</label>
-                                <input class="form-input" id="phone_transitaire" type="tel"
+                                <input class="form-control" id="phone_transitaire" type="tel"
                                     value="{{ $importation->phone_transitaire }}" name="phone_transitaire" required>
                             </div>
                         </div>
                         <div class="mb-3">
                             <div class="input-style-1">
                                 <label for="date_start">Date de départ *</label>
-                                <input class="form-input" id="date_start" type="date"
+                                <input class="form-control" id="date_start" type="date"
                                     value="{{ $importation->date_start }}" name="date_start" required>
                             </div>
                         </div>
                         <div class="mb-3">
                             <div class="input-style-1">
                                 <label for="date_end">Date d'arrivée *</label>
-                                <input class="form-input" id="date_end" type="date"
+                                <input class="form-control" id="date_end" type="date"
                                     value="{{ $importation->date_end }}" name="date_end" required>
                             </div>
                         </div>
