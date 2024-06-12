@@ -298,7 +298,7 @@
                     </button>
                 </div>
 
-                <form action="{{ url('update-state/stock/' . $stock->id) }}" method="POST">
+                <form action="{{ url('admin/update-state/stock/' . $stock->id) }}" method="POST">
                     <div class="modal-body">
                         <div class="mb-3">
                             <div class="input-style-1">

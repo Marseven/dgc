@@ -351,7 +351,7 @@
                     </button>
                 </div>
 
-                <form action="{{ url('update-state/importation/' . $importation->id) }}" method="POST">
+                <form action="{{ url('admin/update-state/importation/' . $importation->id) }}" method="POST">
 
                     <div class="modal-body">
 
@@ -395,7 +395,7 @@
                     </button>
                 </div>
 
-                <form action="{{ url('update/importation/' . $importation->id) }}" method="POST">
+                <form action="{{ url('admin/update/importation/' . $importation->id) }}" method="POST">
 
                     <div class="modal-body">
                         <div class="mb-3">
