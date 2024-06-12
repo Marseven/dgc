@@ -228,12 +228,26 @@
                                                 </tr>
                                                 <tr>
                                                     <td>Données sur le stock</td>
-                                                    <td><a href="{{ asset($stock->file_product_url) }}" target="_blank">
-                                                            <button style="padding: 10px !important" type="button"
-                                                                class="btn btn-primary">
-                                                                Télécharger <i class="icon-download"></i>
-                                                            </button></a></td>
+                                                    <td>
+                                                        @if ($stock->file_product_url)
+                                                            <a href="{{ asset($stock->file_product_url) }}"
+                                                                target="_blank">
+                                                                <button style="padding: 10px !important" type="button"
+                                                                    class="btn btn-primary">
+                                                                    Télécharger <i class="icon-download"></i>
+                                                                </button>
+                                                            </a>
+                                                        @else
+                                                            Pas de fichier importé
+                                                        @endif
+                                                    </td>
                                                 </tr>
+                                                @if ($stock->message_rejected)
+                                                    <tr>
+                                                        <td>Raison du rejet</td>
+                                                        <td>{{ $stock->message_rejected }}</td>
+                                                    </tr>
+                                                @endif
                                             </tbody>
                                         </table>
                                     </div>
