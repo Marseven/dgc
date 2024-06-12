@@ -286,7 +286,9 @@
                                                                 </button>
                                                             </a>
                                                         @endif
-
+                                                        @if (!$importation->facture_url && !$importation->tresor_url && !$importation->cni_url && !$importation->business_url)
+                                                            Aucun document importé
+                                                        @endif
                                                     </td>
                                                 </tr>
                                                 <tr>
