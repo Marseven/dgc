@@ -285,6 +285,47 @@
         </div>
     </div>
 
+    <div class="modal fade" id="cardModal" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabelOne">Mettre à jour le statut déclaration N° :
+                        {{ $stock->id }}</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+
+                    </button>
+                </div>
+
+                <form action="{{ url('update-state/stock/' . $stock->id) }}" method="POST">
+                    <div class="modal-body">
+                        <div class="mb-3">
+                            <div class="input-style-1">
+                                <label for="status">Statut *</label>
+                                <select class="form-input" id="status" name="status" onchange="message_rejectd()"
+                                    required>
+                                    <option value="pending">En cours</option>
+                                    <option value="rejected">Rejetté</option>
+                                    <option value="missing_file">Document manquant</option>
+                                    <option value="completed">Validé</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="mb-3" id="message_rejected" style="display: none">
+                            <label for="message_rejected" class="col-form-label">Message</label>
+                            <textarea class="form-control" name="message_rejected" required></textarea>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-dark" data-bs-dismiss="modal">Fermer</button>
+                        <button type="submit" class="btn btn-success">Enregistrer</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
     <div class="modal fade" id="cardModalView" role="dialog">
         <div class="modal-dialog">
             <div class="modal-content">
@@ -302,7 +343,7 @@
 
                         <div class="mb-3">
                             <div class="input-style-1">
-                                <label class="form-label" for="referent">Nom du Référent *</label>
+                                <label for="referent">Nom du Référent *</label>
                                 <input class="form-control" id="referent" type="text"
                                     value="{{ $stock->referent }}" name="referent" required>
                             </div>
@@ -310,7 +351,7 @@
 
                         <div class="mb-3">
                             <div class="input-style-1">
-                                <label class="form-label" for="referent_contact">Contact du Référent *</label>
+                                <label for="referent_contact">Contact du Référent *</label>
                                 <input class="form-control" id="referent_contact" type="text"
                                     value="{{ $stock->referent_contact }}" name="referent_contact" required>
                             </div>
@@ -318,7 +359,7 @@
 
                         <div class="mb-3">
                             <div class="input-style-1">
-                                <label class="form-label" for="activity_id">Nature de l'activité *</label>
+                                <label for="activity_id">Nature de l'activité *</label>
                                 <select class="form-control" id="activity_id" name="activity_id">
                                     @foreach ($activities_st as $activity)
                                         <option @if ($activity->id == $stock->activity_st->id) selected @endif
@@ -330,7 +371,7 @@
 
                         <div class="mb-3">
                             <div class="input-style-1">
-                                <label class="form-label" for="declaration_type_id">Type de déclaration *</label>
+                                <label for="declaration_type_id">Type de déclaration *</label>
                                 <select class="form-control" id="declaration_type_id" name="declaration_type_id">
                                     @foreach ($declarations as $declaration)
                                         <option @if ($declaration->id == $stock->type_declaration_st->id) selected @endif
@@ -342,7 +383,7 @@
 
                         <div class="mb-3">
                             <div class="input-style-1">
-                                <label class="form-label" for="product_type_id">Type de produits *</label>
+                                <label for="product_type_id">Type de produits *</label>
                                 <select class="form-control" id="product_type_id" name="product_type_id">
                                     @foreach ($products as $product)
                                         <option @if ($product->id == $stock->type_product_st->id) selected @endif
@@ -354,7 +395,7 @@
 
                         <div class="mb-3">
                             <div class="input-style-1">
-                                <label class="form-label" for="province">Province *</label>
+                                <label for="province">Province *</label>
                                 <input class="form-control" id="province" type="text"
                                     value="{{ $stock->province }}" name="province" required>
                             </div>
@@ -362,7 +403,7 @@
 
                         <div class="mb-3">
                             <div class="input-style-1">
-                                <label class="form-label" for="ville">Ville *</label>
+                                <label for="ville">Ville *</label>
                                 <input class="form-control" id="ville" type="text" value="{{ $stock->ville }}"
                                     name="ville" required>
                             </div>
@@ -370,7 +411,7 @@
 
                         <div class="mb-3">
                             <div class="input-style-1">
-                                <label class="form-label" for="commune">Commune *</label>
+                                <label for="commune">Commune *</label>
                                 <input class="form-control" id="commune" type="text" value="{{ $stock->commune }}"
                                     name="commune" required>
                             </div>
@@ -378,7 +419,7 @@
 
                         <div class="mb-3">
                             <div class="input-style-1">
-                                <label class="form-label" for="departement">Département *</label>
+                                <label for="departement">Département *</label>
                                 <input class="form-control" id="departement" type="text"
                                     value="{{ $stock->departement }}" name="departement" required>
                             </div>
@@ -386,7 +427,7 @@
 
                         <div class="mb-3">
                             <div class="input-style-1">
-                                <label class="form-label" for="logistic_id">Moyen logistique utilisé*</label>
+                                <label for="logistic_id">Moyen logistique utilisé*</label>
                                 <select class="form-control" id="logistic_id" name="logistic_id">
                                     @foreach ($logistics as $logistic)
                                         <option @if ($logistic->id == $stock->logistic_st->id) selected @endif
@@ -408,4 +449,16 @@
 
 @push('scripts')
     <script src="{{ asset('admin/js/datatable/datatables/jquery.dataTables.min.js') }}"></script>
+    <script>
+        function message_rejected() {
+            var status = document.getElementById("status");
+            var message = document.getElementById("message_rejected");
+
+            if (status.value != "rejected") {
+                message.style.display = "none";
+            } else {
+                message.style.display = "block";
+            }
+        }
+    </script>
 @endpush

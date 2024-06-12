@@ -95,6 +95,7 @@ class ImportationController extends Controller
         $importation->entreprise_id = $entreprise->id;
         $importation->date_start = $request->date_start;
         $importation->date_end = $request->date_end;
+        $importation->status = "pending";
 
         if ($request->file('facture_url')) {
             $picture = FileController::importation($request->file('facture_url'));

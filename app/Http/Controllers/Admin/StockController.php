@@ -4,12 +4,14 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\FileController;
+use App\Mail\StatutMail;
 use App\Models\Activity;
 use App\Models\DeclarationType;
 use App\Models\Logistic;
 use App\Models\ProductType;
 use App\Models\Stock;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 
 class StockController extends Controller
 {
@@ -284,6 +286,21 @@ class StockController extends Controller
         $outputPath = 'Declaration_Stock_' . $id . '.pdf';
 
         return $pdf->download($outputPath);
+    }
+
+    public function updateState(Request $request, Stock $stock)
+    {
+        $stock->status = $request->status;
+
+        if ($stock->save()) {
+            $stock->load(['entreprise']);
+            $reason = '';
+            if ($request->message_reject != '') $reason = $request->message_reject;
+            Mail::to($stock->entreprise->email)->send(new StatutMail('stock', $stock, $reason));
+            return back()->with('success', "La déclaration a été mise à jour avec succès.");
+        } else {
+            return back()->with('error', "Une erreur s'est produite.");
+        }
     }
 
     public function note(Request $request, Stock $stock)

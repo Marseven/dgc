@@ -4,10 +4,12 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\FileController;
+use App\Mail\StatutMail;
 use App\Models\Importation;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
 
 class ImportationController extends Controller
 {
@@ -171,6 +173,21 @@ class ImportationController extends Controller
         }
 
         if ($importation->save()) {
+            return back()->with('success', "La déclaration a été mise à jour avec succès.");
+        } else {
+            return back()->with('error', "Une erreur s'est produite.");
+        }
+    }
+
+    public function updateState(Request $request, Importation $importation)
+    {
+        $importation->status = $request->status;
+
+        if ($importation->save()) {
+            $importation->load(['entreprise']);
+            $reason = '';
+            if ($request->message_reject != '') $reason = $request->message_reject;
+            Mail::to($importation->entreprise->email)->send(new StatutMail('importation', $importation, $reason));
             return back()->with('success', "La déclaration a été mise à jour avec succès.");
         } else {
             return back()->with('error', "Une erreur s'est produite.");

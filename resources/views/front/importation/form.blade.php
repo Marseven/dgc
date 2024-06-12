@@ -27,7 +27,7 @@
                 <div class="row" style="margin-top: 0px;">
                     <div class="col-xl-6 col-lg-6">
                         <div class="form-wrap postfix-xl-right-40">
-                            <label class="form-label" for="entreprise_id">Sélectionnez votre société </label>
+                            <label for="entreprise_id">Sélectionnez votre société </label>
                             <select class="form-input" id="entreprise_id" name="entreprise_id" onChange="viewSociete()">
                                 <option value="0">Choisissez votre société</option>
                                 @foreach ($entreprises as $entreprise)
@@ -44,85 +44,84 @@
                     <div class="row" style="margin-top: 0px;">
                         <div class="col-xl-4 col-lg-6">
                             <div class="form-wrap postfix-xl-right-40">
-                                <label class="form-label" for="company_name">Raison sociale *</label>
+                                <label for="company_name">Raison sociale *</label>
                                 <input class="form-input" id="company_name" type="text" name="company_name">
                             </div>
                             <div class="form-wrap postfix-xl-right-40">
-                                <label class="form-label" for="gerant">Nom du Gérant ou Représentant *</label>
+                                <label for="gerant">Nom du Gérant ou Représentant *</label>
                                 <input class="form-input" id="gerant" type="text" name="gerant">
                             </div>
                             <div class="form-wrap postfix-xl-right-40">
-                                <label class="form-label" for="activity">Activité *</label>
+                                <label for="activity">Activité *</label>
                                 <input class="form-input" id="activity" type="text" name="activity">
                             </div>
                             <div class="form-wrap postfix-xl-right-40">
-                                <label class="form-label" for="commune">Commune *</label>
+                                <label for="commune">Commune *</label>
                                 <input class="form-input" id="commune" type="text" name="commune">
                             </div>
                             <div class="form-wrap postfix-xl-right-40">
-                                <label class="form-label" for="arrond">Arrondissement *</label>
+                                <label for="arrond">Arrondissement *</label>
                                 <input class="form-input" id="arrond" type="text" name="arrond">
                             </div>
                             <div class="form-wrap postfix-xl-right-40">
-                                <label class="form-label" for="hood">Quartier *</label>
+                                <label for="hood">Quartier *</label>
                                 <input class="form-input" id="hood" type="text" name="hood">
                             </div>
                             <div class="form-wrap postfix-xl-right-40">
-                                <label class="form-label" for="postal_code">BP *</label>
+                                <label for="postal_code">BP *</label>
                                 <input class="form-input" id="postal_code" type="text" name="postal_code">
                             </div>
                         </div>
                         <div class="col-xl-4 col-lg-6">
                             <div class="form-wrap postfix-xl-right-40">
-                                <label class="form-label" for="phone">Téléphone *</label>
+                                <label for="phone">Téléphone *</label>
                                 <input class="form-input" id="phone" type="tel" name="phone">
                             </div>
                             <div class="form-wrap postfix-xl-right-40">
-                                <label class="form-label" for="email">Email *</label>
+                                <label for="email">Email *</label>
                                 <input class="form-input" id="email" type="email" name="email">
                             </div>
                             <div class="form-wrap postfix-xl-right-40">
-                                <label class="form-label" for="business_circuit">N° Fiche Circuit *</label>
+                                <label for="business_circuit">N° Fiche Circuit *</label>
                                 <input class="form-input" id="business_circuit" type="text" name="business_circuit">
                             </div>
                             <div class="form-wrap postfix-xl-right-40">
-                                <label class="form-label" for="number_commercant">N° Carte de commerçant *</label>
-                                <input class="form-input" id="number_commercant" type="text"
-                                    name="number_commercant">
+                                <label for="number_commercant">N° Carte de commerçant *</label>
+                                <input class="form-input" id="number_commercant" type="text" name="number_commercant">
                             </div>
                             <div class="form-wrap postfix-xl-right-40">
-                                <label class="form-label" for="number_statistic">N° Statistique *</label>
+                                <label for="number_statistic">N° Statistique *</label>
                                 <input class="form-input" id="number_statistic" type="text" name="number_statistic">
                             </div>
                             <div class="form-wrap postfix-xl-right-40">
-                                <label class="form-label" for="number_agrement">N° Agrément de Commerce *</label>
+                                <label for="number_agrement">N° Agrément de Commerce *</label>
                                 <input class="form-input" id="number_agrement" type="text" name="number_agrement">
                             </div>
                             <div class="form-wrap postfix-xl-right-40">
-                                <label class="form-label" for="rccm">N° RCCM *</label>
+                                <label for="rccm">N° RCCM *</label>
                                 <input class="form-input" id="rccm" type="text" name="rccm">
                             </div>
                         </div>
                         <div class="col-xl-4">
                             <div class="form-wrap postfix-xl-right-40">
-                                <label class="form-label" for="provider">Nom du fournisseur *</label>
+                                <label for="provider">Nom du fournisseur *</label>
                                 <input class="form-input" id="provider" type="text" name="provider">
                             </div>
                             <div class="form-wrap postfix-xl-right-40">
-                                <label class="form-label" for="adress_provider">Adresse du fournisseur *</label>
+                                <label for="adress_provider">Adresse du fournisseur *</label>
                                 <input class="form-input" id="adress_provider" type="text" name="adress_provider">
                             </div>
                             <div class="form-wrap postfix-xl-right-40">
-                                <label class="form-label" for="transitaire">Transitaire *</label>
+                                <label for="transitaire">Transitaire *</label>
                                 <input class="form-input" id="transitaire" type="text" name="transitaire">
                             </div>
                             <div class="form-wrap postfix-xl-right-40">
-                                <label class="form-label" for="phone_transitaire">Téléphone du Transitaire *</label>
+                                <label for="phone_transitaire">Téléphone du Transitaire *</label>
                                 <input class="form-input" id="phone_transitaire" type="tel"
                                     name="phone_transitaire">
                             </div>
                             <div class="form-wrap postfix-xl-right-40">
-                                <label class="form-label" for="adress_transitaire">Adresse du Transitaire *</label>
+                                <label for="adress_transitaire">Adresse du Transitaire *</label>
                                 <input class="form-input" id="adress_transitaire" type="text"
                                     name="adress_transitaire">
                             </div>
@@ -136,19 +135,19 @@
                 <div class="row" style="margin-top: 0px;">
                     <div class="col-xl-4 col-lg-6">
                         <div class="form-wrap postfix-xl-right-40">
-                            <label class="form-label" for="type_product">Nature des marchandises *</label>
+                            <label for="type_product">Nature des marchandises *</label>
                             <input class="form-input" id="type_product" type="text" name="type_product" required>
                         </div>
                         <div class="form-wrap postfix-xl-right-40">
-                            <label class="form-label" for="country_origin">Pays d'origine *</label>
+                            <label for="country_origin">Pays d'origine *</label>
                             <input class="form-input" id="country_origin" type="text" name="country_origin" required>
                         </div>
                         <div class="form-wrap postfix-xl-right-40">
-                            <label class="form-label" for="country_from">Pays de Provenance *</label>
+                            <label for="country_from">Pays de Provenance *</label>
                             <input class="form-input" id="country_from" type="text" name="country_from" required>
                         </div>
                         <div class="form-wrap postfix-xl-right-40">
-                            <label class="form-label" for="destination">Destination *</label>
+                            <label for="destination">Destination *</label>
                             <input class="form-input" id="destination" type="text" name="destination" required>
                         </div>
                         <div class="form-wrap postfix-xl-right-40">
@@ -165,42 +164,42 @@
                             </select>
                         </div>
                         <div class="form-wrap postfix-xl-right-40">
-                            <label class="form-label" for="dock_loading">Port d'embarquement *</label>
+                            <label for="dock_loading">Port d'embarquement *</label>
                             <input class="form-input" id="dock_loading" type="text" name="dock_loading" required>
                         </div>
                         <div class="form-wrap postfix-xl-right-40">
-                            <label class="form-label" for="dock_unloading">Port de débarquement *</label>
+                            <label for="dock_unloading">Port de débarquement *</label>
                             <input class="form-input" id="dock_unloading" type="text" name="dock_unloading" required>
                         </div>
                     </div>
                     <div class="col-xl-4 col-lg-6">
                         <div class="form-wrap postfix-xl-right-40">
-                            <label class="form-label" for="value">Valeur de la marchandise *</label>
+                            <label for="value">Valeur de la marchandise *</label>
                             <input class="form-input" id="value" type="number" name="value" required>
                         </div>
                         <div class="form-wrap postfix-xl-right-40">
-                            <label class="form-label" for="type_transaport">Moyen de transport *</label>
+                            <label for="type_transaport">Moyen de transport *</label>
                             <input class="form-input" id="type_transaport" type="text" name="type_transaport"
                                 required>
                         </div>
                         <div class="form-wrap postfix-xl-right-40">
-                            <label class="form-label" for="facture_number">N° de Facture pro-forma *</label>
+                            <label for="facture_number">N° de Facture pro-forma *</label>
                             <input class="form-input" id="facture_number" type="text" name="facture_number" required>
                         </div>
                         <div class="form-wrap postfix-xl-right-40">
-                            <label class="form-label" for="weight">Tonnage *</label>
+                            <label for="weight">Tonnage *</label>
                             <input class="form-input" id="weight" type="number" name="weight" required>
                         </div>
                         <div class="form-wrap postfix-xl-right-40">
-                            <label class="form-label" for="quantity">Quantité *</label>
+                            <label for="quantity">Quantité *</label>
                             <input class="form-input" id="quantity" type="number" name="quantity" required>
                         </div>
                         <div class="form-wrap postfix-xl-right-40">
-                            <label class="form-label" for="transitaire">Transitaire *</label>
+                            <label for="transitaire">Transitaire *</label>
                             <input class="form-input" id="transitaire" type="text" name="transitaire" required>
                         </div>
                         <div class="form-wrap postfix-xl-right-40">
-                            <label class="form-label" for="phone_transitaire">Téléphone du Transitaire *</label>
+                            <label for="phone_transitaire">Téléphone du Transitaire *</label>
                             <input class="form-input" id="phone_transitaire" type="tel" name="phone_transitaire"
                                 required>
                         </div>
@@ -215,24 +214,24 @@
                             <input class="form-input" id="date_end" type="date" name="date_end" required>
                         </div>
                         <div class="form-wrap postfix-xl-right-40">
-                            <label class="form-label" for="business_url">Téléverser la fiche circuit</label>
+                            <label for="business_url">Téléverser la fiche circuit</label>
                             <br><br>
                             <input class="form-control" id="business_url" type="file" name="business_url">
                         </div>
                         <div class="form-wrap postfix-xl-right-40">
-                            <label class="form-label" for="cni_url">Téléverser la pièce du gérant valide</label>
+                            <label for="cni_url">Téléverser la pièce du gérant valide</label>
                             <br><br>
                             <input class="form-control" id="cni_url" type="file" name="cni_url">
                         </div>
                         <div class="form-wrap postfix-xl-right-40">
-                            <label class="form-label" for="tresor_url">Téléverser la facture de paiement au Trésor
+                            <label for="tresor_url">Téléverser la facture de paiement au Trésor
                                 Public</label>
                             <br><br>
                             <input class="form-control" id="tresor_url" type="file" name="tresor_url">
                         </div>
                         <br>
                         <div class="form-wrap postfix-xl-right-40">
-                            <label class="form-label" for="facture_url">Téléverser Bon de commande, facture pro forma ou
+                            <label for="facture_url">Téléverser Bon de commande, facture pro forma ou
                                 tous autres documents justifiant de la nature, l'origine, la quantité et la valeur de la
                                 marchandise</label>
                             <br><br><br>

@@ -33,7 +33,7 @@
                 <div class="row" style="margin-top: 0px;">
                     <div class="col-xl-6 col-lg-6">
                         <div class="form-wrap postfix-xl-right-40">
-                            <label class="form-label" for="entreprise_id">Sélectionnez votre société </label>
+                            <label for="entreprise_id">Sélectionnez votre société </label>
                             <select class="form-input" id="entreprise_id" name="entreprise_id" onChange="viewSociete()">
                                 <option value="0">Choisissez votre société</option>
                                 @foreach ($entreprises as $entreprise)
@@ -50,61 +50,60 @@
                     <div class="row" style="margin-top: 0px;">
                         <div class="col-xl-4 col-lg-6">
                             <div class="form-wrap postfix-xl-right-40">
-                                <label class="form-label" for="legal_status">Forme Juridique *</label>
+                                <label for="legal_status">Forme Juridique *</label>
                                 <input class="form-input" id="legal_status" type="text" name="legal_status">
                             </div>
                             <div class="form-wrap postfix-xl-right-40">
-                                <label class="form-label" for="company_name">Société *</label>
+                                <label for="company_name">Société *</label>
                                 <input class="form-input" id="company_name" type="text" name="company_name">
                             </div>
                             <div class="form-wrap postfix-xl-right-40">
-                                <label class="form-label" for="activity">Activité *</label>
+                                <label for="activity">Activité *</label>
                                 <input class="form-input" id="activity" type="text" name="activity">
                             </div>
                             <div class="form-wrap postfix-xl-right-40">
-                                <label class="form-label" for="commune">Commune *</label>
+                                <label for="commune">Commune *</label>
                                 <input class="form-input" id="commune" type="text" name="commune">
                             </div>
                             <div class="form-wrap postfix-xl-right-40">
-                                <label class="form-label" for="hood">Quartier *</label>
+                                <label for="hood">Quartier *</label>
                                 <input class="form-input" id="hood" type="text" name="hood">
                             </div>
 
                         </div>
                         <div class="col-xl-4 col-lg-6">
                             <div class="form-wrap postfix-xl-right-40">
-                                <label class="form-label" for="postal_code">BP *</label>
+                                <label for="postal_code">BP *</label>
                                 <input class="form-input" id="postal_code" type="text" name="postal_code">
                             </div>
                             <div class="form-wrap postfix-xl-right-40">
-                                <label class="form-label" for="phone">Téléphone *</label>
+                                <label for="phone">Téléphone *</label>
                                 <input class="form-input" id="phone" type="tel" name="phone">
                             </div>
                             <div class="form-wrap postfix-xl-right-40">
-                                <label class="form-label" for="email">Email *</label>
+                                <label for="email">Email *</label>
                                 <input class="form-input" id="email" type="email" name="email">
                             </div>
                             <div class="form-wrap postfix-xl-right-40">
-                                <label class="form-label" for="business_circuit">N° Fiche Circuit *</label>
+                                <label for="business_circuit">N° Fiche Circuit *</label>
                                 <input class="form-input" id="business_circuit" type="text" name="business_circuit">
                             </div>
                             <div class="form-wrap postfix-xl-right-40">
-                                <label class="form-label" for="number_commercant">N° Carte Commerçant *</label>
-                                <input class="form-input" id="number_commercant" type="text"
-                                    name="number_commercant">
+                                <label for="number_commercant">N° Carte Commerçant *</label>
+                                <input class="form-input" id="number_commercant" type="text" name="number_commercant">
                             </div>
                         </div>
                         <div class="col-xl-4">
                             <div class="form-wrap postfix-xl-right-40">
-                                <label class="form-label" for="number_agrement">N° Agrément de Commerce *</label>
+                                <label for="number_agrement">N° Agrément de Commerce *</label>
                                 <input class="form-input" id="number_agrement" type="text" name="number_agrement">
                             </div>
                             <div class="form-wrap postfix-xl-right-40">
-                                <label class="form-label" for="nif">N° NIF *</label>
+                                <label for="nif">N° NIF *</label>
                                 <input class="form-input" id="nif" type="text" name="nif">
                             </div>
                             <div class="form-wrap postfix-xl-right-40">
-                                <label class="form-label" for="rccm">N° RCCM *</label>
+                                <label for="rccm">N° RCCM *</label>
                                 <input class="form-input" id="rccm" type="text" name="rccm">
                             </div>
                             <div class="form-wrap postfix-xl-right-40">
@@ -124,35 +123,35 @@
                 <div class="row" style="margin-top: 0px;">
                     <div class="col-xl-4 col-lg-6">
                         <div class="form-wrap postfix-xl-right-40">
-                            <label class="form-label" for="referent">Nom du référent stock *</label>
+                            <label for="referent">Nom du référent stock *</label>
                             <input class="form-input" id="referent" type="text" name="referent" required>
                         </div>
                         <div class="form-wrap postfix-xl-right-40">
-                            <label class="form-label" for="referent_contact">Contact *</label>
+                            <label for="referent_contact">Contact *</label>
                             <input class="form-input" id="referent_contact" type="tel" name="referent_contact"
                                 required>
                         </div>
                         <div class="form-wrap postfix-xl-right-40">
-                            <label class="form-label" for="province">Province *</label>
+                            <label for="province">Province *</label>
                             <input class="form-input" id="province" type="text" name="province" required>
                         </div>
                         <div class="form-wrap postfix-xl-right-40">
-                            <label class="form-label" for="ville">Ville *</label>
+                            <label for="ville">Ville *</label>
                             <input class="form-input" id="ville" type="text" name="ville" required>
                         </div>
                     </div>
                     <div class="col-xl-4 col-lg-6">
 
                         <div class="form-wrap postfix-xl-right-40">
-                            <label class="form-label" for="commune">Commune *</label>
+                            <label for="commune">Commune *</label>
                             <input class="form-input" id="commune" type="text" name="commune" required>
                         </div>
                         <div class="form-wrap postfix-xl-right-40">
-                            <label class="form-label" for="departement">Département *</label>
+                            <label for="departement">Département *</label>
                             <input class="form-input" id="departement" type="text" name="departement" required>
                         </div>
                         <div class="form-wrap postfix-xl-right-40">
-                            <label class="form-label" for="st_activity_id">Nature de l'activité *</label>
+                            <label for="st_activity_id">Nature de l'activité *</label>
                             <select class="form-input" id="st_activity_id" name="st_activity_id">
                                 <option>Choisissez une activité</option>
                                 @foreach ($activities_st as $activity)
@@ -161,7 +160,7 @@
                             </select>
                         </div>
                         <div class="form-wrap postfix-xl-right-40">
-                            <label class="form-label" for="declaration_type_id">Type de déclaration *</label>
+                            <label for="declaration_type_id">Type de déclaration *</label>
                             <select class="form-input" id="declaration_type_id" name="declaration_type_id">
                                 <option>Choisissez un type de déclaration</option>
                                 @foreach ($declarations as $declaration)
@@ -172,7 +171,7 @@
                     </div>
                     <div class="col-xl-4">
                         <div class="form-wrap postfix-xl-right-40">
-                            <label class="form-label" for="product_type_id">Type de produits *</label>
+                            <label for="product_type_id">Type de produits *</label>
                             <select class="form-input" id="product_type_id" name="product_type_id" onChange="other()">
                                 <option>Choisissez un type de produit</option>
                                 @foreach ($products as $product)
@@ -184,7 +183,7 @@
                                 placeholder="Type de produit" style="display:none">
                         </div>
                         <div class="form-wrap postfix-xl-right-40">
-                            <label class="form-label" for="logistic_id">Moyen logistiques utilisés *</label>
+                            <label for="logistic_id">Moyen logistiques utilisés *</label>
                             <select class="form-input" id="logistic_id" name="logistic_id">
                                 <option>Choisissez un moyen logistique</option>
                                 @foreach ($logistics as $logistic)
@@ -194,7 +193,7 @@
                         </div>
 
                         <div class="form-wrap postfix-xl-right-40">
-                            <label class="form-label" for="file_product_url">Téléverser le fichier de données sur les
+                            <label for="file_product_url">Téléverser le fichier de données sur les
                                 stocks *</label>
                             <br><br>
                             <input class="form-control" id="file_product_url" type="file" name="file_product_url"

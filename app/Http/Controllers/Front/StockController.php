@@ -103,6 +103,7 @@ class StockController extends Controller
         $stock->commune = $request->commune;
         $stock->departement = $request->departement;
         $stock->entreprise_id = $entreprise->id;
+        $stock->status = "pending";
 
         if ($request->file('file_product_url')) {
             $picture = FileController::stock($request->file('file_product_url'));

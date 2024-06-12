@@ -97,6 +97,7 @@ Route::middleware('auth')->group(function () {
         Route::get('/importation/{importation}', [AdminImportationController::class, 'item'])->name('admin.importation.item');
         Route::get('/export/importation/{importation}', [AdminImportationController::class, 'export'])->name('export.importation');
         Route::post('/update/importation/{importation}', [AdminImportationController::class, 'update'])->name('update.importation');
+        Route::post('/update-state/importation/{importation}', [AdminImportationController::class, 'updateState'])->name('update.state.importation');
         Route::post('/get/importation', [AdminImportationController::class, 'ajaxItem'])->name('get-importation');
         Route::get('/ajax/importations', [AdminImportationController::class, 'ajaxList'])->name('list-importation');
 
@@ -105,6 +106,7 @@ Route::middleware('auth')->group(function () {
         Route::get('/stock/{stock}', [AdminStockController::class, 'item'])->name('admin.stock.item');
         Route::get('/export/stock/{stock}', [AdminStockController::class, 'export'])->name('export.stock');
         Route::post('/update/stock/{stock}', [AdminStockController::class, 'update'])->name('update.stock');
+        Route::post('/update-state/stock/{stock}', [AdminStockController::class, 'updateState'])->name('update.state.stock');
         Route::post('/note/stock/{stock}', [AdminStockController::class, 'note'])->name('note.stock');
         Route::post('/get/stock', [AdminStockController::class, 'ajaxItem'])->name('get-stock');
         Route::get('/ajax/stocks', [AdminStockController::class, 'ajaxList'])->name('list-stock');
