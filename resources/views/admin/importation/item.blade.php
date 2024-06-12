@@ -43,6 +43,8 @@
                                                 </div>
                                                 <div class="media-body m-l-20 text-right">
                                                     <h4 class="media-heading">{{ $importation->entreprise->company_name }}
+                                                        <span
+                                                            class="badge badge-{{ App\Http\Controllers\Controller::status($entity->status)['type'] }}">{{ App\Http\Controllers\Controller::status($entity->status)['message'] }}</span>
                                                     </h4>
                                                     <p>{{ $importation->entreprise->email }}<br><span>{{ $importation->entreprise->phone }}</span>
                                                     </p>
@@ -323,6 +325,8 @@
                                 <!-- End InvoiceBot-->
                             </div>
                             <div class="col-sm-12 text-center mt-3">
+                                <button class="btn btn-secondary" type="button" data-bs-toggle="modal"
+                                    data-bs-target="#cardModal">Statut</button>
                                 <button class="btn btn-info" type="button" data-bs-toggle="modal"
                                     data-bs-target="#cardModalView">Modifier</button>
                                 <a href="{{ url('admin/export/importation/' . $importation->id) }}"><button

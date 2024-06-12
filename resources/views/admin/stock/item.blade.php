@@ -42,7 +42,9 @@
                                                         src="../assets/images/other-images/logo-login.png" alt="">
                                                 </div>
                                                 <div class="media-body m-l-20 text-right">
-                                                    <h4 class="media-heading">{{ $stock->entreprise->company_name }}</h4>
+                                                    <h4 class="media-heading">{{ $stock->entreprise->company_name }} <span
+                                                            class="badge badge-{{ App\Http\Controllers\Controller::status($entity->status)['type'] }}">{{ App\Http\Controllers\Controller::status($entity->status)['message'] }}</span>
+                                                    </h4>
                                                     <p>{{ $stock->entreprise->email }}<br><span>{{ $stock->entreprise->phone }}</span>
                                                     </p>
                                                 </div>
@@ -240,6 +242,8 @@
                                 <!-- End InvoiceBot-->
                             </div>
                             <div class="col-sm-12 text-center mt-3">
+                                <button class="btn btn-secondary" type="button" data-bs-toggle="modal"
+                                    data-bs-target="#cardModal">Statut</button>
                                 <button class="btn btn-info" type="button" data-bs-toggle="modal"
                                     data-bs-target="#cardModalView">Modifier</button>
                                 {{-- <button class="btn btn-success" type="button" data-bs-toggle="modal"
