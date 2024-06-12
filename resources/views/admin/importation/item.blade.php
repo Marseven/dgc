@@ -358,7 +358,7 @@
                         <div class="mb-3">
                             <div class="input-style-1">
                                 <label for="status">Statut *</label>
-                                <select class="form-control" id="status" name="status" onchange="message_rejectd()"
+                                <select class="form-control" id="status" name="status" onChange="message_rejected()"
                                     required>
                                     <option value="pending">En cours</option>
                                     <option value="rejected">Rejetté</option>
