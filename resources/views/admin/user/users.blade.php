@@ -94,7 +94,7 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    <form action="{{ url('admn/user-create') }}" method="POST">
+                    <form action="{{ url('admin/user-create') }}" method="POST">
                         @csrf
 
                         <div class="mb-3">
