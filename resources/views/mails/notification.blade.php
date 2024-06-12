@@ -3,7 +3,7 @@
 
     Vous avez reçu une nouvelle déclaration :
 
-    - Type : {{ $type }}
+    - Type : {{ $type == 'importation' ? 'Importation/Exportation' : 'Stock' }}
     - N° : {{ $entity->id }}
     - Entreprise : {{ $entity->entreprise->company_name }}
 

@@ -19,6 +19,7 @@ class StatutMail extends Mailable
     public $type;
     public $entity;
     public $reason;
+    public $subject;
 
     /**
      * Create a new message instance.
@@ -28,15 +29,16 @@ class StatutMail extends Mailable
         $this->type = $type;
         $this->entity = $entity;
         $this->reason = $reason;
+        $this->subject = "Notification de la déclaration " . ($type == "importation" ? "d'importation/exportation" : "de stock") . " N°" . $entity->id;
     }
 
     /**
      * Get the message envelope.
      */
-    public function envelope($entity): Envelope
+    public function envelope(): Envelope
     {
         return new Envelope(
-            subject: 'Notification de Déclaration N°' . $entity->id,
+            subject: $this->subject,
         );
     }
 
