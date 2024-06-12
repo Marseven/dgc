@@ -1,27 +1,27 @@
 <x-mail::layout>
-{{-- Header --}}
-<x-slot:header>
-<x-mail::header :url="config('app.url')">
-{{ config('app.name') }}
-</x-mail::header>
-</x-slot:header>
+    {{-- Header --}}
+    <x-slot:header>
+        <x-mail::header :url="config('app.url')">
+            <img src="{{ asset('front/images/dgc_wb.png') }}" class="logo" alt="Logo DGC">
+        </x-mail::header>
+    </x-slot:header>
 
-{{-- Body --}}
-{{ $slot }}
+    {{-- Body --}}
+    {{ $slot }}
 
-{{-- Subcopy --}}
-@isset($subcopy)
-<x-slot:subcopy>
-<x-mail::subcopy>
-{{ $subcopy }}
-</x-mail::subcopy>
-</x-slot:subcopy>
-@endisset
+    {{-- Subcopy --}}
+    @isset($subcopy)
+        <x-slot:subcopy>
+            <x-mail::subcopy>
+                {{ $subcopy }}
+            </x-mail::subcopy>
+        </x-slot:subcopy>
+    @endisset
 
-{{-- Footer --}}
-<x-slot:footer>
-<x-mail::footer>
-© {{ date('Y') }} {{ config('app.name') }}. {{ __('All rights reserved.') }}
-</x-mail::footer>
-</x-slot:footer>
+    {{-- Footer --}}
+    <x-slot:footer>
+        <x-mail::footer>
+            © {{ date('Y') }} {{ config('app.name') }}. {{ __('All rights reserved.') }}
+        </x-mail::footer>
+    </x-slot:footer>
 </x-mail::layout>

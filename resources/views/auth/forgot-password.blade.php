@@ -1,4 +1,4 @@
-@extends('layout.login')
+@extends('layout.auth')
 
 @section('content')
     <div class="d-flex flex-column flex-root" id="kt_app_root">
@@ -82,7 +82,7 @@
 
                             <!--begin::Links-->
                             <div class="d-flex fw-semibold text-black mb-10 fs-base ">
-                                <p>{{ date('Y') }} © Exa Conseil</p>
+                                <p>{{ date('Y') }} © {{ env('APP_NAME') }}</p>
                             </div>
                             <!--end::Links-->
                         </div>
