@@ -182,6 +182,7 @@ class ImportationController extends Controller
     public function updateState(Request $request, Importation $importation)
     {
         $importation->status = $request->status;
+        if ($request->message_reject != '') $importation->message_reject = $request->message_reject;
 
         if ($importation->save()) {
             $importation->load(['entreprise']);

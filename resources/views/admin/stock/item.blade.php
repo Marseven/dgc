@@ -242,10 +242,10 @@
                                                         @endif
                                                     </td>
                                                 </tr>
-                                                @if ($stock->message_rejected)
+                                                @if ($stock->message_reject)
                                                     <tr>
                                                         <td>Raison du rejet</td>
-                                                        <td>{{ $stock->message_rejected }}</td>
+                                                        <td>{{ $stock->message_reject }}</td>
                                                     </tr>
                                                 @endif
                                             </tbody>

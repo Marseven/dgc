@@ -317,10 +317,10 @@
                                                     <td>Date d'arrivée</td>
                                                     <td>{{ $importation->date_end }}</td>
                                                 </tr>
-                                                @if ($importation->message_rejected)
+                                                @if ($importation->message_reject)
                                                     <tr>
                                                         <td>Raison du rejet</td>
-                                                        <td>{{ $importation->message_rejected }}</td>
+                                                        <td>{{ $importation->message_reject }}</td>
                                                     </tr>
                                                 @endif
                                             </tbody>

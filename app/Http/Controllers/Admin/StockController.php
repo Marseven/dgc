@@ -291,6 +291,7 @@ class StockController extends Controller
     public function updateState(Request $request, Stock $stock)
     {
         $stock->status = $request->status;
+        if ($request->message_reject != '') $stock->message_reject = $request->message_reject;
 
         if ($stock->save()) {
             $stock->load(['entreprise']);
