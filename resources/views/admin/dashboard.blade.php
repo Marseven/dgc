@@ -28,7 +28,8 @@
                         <div class="media media-wrapper justify-content-between">
                             <div class="media-body">
                                 <div class="greeting-user">
-                                    <h4 class="f-w-600">Bienvenue Sur la plateforme de la Direction Général du Commerce</h4>
+                                    <h4 class="f-w-600">Bienvenue sur la plateforme de la Direction Générale du Commerce
+                                    </h4>
                                 </div>
                             </div>
                             <div>
