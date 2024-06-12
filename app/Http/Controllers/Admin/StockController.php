@@ -87,7 +87,7 @@ class StockController extends Controller
                                 <i class="icon-eye"></i>
                             </button>
                         </a>
-                        <a href="' . url('export/stock/' . $record->id) . '">
+                        <a href="' . url('admin/export/stock/' . $record->id) . '">
                         <button style="padding: 10px !important" type="button"
                             class="btn btn-primary">
                             <i class="icon-download"></i>
