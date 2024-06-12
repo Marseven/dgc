@@ -358,7 +358,7 @@
                         <div class="mb-3">
                             <div class="input-style-1">
                                 <label for="status">Statut *</label>
-                                <select class="form-control" id="status" name="status" onChange="message_rejected()"
+                                <select class="form-control" id="status" name="status" onChange="message_r()"
                                     required>
                                     <option value="pending">En cours</option>
                                     <option value="rejected">Rejetté</option>
@@ -542,7 +542,7 @@
 @push('scripts')
     <script src="{{ asset('admin/js/datatable/datatables/jquery.dataTables.min.js') }}"></script>
     <script>
-        function message_rejected() {
+        function message_r() {
             var status = document.getElementById("status");
             var message = document.getElementById("message_rejected");
 
