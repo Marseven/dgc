@@ -44,7 +44,7 @@
                                                 <div class="media-body m-l-20 text-right">
                                                     <h4 class="media-heading">{{ $importation->entreprise->company_name }}
                                                         <span
-                                                            class="badge badge-{{ App\Http\Controllers\Controller::status($entity->status)['type'] }}">{{ App\Http\Controllers\Controller::status($entity->status)['message'] }}</span>
+                                                            class="badge badge-{{ App\Http\Controllers\Controller::status($importation->status)['type'] }}">{{ App\Http\Controllers\Controller::status($importation->status)['message'] }}</span>
                                                     </h4>
                                                     <p>{{ $importation->entreprise->email }}<br><span>{{ $importation->entreprise->phone }}</span>
                                                     </p>

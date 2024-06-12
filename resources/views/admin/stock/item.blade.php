@@ -43,7 +43,7 @@
                                                 </div>
                                                 <div class="media-body m-l-20 text-right">
                                                     <h4 class="media-heading">{{ $stock->entreprise->company_name }} <span
-                                                            class="badge badge-{{ App\Http\Controllers\Controller::status($entity->status)['type'] }}">{{ App\Http\Controllers\Controller::status($entity->status)['message'] }}</span>
+                                                            class="badge badge-{{ App\Http\Controllers\Controller::status($stock->status)['type'] }}">{{ App\Http\Controllers\Controller::status($stock->status)['message'] }}</span>
                                                     </h4>
                                                     <p>{{ $stock->entreprise->email }}<br><span>{{ $stock->entreprise->phone }}</span>
                                                     </p>
