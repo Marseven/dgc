@@ -21,6 +21,7 @@ class ImportationController extends Controller
 
     public function item(Importation $importation)
     {
+        $importation->load(['entreprise', 'user']);
         return view('admin.importation.item', compact('importation'));
     }
 
@@ -131,6 +132,7 @@ class ImportationController extends Controller
         $importation->transitaire = $request->transitaire;
         $importation->zone = $request->zone;
         $importation->phone_transitaire = $request->phone_transitaire;
+        $importation->updated_by = Auth::user()->id;
 
         if ($request->file('facture_url')) {
             $picture = FileController::importation($request->file('facture_url'));
@@ -183,7 +185,7 @@ class ImportationController extends Controller
     {
         $importation->status = $request->status;
         if ($request->message_reject != '') $importation->message_reject = $request->message_reject;
-
+        $importation->updated_by = Auth::user()->id;
         if ($importation->save()) {
             $importation->load(['entreprise']);
             $reason = '';

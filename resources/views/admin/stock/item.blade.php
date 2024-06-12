@@ -55,6 +55,9 @@
                                             <div class="text-md-end text-xs-center">
                                                 <h3>Déclaration #<span class="counter">{{ $stock->id }}</span></h3>
                                                 <p>Date: {{ $stock->created_at }}</p>
+                                                <p>Traité par :
+                                                    {{ $stock->user->lastname . ' ' . $stock->user->firstname }}
+                                                </p>
                                             </div>
                                             <!-- End Title-->
                                         </div>

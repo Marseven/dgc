@@ -11,6 +11,7 @@ use App\Models\Logistic;
 use App\Models\ProductType;
 use App\Models\Stock;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
 
 class StockController extends Controller
@@ -27,7 +28,7 @@ class StockController extends Controller
         $declarations = DeclarationType::where('deleted', NULL)->get();
         $products = ProductType::where('deleted', NULL)->get();
         $logistics = Logistic::where('deleted', NULL)->get();
-        $stock->load(['entreprise', 'type_declaration_st', 'type_product_st', 'logistic_st', 'activity_st']);
+        $stock->load(['entreprise', 'type_declaration_st', 'type_product_st', 'logistic_st', 'activity_st', 'user']);
         return view('admin.stock.item', compact('stock', 'activities_st', 'products', 'logistics', 'declarations'));
     }
 
@@ -253,6 +254,7 @@ class StockController extends Controller
         $stock->ville = $request->ville;
         $stock->commune = $request->commune;
         $stock->departement = $request->departement;
+        $stock->updated_by = Auth::user()->id;
 
         if ($request->file('file_product_url')) {
             $picture = FileController::stock($request->file('file_product_url'));
@@ -292,7 +294,7 @@ class StockController extends Controller
     {
         $stock->status = $request->status;
         if ($request->message_reject != '') $stock->message_reject = $request->message_reject;
-
+        $stock->updated_by = Auth::user()->id;
         if ($stock->save()) {
             $stock->load(['entreprise']);
             $reason = '';

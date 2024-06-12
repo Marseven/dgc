@@ -19,6 +19,7 @@
                                 </svg></a></li>
                         <li class="breadcrumb-item">Importation / Exportation</li>
                         <li class="breadcrumb-item active">N°{{ $importation->id }}</li>
+
                     </ol>
                 </div>
             </div>
@@ -56,6 +57,11 @@
                                             <div class="text-md-end text-xs-center">
                                                 <h3>Déclaration #<span class="counter">{{ $importation->id }}</span></h3>
                                                 <p>Date: {{ $importation->created_at }}</p>
+                                                @if ($importation->updated_by)
+                                                    <p>Traité par :
+                                                        {{ $importation->user->lastname . ' ' . $importation->user->firstname }}
+                                                    </p>
+                                                @endif
                                             </div>
                                             <!-- End Title-->
                                         </div>
