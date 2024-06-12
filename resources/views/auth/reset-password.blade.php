@@ -31,6 +31,7 @@
                                         {{ $errors->first('email') }}</div>
                                 @endif
                             </div>
+                            <br>
                             <!--end::Input group=-->
                             <div class="fv-row mb-3">
                                 <!--begin::Password-->
