@@ -103,7 +103,7 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    <form action="{{ url('/admin-user/' . $user->id) }}" method="POST">
+                    <form action="{{ url('admin-user/' . $user->id) }}" method="POST">
                         @csrf
                         <div class="mb-3">
                             <label for="firstname" class="col-form-label">Nom</label>
@@ -142,7 +142,7 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    <form action="{{ url('profil/password/' . $user->id) }}" method="POST">
+                    <form action="{{ url('admin/profil/password/' . $user->id) }}" method="POST">
                         @csrf
                         <div class="mb-3">
                             <label for="recipient-name" class="col-form-label">Ancien mot de passe</label>

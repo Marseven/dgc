@@ -91,7 +91,7 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    <form action="{{ url('role') }}" method="POST">
+                    <form action="{{ url('admin/role') }}" method="POST">
                         @csrf
                         <div class="mb-3">
                             <label for="user_type_id" class="col-form-label">Type d'utilisateur</label>
@@ -180,7 +180,7 @@
                         </button>
                     </div>
                     <div class="modal-body">
-                        <form action="{{ url('role/edit/' . $role->id) }}" method="POST">
+                        <form action="{{ url('admin/role/edit/' . $role->id) }}" method="POST">
                             @csrf
                             <div class="mb-3">
                                 <label for="user_type_id" class="col-form-label">Type d'utilisateur</label>
@@ -279,7 +279,7 @@
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-dark" data-bs-dismiss="modal">Fermer</button>
-                        <a href="{{ url('delete-role/' . $role->id) }}">
+                        <a href="{{ url('admin/delete-role/' . $role->id) }}">
                             <button type="button" class="btn btn-danger">Supprimer</button>
                         </a>
 
