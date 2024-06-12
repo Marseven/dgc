@@ -299,7 +299,9 @@
                 </div>
 
                 <form action="{{ url('admin/update-state/stock/' . $stock->id) }}" method="POST">
+
                     <div class="modal-body">
+                        @csrf
                         <div class="mb-3">
                             <div class="input-style-1">
                                 <label for="status">Statut *</label>

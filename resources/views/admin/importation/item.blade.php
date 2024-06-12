@@ -354,7 +354,7 @@
                 <form action="{{ url('admin/update-state/importation/' . $importation->id) }}" method="POST">
 
                     <div class="modal-body">
-
+                        @csrf
                         <div class="mb-3">
                             <div class="input-style-1">
                                 <label for="status">Statut *</label>
@@ -398,6 +398,7 @@
                 <form action="{{ url('admin/update/importation/' . $importation->id) }}" method="POST">
 
                     <div class="modal-body">
+                        @csrf
                         <div class="mb-3">
                             <div class="input-style-1">
                                 <label for="type_product">Nature des marchandises *</label>
