@@ -132,9 +132,7 @@
             </p>
         </div>
 
-        <h2 style="font-family:'Bookman Old Style'; font-size:10px; text-align:center;">INFORMATIONS CONCERNANT
-            L’ENTREPRISE
-        </h2>
+        <h2 style="font-family:'Bookman Old Style'; font-size:10px; text-align:center;">DELIVRE À L’ENTREPRISE :</h2>
 
         <div class="entreprise-info"
             style="font-family:'Bookman Old Style'; margin-top:5px; border: 1.5px solid #000; padding:10px;">
