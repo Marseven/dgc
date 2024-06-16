@@ -83,7 +83,7 @@
                                     <div class="col-md-8">
                                         <div class="text-md-end" id="project">
                                             @hasPrivilige('MODIFIER_IMPORTATION')
-                                                @if ($importation->status != 'completed')
+                                                @if ($importation->status == 'pending' || $importation->status == 'missing_file')
                                                     <button class="btn btn-secondary" type="button" data-bs-toggle="modal"
                                                         data-bs-target="#cardModal">Statut</button>
                                                     <button class="btn btn-info" type="button" data-bs-toggle="modal"
@@ -343,12 +343,18 @@
                                 <!-- End InvoiceBot-->
                             </div>
                             <div class="col-sm-12 text-center mt-3">
-                                <button class="btn btn-secondary" type="button" data-bs-toggle="modal"
-                                    data-bs-target="#cardModal">Statut</button>
-                                <button class="btn btn-info" type="button" data-bs-toggle="modal"
-                                    data-bs-target="#cardModalView">Modifier</button>
-                                <a href="{{ url('admin/export/importation/' . $importation->id) }}"><button
-                                        class="btn btn btn-primary me-2" type="button">Imprimer</button></a>
+                                @hasPrivilige('MODIFIER_IMPORTATION')
+                                    @if ($importation->status == 'pending' || $importation->status == 'missing_file')
+                                        <button class="btn btn-secondary" type="button" data-bs-toggle="modal"
+                                            data-bs-target="#cardModal">Statut</button>
+                                        <button class="btn btn-info" type="button" data-bs-toggle="modal"
+                                            data-bs-target="#cardModalView">Modifier</button>
+                                    @endif
+                                @endHasPrivilige
+                                @if ($importation->status == 'doing' || $importation->status == 'completed')
+                                    <a href="{{ url('admin/export/importation/' . $importation->id) }}"><button
+                                            class="btn btn btn-primary me-2" type="button">Imprimer</button></a>
+                                @endif
                             </div>
                             <!-- End Invoice-->
                             <!-- End Invoice Holder-->

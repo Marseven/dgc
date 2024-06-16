@@ -81,7 +81,7 @@
                                     <div class="col-md-8">
                                         <div class="text-md-end" id="project">
                                             @hasPrivilige('MODIFIER_IMPORTATION')
-                                                @if ($stock->status != 'completed')
+                                                @if ($stock->status == 'pending' || $stock->status == 'missing_file')
                                                     <button class="btn btn-secondary" type="button" data-bs-toggle="modal"
                                                         data-bs-target="#cardModal">Statut</button>
                                                     <button class="btn btn-info" type="button" data-bs-toggle="modal"
@@ -267,14 +267,20 @@
                                 <!-- End InvoiceBot-->
                             </div>
                             <div class="col-sm-12 text-center mt-3">
-                                <button class="btn btn-secondary" type="button" data-bs-toggle="modal"
-                                    data-bs-target="#cardModal">Statut</button>
-                                <button class="btn btn-info" type="button" data-bs-toggle="modal"
-                                    data-bs-target="#cardModalView">Modifier</button>
+                                @hasPrivilige('MODIFIER_IMPORTATION')
+                                    @if ($stock->status == 'pending' || $stock->status == 'missing_file')
+                                        <button class="btn btn-secondary" type="button" data-bs-toggle="modal"
+                                            data-bs-target="#cardModal">Statut</button>
+                                        <button class="btn btn-info" type="button" data-bs-toggle="modal"
+                                            data-bs-target="#cardModalView">Modifier</button>
+                                    @endif
+                                @endHasPrivilige
                                 {{-- <button class="btn btn-success" type="button" data-bs-toggle="modal"
-                                    data-bs-target="#securityModal">Note de l'administration</button> --}}
-                                <a href="{{ url('admin/export/stock/' . $stock->id) }}"><button
-                                        class="btn btn btn-primary me-2" type="button">Imprimer</button></a>
+                                data-bs-target="#securityModal">Note de l'administration</button> --}}
+                                @if ($stock->status == 'doing' || $stock->status == 'completed')
+                                    <a href="{{ url('admin/export/stock/' . $stock->id) }}"><button
+                                            class="btn btn btn-primary me-2" type="button">Imprimer</button></a>
+                                @endif
                             </div>
                             <!-- End Invoice-->
                             <!-- End Invoice Holder-->
@@ -287,196 +293,198 @@
     </div>
     <!-- Container-fluid Ends-->
 
-    <div class="modal fade" id="securityModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabelOne"
-        aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabelOne">Ajouter une note</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+    @hasPrivilige('MODIFIER_IMPORTATION')
+        <div class="modal fade" id="securityModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabelOne"
+            aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabelOne">Ajouter une note</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
 
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <form action="{{ url('activite') }}" method="POST">
-                        @csrf
-
-                        <div class="mb-3">
-                            <label for="name" class="col-form-label">Note</label>
-                            <textarea class="form-control" name="note" required></textarea>
-                        </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-dark" data-bs-dismiss="modal">Fermer</button>
-                    <button type="submit" class="btn btn-primary">Enregistrer</button>
-                </div>
-                </form>
-            </div>
-        </div>
-    </div>
-
-    <div class="modal fade" id="cardModal" role="dialog">
-        <div class="modal-dialog">
-            <div class="modal-content">
-
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabelOne">Mettre à jour le statut déclaration N° :
-                        {{ $stock->id }}</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
-
-                    </button>
-                </div>
-
-                <form action="{{ url('admin/update-state/stock/' . $stock->id) }}" method="POST">
-
+                        </button>
+                    </div>
                     <div class="modal-body">
-                        @csrf
-                        <div class="mb-3">
-                            <div class="input-style-1">
-                                <label for="status">Statut *</label>
-                                <select class="form-control" id="status" name="status" onchange="message_rejectd()"
-                                    required>
-                                    <option value="pending">En cours</option>
-                                    <option value="rejected">Rejetté</option>
-                                    <option value="missing_file">Document manquant</option>
-                                    <option value="completed">Validé</option>
-                                </select>
-                            </div>
-                        </div>
+                        <form action="{{ url('activite') }}" method="POST">
+                            @csrf
 
-                        <div class="mb-3" id="message_rejected" style="display: none">
-                            <label for="message_rejected" class="col-form-label">Message</label>
-                            <textarea class="form-control" name="message_rejected" required></textarea>
-                        </div>
+                            <div class="mb-3">
+                                <label for="name" class="col-form-label">Note</label>
+                                <textarea class="form-control" name="note" required></textarea>
+                            </div>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-dark" data-bs-dismiss="modal">Fermer</button>
-                        <button type="submit" class="btn btn-success">Enregistrer</button>
+                        <button type="submit" class="btn btn-primary">Enregistrer</button>
                     </div>
-                </form>
-            </div>
-        </div>
-    </div>
-
-    <div class="modal fade" id="cardModalView" role="dialog">
-        <div class="modal-dialog">
-            <div class="modal-content">
-
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabelOne">Mettre à jour la déclaration N° :
-                        {{ $stock->id }}</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
-                    </button>
+                    </form>
                 </div>
-
-                <form action="{{ url('admin/update/stock/' . $stock->id) }}" method="POST">
-                    @csrf
-                    <div class="modal-body">
-
-                        <div class="mb-3">
-                            <div class="input-style-1">
-                                <label for="referent">Nom du Référent *</label>
-                                <input class="form-control" id="referent" type="text"
-                                    value="{{ $stock->referent }}" name="referent" required>
-                            </div>
-                        </div>
-
-                        <div class="mb-3">
-                            <div class="input-style-1">
-                                <label for="referent_contact">Contact du Référent *</label>
-                                <input class="form-control" id="referent_contact" type="text"
-                                    value="{{ $stock->referent_contact }}" name="referent_contact" required>
-                            </div>
-                        </div>
-
-                        <div class="mb-3">
-                            <div class="input-style-1">
-                                <label for="activity_id">Nature de l'activité *</label>
-                                <select class="form-control" id="activity_id" name="activity_id">
-                                    @foreach ($activities_st as $activity)
-                                        <option @if ($activity->id == $stock->activity_st->id) selected @endif
-                                            value="{{ $activity->id }}">{{ $activity->name }}</option>
-                                    @endforeach
-                                </select>
-                            </div>
-                        </div>
-
-                        <div class="mb-3">
-                            <div class="input-style-1">
-                                <label for="declaration_type_id">Type de déclaration *</label>
-                                <select class="form-control" id="declaration_type_id" name="declaration_type_id">
-                                    @foreach ($declarations as $declaration)
-                                        <option @if ($declaration->id == $stock->type_declaration_st->id) selected @endif
-                                            value="{{ $declaration->id }}">{{ $declaration->name }}</option>
-                                    @endforeach
-                                </select>
-                            </div>
-                        </div>
-
-                        <div class="mb-3">
-                            <div class="input-style-1">
-                                <label for="product_type_id">Type de produits *</label>
-                                <select class="form-control" id="product_type_id" name="product_type_id">
-                                    @foreach ($products as $product)
-                                        <option @if ($product->id == $stock->type_product_st->id) selected @endif
-                                            value="{{ $product->id }}">{{ $product->name }}</option>
-                                    @endforeach
-                                </select>
-                            </div>
-                        </div>
-
-                        <div class="mb-3">
-                            <div class="input-style-1">
-                                <label for="province">Province *</label>
-                                <input class="form-control" id="province" type="text"
-                                    value="{{ $stock->province }}" name="province" required>
-                            </div>
-                        </div>
-
-                        <div class="mb-3">
-                            <div class="input-style-1">
-                                <label for="ville">Ville *</label>
-                                <input class="form-control" id="ville" type="text" value="{{ $stock->ville }}"
-                                    name="ville" required>
-                            </div>
-                        </div>
-
-                        <div class="mb-3">
-                            <div class="input-style-1">
-                                <label for="commune">Commune *</label>
-                                <input class="form-control" id="commune" type="text" value="{{ $stock->commune }}"
-                                    name="commune" required>
-                            </div>
-                        </div>
-
-                        <div class="mb-3">
-                            <div class="input-style-1">
-                                <label for="departement">Département *</label>
-                                <input class="form-control" id="departement" type="text"
-                                    value="{{ $stock->departement }}" name="departement" required>
-                            </div>
-                        </div>
-
-                        <div class="mb-3">
-                            <div class="input-style-1">
-                                <label for="logistic_id">Moyen logistique utilisé*</label>
-                                <select class="form-control" id="logistic_id" name="logistic_id">
-                                    @foreach ($logistics as $logistic)
-                                        <option @if ($logistic->id == $stock->logistic_st->id) selected @endif
-                                            value="{{ $logistic->id }}">{{ $logistic->name }}</option>
-                                    @endforeach
-                                </select>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-dark" data-bs-dismiss="modal">Fermer</button>
-                        <button type="submit" class="btn btn-success">Enregistrer</button>
-                    </div>
-                </form>
             </div>
         </div>
-    </div>
+
+        <div class="modal fade" id="cardModal" role="dialog">
+            <div class="modal-dialog">
+                <div class="modal-content">
+
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabelOne">Mettre à jour le statut déclaration N° :
+                            {{ $stock->id }}</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+
+                        </button>
+                    </div>
+
+                    <form action="{{ url('admin/update-state/stock/' . $stock->id) }}" method="POST">
+
+                        <div class="modal-body">
+                            @csrf
+                            <div class="mb-3">
+                                <div class="input-style-1">
+                                    <label for="status">Statut *</label>
+                                    <select class="form-control" id="status" name="status" onchange="message_rejectd()"
+                                        required>
+                                        <option value="pending">En cours</option>
+                                        <option value="rejected">Rejetté</option>
+                                        <option value="missing_file">Document manquant</option>
+                                        <option value="completed">Validé</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="mb-3" id="message_rejected" style="display: none">
+                                <label for="message_rejected" class="col-form-label">Message</label>
+                                <textarea class="form-control" name="message_rejected" required></textarea>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-dark" data-bs-dismiss="modal">Fermer</button>
+                            <button type="submit" class="btn btn-success">Enregistrer</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <div class="modal fade" id="cardModalView" role="dialog">
+            <div class="modal-dialog">
+                <div class="modal-content">
+
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabelOne">Mettre à jour la déclaration N° :
+                            {{ $stock->id }}</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+                        </button>
+                    </div>
+
+                    <form action="{{ url('admin/update/stock/' . $stock->id) }}" method="POST">
+                        @csrf
+                        <div class="modal-body">
+
+                            <div class="mb-3">
+                                <div class="input-style-1">
+                                    <label for="referent">Nom du Référent *</label>
+                                    <input class="form-control" id="referent" type="text"
+                                        value="{{ $stock->referent }}" name="referent" required>
+                                </div>
+                            </div>
+
+                            <div class="mb-3">
+                                <div class="input-style-1">
+                                    <label for="referent_contact">Contact du Référent *</label>
+                                    <input class="form-control" id="referent_contact" type="text"
+                                        value="{{ $stock->referent_contact }}" name="referent_contact" required>
+                                </div>
+                            </div>
+
+                            <div class="mb-3">
+                                <div class="input-style-1">
+                                    <label for="activity_id">Nature de l'activité *</label>
+                                    <select class="form-control" id="activity_id" name="activity_id">
+                                        @foreach ($activities_st as $activity)
+                                            <option @if ($activity->id == $stock->activity_st->id) selected @endif
+                                                value="{{ $activity->id }}">{{ $activity->name }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="mb-3">
+                                <div class="input-style-1">
+                                    <label for="declaration_type_id">Type de déclaration *</label>
+                                    <select class="form-control" id="declaration_type_id" name="declaration_type_id">
+                                        @foreach ($declarations as $declaration)
+                                            <option @if ($declaration->id == $stock->type_declaration_st->id) selected @endif
+                                                value="{{ $declaration->id }}">{{ $declaration->name }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="mb-3">
+                                <div class="input-style-1">
+                                    <label for="product_type_id">Type de produits *</label>
+                                    <select class="form-control" id="product_type_id" name="product_type_id">
+                                        @foreach ($products as $product)
+                                            <option @if ($product->id == $stock->type_product_st->id) selected @endif
+                                                value="{{ $product->id }}">{{ $product->name }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="mb-3">
+                                <div class="input-style-1">
+                                    <label for="province">Province *</label>
+                                    <input class="form-control" id="province" type="text"
+                                        value="{{ $stock->province }}" name="province" required>
+                                </div>
+                            </div>
+
+                            <div class="mb-3">
+                                <div class="input-style-1">
+                                    <label for="ville">Ville *</label>
+                                    <input class="form-control" id="ville" type="text" value="{{ $stock->ville }}"
+                                        name="ville" required>
+                                </div>
+                            </div>
+
+                            <div class="mb-3">
+                                <div class="input-style-1">
+                                    <label for="commune">Commune *</label>
+                                    <input class="form-control" id="commune" type="text" value="{{ $stock->commune }}"
+                                        name="commune" required>
+                                </div>
+                            </div>
+
+                            <div class="mb-3">
+                                <div class="input-style-1">
+                                    <label for="departement">Département *</label>
+                                    <input class="form-control" id="departement" type="text"
+                                        value="{{ $stock->departement }}" name="departement" required>
+                                </div>
+                            </div>
+
+                            <div class="mb-3">
+                                <div class="input-style-1">
+                                    <label for="logistic_id">Moyen logistique utilisé*</label>
+                                    <select class="form-control" id="logistic_id" name="logistic_id">
+                                        @foreach ($logistics as $logistic)
+                                            <option @if ($logistic->id == $stock->logistic_st->id) selected @endif
+                                                value="{{ $logistic->id }}">{{ $logistic->name }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-dark" data-bs-dismiss="modal">Fermer</button>
+                            <button type="submit" class="btn btn-success">Enregistrer</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    @endHasPrivilige
 @endsection
 
 @push('scripts')
