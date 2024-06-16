@@ -405,7 +405,7 @@
 
                             <div class="mb-3" id="message_rejected" style="display: none">
                                 <label for="message_rejected" class="col-form-label">Message</label>
-                                <textarea class="form-control" name="message_rejected" required></textarea>
+                                <textarea class="form-control" name="message_rejected"></textarea>
                             </div>
 
                         </div>
