@@ -42,19 +42,19 @@ class PrivilegeSeeder extends Seeder
 
         Privilege::create([
             'name' => 'VOIR_IMPORTATION',
-            'description' => "Voir une commande",
+            'description' => "Voir une importation",
             'user_type_id' => 1,
         ]);
 
         Privilege::create([
             'name' => 'VOIR_STOCK',
-            'description' => "Voir une offre",
+            'description' => "Voir un stock",
             'user_type_id' => 1,
         ]);
 
         Privilege::create([
             'name' => 'VOIR_ENTREPRISE',
-            'description' => "Voir un fournisseur",
+            'description' => "Voir une entreprise",
             'user_type_id' => 1,
         ]);
 
@@ -81,7 +81,7 @@ class PrivilegeSeeder extends Seeder
 
         Privilege::create([
             'name' => 'CREER_IMPORTATION',
-            'description' => "Créer une commande",
+            'description' => "Créer une importation",
             'user_type_id' => 1,
         ]);
 
@@ -113,7 +113,7 @@ class PrivilegeSeeder extends Seeder
 
         Privilege::create([
             'name' => 'MODIFIER_IMPORTATION',
-            'description' => "Mettre à jour une commande",
+            'description' => "Mettre à jour une importation",
             'user_type_id' => 1,
         ]);
 
@@ -145,13 +145,13 @@ class PrivilegeSeeder extends Seeder
 
         Privilege::create([
             'name' => 'SUPPRIMER_IMPORTATION',
-            'description' => "Supprimer une commande",
+            'description' => "Supprimer une importation",
             'user_type_id' => 1,
         ]);
 
         Privilege::create([
             'name' => 'SUPPRIMER_STOCK',
-            'description' => "Supprimer une offre",
+            'description' => "Supprimer un stock",
             'user_type_id' => 1,
         ]);
 
@@ -164,6 +164,18 @@ class PrivilegeSeeder extends Seeder
         Privilege::create([
             'name' => 'VOIR_LOG',
             'description' => "Voir les logs",
+            'user_type_id' => 1,
+        ]);
+
+        Privilege::create([
+            'name' => 'VALIDER_STOCK',
+            'description' => "Valider une stock",
+            'user_type_id' => 1,
+        ]);
+
+        Privilege::create([
+            'name' => 'VALIDER_IMPORTATION',
+            'description' => "Valider une importation",
             'user_type_id' => 1,
         ]);
     }

@@ -82,13 +82,19 @@
                                     </div>
                                     <div class="col-md-8">
                                         <div class="text-md-end" id="project">
-                                            <button class="btn btn-secondary" type="button" data-bs-toggle="modal"
-                                                data-bs-target="#cardModal">Statut</button>
-                                            <button class="btn btn-info" type="button" data-bs-toggle="modal"
-                                                data-bs-target="#cardModalView">Modifier</button>
-                                            <a href="{{ url('admin/export/importation/' . $importation->id) }}"><button
-                                                    class="btn btn btn-primary me-2" type="button">Imprimer</button></a>
-
+                                            @hasPrivilige('MODIFIER_IMPORTATION')
+                                                @if ($importation->status != 'completed')
+                                                    <button class="btn btn-secondary" type="button" data-bs-toggle="modal"
+                                                        data-bs-target="#cardModal">Statut</button>
+                                                    <button class="btn btn-info" type="button" data-bs-toggle="modal"
+                                                        data-bs-target="#cardModalView">Modifier</button>
+                                                @endif
+                                            @endHasPrivilige
+                                            @if ($importation->status == 'doing' || $importation->status == 'completed')
+                                                <a href="{{ url('admin/export/importation/' . $importation->id) }}"><button
+                                                        class="btn btn btn-primary me-2"
+                                                        type="button">Imprimer</button></a>
+                                            @endif
                                         </div>
                                     </div>
                                 </div>
@@ -354,206 +360,214 @@
         </div>
     </div>
     <!-- Container-fluid Ends-->
+    @hasPrivilige('MODIFIER_IMPORTATION')
+        <div class="modal fade" id="cardModal" role="dialog">
+            <div class="modal-dialog">
+                <div class="modal-content">
 
-    <div class="modal fade" id="cardModal" role="dialog">
-        <div class="modal-dialog">
-            <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabelOne">Mettre à jour le statut déclaration N° :
+                            {{ $importation->id }}</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
 
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabelOne">Mettre à jour le statut déclaration N° :
-                        {{ $importation->id }}</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+                        </button>
+                    </div>
 
-                    </button>
-                </div>
+                    <form action="{{ url('admin/update-state/importation/' . $importation->id) }}" method="POST">
 
-                <form action="{{ url('admin/update-state/importation/' . $importation->id) }}" method="POST">
+                        <div class="modal-body">
+                            @csrf
+                            <div class="mb-3">
+                                <div class="input-style-1">
+                                    <label for="status">Statut *</label>
+                                    <select class="form-control" id="status" name="status" onChange="message_r()"
+                                        required>
+                                        <option value="pending">En cours</option>
+                                        <option value="rejected">Rejetté</option>
+                                        <option value="missing_file">Document manquant</option>
 
-                    <div class="modal-body">
-                        @csrf
-                        <div class="mb-3">
-                            <div class="input-style-1">
-                                <label for="status">Statut *</label>
-                                <select class="form-control" id="status" name="status" onChange="message_r()"
-                                    required>
-                                    <option value="pending">En cours</option>
-                                    <option value="rejected">Rejetté</option>
-                                    <option value="missing_file">Document manquant</option>
-                                    <option value="completed">Validé</option>
-                                </select>
+                                        @if ($importation->status != 'completed' || $importation->status != 'doing')
+                                            <option value="doing">Traité</option>
+                                        @else
+                                            @hasPrivilige('VALIDER_IMPORTATION')
+                                                <option value="completed">Validé</option>
+                                            @endHasPrivilige
+                                        @endif
+                                    </select>
+                                </div>
                             </div>
-                        </div>
 
-                        <div class="mb-3" id="message_rejected" style="display: none">
-                            <label for="message_rejected" class="col-form-label">Message</label>
-                            <textarea class="form-control" name="message_rejected" required></textarea>
-                        </div>
+                            <div class="mb-3" id="message_rejected" style="display: none">
+                                <label for="message_rejected" class="col-form-label">Message</label>
+                                <textarea class="form-control" name="message_rejected" required></textarea>
+                            </div>
 
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-dark" data-bs-dismiss="modal">Fermer</button>
-                        <button type="submit" class="btn btn-success">Enregistrer</button>
-                    </div>
-                </form>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-dark" data-bs-dismiss="modal">Fermer</button>
+                            <button type="submit" class="btn btn-success">Enregistrer</button>
+                        </div>
+                    </form>
+                </div>
             </div>
         </div>
-    </div>
 
-    <div class="modal fade" id="cardModalView" role="dialog">
-        <div class="modal-dialog">
-            <div class="modal-content">
+        <div class="modal fade" id="cardModalView" role="dialog">
+            <div class="modal-dialog">
+                <div class="modal-content">
 
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabelOne">Mettre à jour la déclaration N° :
-                        {{ $importation->id }}</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabelOne">Mettre à jour la déclaration N° :
+                            {{ $importation->id }}</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
 
-                    </button>
+                        </button>
+                    </div>
+
+                    <form action="{{ url('admin/update/importation/' . $importation->id) }}" method="POST">
+
+                        <div class="modal-body">
+                            @csrf
+                            <div class="mb-3">
+                                <div class="input-style-1">
+                                    <label for="type_product">Nature des marchandises *</label>
+                                    <input class="form-control" id="type_product" type="text"
+                                        value="{{ $importation->type_product }}" name="type_product" required>
+                                </div>
+                            </div>
+
+                            <div class="mb-3">
+                                <div class="input-style-1">
+                                    <label for="country_origin">Pays d\'origine *</label>
+                                    <input class="form-control" id="country_origin" type="text"
+                                        value="{{ $importation->country_origin }}" name="country_origin" required>
+                                </div>
+                            </div>
+
+                            <div class="mb-3">
+                                <div class="input-style-1">
+                                    <label for="country_from">Pays de Provenance *</label>
+                                    <input class="form-control" id="country_from" type="text"
+                                        value="{{ $importation->country_from }}" name="country_from" required>
+                                </div>
+                            </div>
+
+                            <div class="mb-3">
+                                <div class="input-style-1">
+                                    <label for="destination">Destination *</label>
+                                    <input class="form-control" id="destination" type="text"
+                                        value="{{ $importation->destination }}" name="destination" required>
+                                </div>
+                            </div>
+
+                            <div class="mb-3">
+                                <div class="input-style-1">
+                                    <label for="dock_loading">Port d\'embarquement *</label>
+                                    <input class="form-control" id="dock_loading" type="text"
+                                        value="{{ $importation->type_product }}" name="dock_loading" required>
+                                </div>
+                            </div>
+
+                            <div class="mb-3">
+                                <div class="input-style-1">
+                                    <label for="dock_unloading">Port de débarquement *</label>
+                                    <input class="form-control" id="dock_unloading" type="text"
+                                        value="{{ $importation->dock_unloading }}" name="dock_unloading" required>
+                                </div>
+                            </div>
+
+                            <div class="mb-3">
+                                <div class="input-style-1">
+                                    <label for="zone">Zone Géographique *</label>
+                                    <select class="form-control" id="zone" name="zone" required>
+                                        <option {{ $importation->zone == 'CEMAC' ? 'selected' : '' }}>CEMAC</option>
+                                        <option {{ $importation->zone == 'CEEAC' ? 'selected' : '' }}>CEEAC</option>
+                                        <option {{ $importation->zone == 'UE' ? 'selected' : '' }}>UE</option>
+                                        <option {{ $importation->zone == 'Amérique' ? 'selected' : '' }}>Amérique</option>
+                                        <option {{ $importation->zone == 'Asie' ? 'selected' : '' }}>Asie</option>
+                                        <option {{ $importation->zone == 'Autres' ? 'selected' : '' }}>Autres</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="mb-3">
+                                <div class="input-style-1">
+                                    <label for="value">Valeur de la marchandise *</label>
+                                    <input class="form-control" id="value" type="text"
+                                        value="{{ $importation->value }}" name="value" required>
+                                </div>
+                            </div>
+
+                            <div class="mb-3">
+                                <div class="input-style-1">
+                                    <label for="type_transaport">Moyen de transport *</label>
+                                    <input class="form-control" id="type_transaport" type="text"
+                                        value="{{ $importation->type_transaport }}" name="type_transaport" required>
+                                </div>
+                            </div>
+
+                            <div class="mb-3">
+                                <div class="input-style-1">
+                                    <label for="facture_number">N° de Facture pro-forma *</label>
+                                    <input class="form-control" id="facture_number" type="text"
+                                        value="{{ $importation->facture_number }}" name="facture_number" required>
+                                </div>
+                            </div>
+
+                            <div class="mb-3">
+                                <div class="input-style-1">
+                                    <label for="weight">Tonnage *</label>
+                                    <input class="form-control" id="weight" type="number"
+                                        value="{{ $importation->weight }}" name="weight" required>
+                                </div>
+                            </div>
+
+                            <div class="mb-3">
+                                <div class="input-style-1">
+                                    <label for="quantity">Quantité *</label>
+                                    <input class="form-control" id="quantity" type="number"
+                                        value="{{ $importation->quantity }}" name="quantity" required>
+                                </div>
+                            </div>
+
+                            <div class="mb-3">
+                                <div class="input-style-1">
+                                    <label for="transitaire">Transitaire *</label>
+                                    <input class="form-control" id="transitaire" type="text"
+                                        value="{{ $importation->transitaire }}" name="transitaire" required>
+                                </div>
+                            </div>
+                            <div class="mb-3">
+                                <div class="input-style-1">
+                                    <label for="phone_transitaire">Téléphone du Transitaire *</label>
+                                    <input class="form-control" id="phone_transitaire" type="tel"
+                                        value="{{ $importation->phone_transitaire }}" name="phone_transitaire" required>
+                                </div>
+                            </div>
+                            <div class="mb-3">
+                                <div class="input-style-1">
+                                    <label for="date_start">Date de départ *</label>
+                                    <input class="form-control" id="date_start" type="date"
+                                        value="{{ $importation->date_start }}" name="date_start" required>
+                                </div>
+                            </div>
+                            <div class="mb-3">
+                                <div class="input-style-1">
+                                    <label for="date_end">Date d'arrivée *</label>
+                                    <input class="form-control" id="date_end" type="date"
+                                        value="{{ $importation->date_end }}" name="date_end" required>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-dark" data-bs-dismiss="modal">Fermer</button>
+                            <button type="submit" class="btn btn-success">Enregistrer</button>
+                        </div>
+                    </form>
                 </div>
-
-                <form action="{{ url('admin/update/importation/' . $importation->id) }}" method="POST">
-
-                    <div class="modal-body">
-                        @csrf
-                        <div class="mb-3">
-                            <div class="input-style-1">
-                                <label for="type_product">Nature des marchandises *</label>
-                                <input class="form-control" id="type_product" type="text"
-                                    value="{{ $importation->type_product }}" name="type_product" required>
-                            </div>
-                        </div>
-
-                        <div class="mb-3">
-                            <div class="input-style-1">
-                                <label for="country_origin">Pays d\'origine *</label>
-                                <input class="form-control" id="country_origin" type="text"
-                                    value="{{ $importation->country_origin }}" name="country_origin" required>
-                            </div>
-                        </div>
-
-                        <div class="mb-3">
-                            <div class="input-style-1">
-                                <label for="country_from">Pays de Provenance *</label>
-                                <input class="form-control" id="country_from" type="text"
-                                    value="{{ $importation->country_from }}" name="country_from" required>
-                            </div>
-                        </div>
-
-                        <div class="mb-3">
-                            <div class="input-style-1">
-                                <label for="destination">Destination *</label>
-                                <input class="form-control" id="destination" type="text"
-                                    value="{{ $importation->destination }}" name="destination" required>
-                            </div>
-                        </div>
-
-                        <div class="mb-3">
-                            <div class="input-style-1">
-                                <label for="dock_loading">Port d\'embarquement *</label>
-                                <input class="form-control" id="dock_loading" type="text"
-                                    value="{{ $importation->type_product }}" name="dock_loading" required>
-                            </div>
-                        </div>
-
-                        <div class="mb-3">
-                            <div class="input-style-1">
-                                <label for="dock_unloading">Port de débarquement *</label>
-                                <input class="form-control" id="dock_unloading" type="text"
-                                    value="{{ $importation->dock_unloading }}" name="dock_unloading" required>
-                            </div>
-                        </div>
-
-                        <div class="mb-3">
-                            <div class="input-style-1">
-                                <label for="zone">Zone Géographique *</label>
-                                <select class="form-control" id="zone" name="zone" required>
-                                    <option {{ $importation->zone == 'CEMAC' ? 'selected' : '' }}>CEMAC</option>
-                                    <option {{ $importation->zone == 'CEEAC' ? 'selected' : '' }}>CEEAC</option>
-                                    <option {{ $importation->zone == 'UE' ? 'selected' : '' }}>UE</option>
-                                    <option {{ $importation->zone == 'Amérique' ? 'selected' : '' }}>Amérique</option>
-                                    <option {{ $importation->zone == 'Asie' ? 'selected' : '' }}>Asie</option>
-                                    <option {{ $importation->zone == 'Autres' ? 'selected' : '' }}>Autres</option>
-                                </select>
-                            </div>
-                        </div>
-
-                        <div class="mb-3">
-                            <div class="input-style-1">
-                                <label for="value">Valeur de la marchandise *</label>
-                                <input class="form-control" id="value" type="text"
-                                    value="{{ $importation->value }}" name="value" required>
-                            </div>
-                        </div>
-
-                        <div class="mb-3">
-                            <div class="input-style-1">
-                                <label for="type_transaport">Moyen de transport *</label>
-                                <input class="form-control" id="type_transaport" type="text"
-                                    value="{{ $importation->type_transaport }}" name="type_transaport" required>
-                            </div>
-                        </div>
-
-                        <div class="mb-3">
-                            <div class="input-style-1">
-                                <label for="facture_number">N° de Facture pro-forma *</label>
-                                <input class="form-control" id="facture_number" type="text"
-                                    value="{{ $importation->facture_number }}" name="facture_number" required>
-                            </div>
-                        </div>
-
-                        <div class="mb-3">
-                            <div class="input-style-1">
-                                <label for="weight">Tonnage *</label>
-                                <input class="form-control" id="weight" type="number"
-                                    value="{{ $importation->weight }}" name="weight" required>
-                            </div>
-                        </div>
-
-                        <div class="mb-3">
-                            <div class="input-style-1">
-                                <label for="quantity">Quantité *</label>
-                                <input class="form-control" id="quantity" type="number"
-                                    value="{{ $importation->quantity }}" name="quantity" required>
-                            </div>
-                        </div>
-
-                        <div class="mb-3">
-                            <div class="input-style-1">
-                                <label for="transitaire">Transitaire *</label>
-                                <input class="form-control" id="transitaire" type="text"
-                                    value="{{ $importation->transitaire }}" name="transitaire" required>
-                            </div>
-                        </div>
-                        <div class="mb-3">
-                            <div class="input-style-1">
-                                <label for="phone_transitaire">Téléphone du Transitaire *</label>
-                                <input class="form-control" id="phone_transitaire" type="tel"
-                                    value="{{ $importation->phone_transitaire }}" name="phone_transitaire" required>
-                            </div>
-                        </div>
-                        <div class="mb-3">
-                            <div class="input-style-1">
-                                <label for="date_start">Date de départ *</label>
-                                <input class="form-control" id="date_start" type="date"
-                                    value="{{ $importation->date_start }}" name="date_start" required>
-                            </div>
-                        </div>
-                        <div class="mb-3">
-                            <div class="input-style-1">
-                                <label for="date_end">Date d'arrivée *</label>
-                                <input class="form-control" id="date_end" type="date"
-                                    value="{{ $importation->date_end }}" name="date_end" required>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-dark" data-bs-dismiss="modal">Fermer</button>
-                        <button type="submit" class="btn btn-success">Enregistrer</button>
-                    </div>
-                </form>
             </div>
         </div>
-    </div>
+    @endHasPrivilige
 @endsection
 
 @push('scripts')

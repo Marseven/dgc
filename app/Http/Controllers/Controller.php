@@ -48,9 +48,9 @@ class Controller extends BaseController
                 $message['message'] = "Dossier incomplet";
                 return $message;
                 break;
-            case 'submited':
+            case 'doing':
                 $message['type'] = "info";
-                $message['message'] = "Soumis";
+                $message['message'] = "Traité";
                 return $message;
                 break;
             case 'completed':

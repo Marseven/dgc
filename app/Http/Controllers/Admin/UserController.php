@@ -289,9 +289,12 @@ class UserController extends Controller
 
         if ($request->has('delete') && $request->delete == true) {
 
-            $object = $user->delete();
+            $user = User::find($request->user_id)->update([
+                'deleted' => 1,
+                'deleted_at' => now()
+            ]);
 
-            if ($object) {
+            if ($user->deleted == 1) {
                 return back()->with('success', "Utilisateur supprimé avec succès.");
             } else {
                 return back()->with('error', "une erreur s'est produite");

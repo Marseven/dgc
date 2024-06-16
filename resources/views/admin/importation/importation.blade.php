@@ -49,6 +49,7 @@
                                         <th> <span class="f-light f-w-600">Valeur</span></th>
                                         <th> <span class="f-light f-w-600">Tonnage</span></th>
                                         <th> <span class="f-light f-w-600">Transitaire</span></th>
+                                        <th> <span class="f-light f-w-600">Statut</span></th>
                                         <th> <span class="f-light f-w-600">Date de Création</span></th>
                                         <th> <span class="f-light f-w-600">Action</span></th>
                                     </tr>
@@ -157,6 +158,9 @@
                     },
                     {
                         data: 'transitaire'
+                    },
+                    {
+                        data: 'status'
                     },
                     {
                         data: 'created_at'

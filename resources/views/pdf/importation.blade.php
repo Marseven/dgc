@@ -93,7 +93,7 @@
                 <p style="text-align: center; font-size:10px; line-height:10px">
                     MINISTERE DU COMMERCE, DES PETITES ET MOYENNES <br>
                     ENTREPRISES, PETITES ET MOYENNES INDUSTRIES,<br>
-                    ACTIVITES GENERATRICES DE REVENUS CHARGE DES <br>
+                    CHARGE DES ACTIVITES GENERATRICES DE REVENUS<br>
                     -------------------<br>
                     SECRETARIAT GENERAL<br>
                     -------------------<br>

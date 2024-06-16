@@ -80,15 +80,21 @@
                                     </div>
                                     <div class="col-md-8">
                                         <div class="text-md-end" id="project">
-                                            <button class="btn btn-secondary" type="button" data-bs-toggle="modal"
-                                                data-bs-target="#cardModal">Statut</button>
-                                            <button class="btn btn-info" type="button" data-bs-toggle="modal"
-                                                data-bs-target="#cardModalView">Modifier</button>
+                                            @hasPrivilige('MODIFIER_IMPORTATION')
+                                                @if ($stock->status != 'completed')
+                                                    <button class="btn btn-secondary" type="button" data-bs-toggle="modal"
+                                                        data-bs-target="#cardModal">Statut</button>
+                                                    <button class="btn btn-info" type="button" data-bs-toggle="modal"
+                                                        data-bs-target="#cardModalView">Modifier</button>
+                                                @endif
+                                            @endHasPrivilige
                                             {{-- <button class="btn btn-success" type="button" data-bs-toggle="modal"
                                                 data-bs-target="#securityModal">Note de l'administration</button> --}}
-                                            <a href="{{ url('admin/export/stock/' . $stock->id) }}"><button
-                                                    class="btn btn btn-primary me-2" type="button">Imprimer</button></a>
-
+                                            @if ($stock->status == 'doing' || $stock->status == 'completed')
+                                                <a href="{{ url('admin/export/stock/' . $stock->id) }}"><button
+                                                        class="btn btn btn-primary me-2"
+                                                        type="button">Imprimer</button></a>
+                                            @endif
                                         </div>
                                     </div>
                                 </div>

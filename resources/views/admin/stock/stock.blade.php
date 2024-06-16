@@ -49,6 +49,7 @@
                                         <th> <span class="f-light f-w-600">Produit</span></th>
                                         <th> <span class="f-light f-w-600">Ville</span></th>
                                         <th> <span class="f-light f-w-600">logistique</span></th>
+                                        <th> <span class="f-light f-w-600">Statut</span></th>
                                         <th> <span class="f-light f-w-600">Date de Création</span></th>
                                         <th> <span class="f-light f-w-600">Action</span></th>
                                     </tr>
@@ -114,6 +115,9 @@
                     },
                     {
                         data: 'logistic'
+                    },
+                    {
+                        data: 'status'
                     },
                     {
                         data: 'created_at'

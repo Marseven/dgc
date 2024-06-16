@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Controllers\FileController;
 use App\Mail\StatutMail;
 use App\Models\Importation;
+use App\Models\ImportationStatusHistory;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -79,17 +80,22 @@ class ImportationController extends Controller
             $facture_number = '<a target="_blank"
             href="' . asset($record->facture_url) . '">' . ($record->facture_number ?? 'Télécharger') . '</a>';
 
+            $status = '<span class="badge badge-' . Controller::status($record->status)['type'] . '">' . Controller::status($record->status)['message'] . '</span>';
+
             $actions = '
                         <a href="' . url('admin/importation/' . $record->id) . '">
                             <button style="padding: 10px !important" type="button" class="btn btn-info">
                                 <i class="icon-eye"></i>
                             </button>
-                        </a>
-                        <a href="' . url('admin/export/' . $record->id) . '">
+                        </a>';
+            if ($record->status == 'doing' || $record->status == 'completed') {
+                $actions .=  '<a href="' . url('admin/export/importation/' . $record->id) . '">
                             <button style="padding: 10px !important" type="button" class="btn btn-primary">
                                 <i class="icon-download"></i>
                             </button>
                         </a>';
+            }
+
 
             $data_arr[] = array(
                 "id" => $id,
@@ -101,6 +107,7 @@ class ImportationController extends Controller
                 "value" => $record->value . ' FCFA',
                 "weight" => $record->weight . ' T',
                 "transitaire" => $record->transitaire,
+                "status" => $status,
                 "created_at" => date_format(date_create($record->created_at), 'd-m-Y'),
                 "actions" => $actions,
             );
@@ -183,10 +190,18 @@ class ImportationController extends Controller
 
     public function updateState(Request $request, Importation $importation)
     {
+        $old_status = $importation->status;
         $importation->status = $request->status;
         if ($request->message_reject != '') $importation->message_reject = $request->message_reject;
         $importation->updated_by = Auth::user()->id;
         if ($importation->save()) {
+            ImportationStatusHistory::create([
+                'old_status' => $old_status,
+                'new_status' => $importation->status,
+                'message' => $importation->message_reject,
+                'user_id' => Auth::user()->id,
+                'importation_id' => $importation->id
+            ]);
             $importation->load(['entreprise']);
             $reason = '';
             if ($request->message_reject != '') $reason = $request->message_reject;

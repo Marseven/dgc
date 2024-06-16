@@ -10,6 +10,7 @@ use App\Models\DeclarationType;
 use App\Models\Logistic;
 use App\Models\ProductType;
 use App\Models\Stock;
+use App\Models\StockStatusHistory;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
@@ -80,18 +81,23 @@ class StockController extends Controller
 
             $id = $record->id;
 
+            $status = '<span class="badge badge-' . Controller::status($record->status)['type'] . '">' . Controller::status($record->status)['message'] . '</span>';
+
             $actions = '
                         <a href="' . url('admin/stock/' . $record->id) . '">
                             <button style="padding: 10px !important" type="button"
                                 class="btn btn-info">
                                 <i class="icon-eye"></i>
                             </button>
-                        </a>
-                        <a href="' . url('admin/export/stock/' . $record->id) . '">
-                        <button style="padding: 10px !important" type="button"
-                            class="btn btn-primary">
-                            <i class="icon-download"></i>
-                        </button></a>';
+                        </a>';
+
+            if ($record->status == 'doing' || $record->status == 'completed') {
+                $actions .=  '<a href="' . url('admin/export/stock/' . $record->id) . '">
+                                        <button style="padding: 10px !important" type="button" class="btn btn-primary">
+                                            <i class="icon-download"></i>
+                                        </button>
+                                    </a>';
+            }
 
             $data_arr[] = array(
                 "id" => $id,
@@ -101,6 +107,7 @@ class StockController extends Controller
                 "product" => $record->type_product_st->name,
                 "ville" => $record->ville,
                 "logistic" => $record->logistic_st->name,
+                "status" => $status,
                 "created_at" => date_format(date_create($record->created_at), 'd-m-Y'),
                 "actions" => $actions,
             );
@@ -292,10 +299,18 @@ class StockController extends Controller
 
     public function updateState(Request $request, Stock $stock)
     {
+        $old_status = $stock->status;
         $stock->status = $request->status;
         if ($request->message_reject != '') $stock->message_reject = $request->message_reject;
         $stock->updated_by = Auth::user()->id;
         if ($stock->save()) {
+            StockStatusHistory::create([
+                'old_status' => $old_status,
+                'new_status' => $stock->status,
+                'message' => $stock->message_reject,
+                'user_id' => Auth::user()->id,
+                'stock_id' => $stock->id
+            ]);
             $stock->load(['entreprise']);
             $reason = '';
             if ($request->message_reject != '') $reason = $request->message_reject;

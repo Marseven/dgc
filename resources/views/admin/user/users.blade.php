@@ -193,24 +193,24 @@
         </div>
     @endforeach
 
-    @foreach ($roles as $role)
+    @foreach ($users as $user)
         <!-- Modal -->
-        <div class="modal fade" id="cardModalCenter{{ $role->id }}" tabindex="-1" role="dialog"
+        <div class="modal fade" id="cardModalCenter{{ $user->id }}" tabindex="-1" role="dialog"
             aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
                         <h5 class="modal-title" id="exampleModalCenterTitle">Suppression</h5>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
-
                         </button>
                     </div>
                     <div class="modal-body">
                         Êtes-vous sûr de vouloir supprimer ce utilisateur ?
+                        <input type="hidden" name="delete" value="true">
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-dark" data-bs-dismiss="modal">Fermer</button>
-                        <a href="{{ url('admin/delete-role/' . $role->id) }}">
+                        <a href="{{ url('admin/user-update/' . $user->id) }}">
                             <button type="button" class="btn btn-danger">Supprimer</button>
                         </a>
 
