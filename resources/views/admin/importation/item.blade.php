@@ -83,6 +83,12 @@
                                     <div class="col-md-8">
                                         <div class="text-md-end" id="project">
                                             @hasPrivilige('MODIFIER_IMPORTATION')
+                                                @hasPrivilige('VALIDER_IMPORTATION')
+                                                    <button class="btn btn-secondary" type="button" data-bs-toggle="modal"
+                                                        data-bs-target="#cardModal">Statut</button>
+                                                    <button class="btn btn-info" type="button" data-bs-toggle="modal"
+                                                        data-bs-target="#cardModalView">Modifier</button>
+                                                @endHasPrivilige
                                                 @if ($importation->status == 'pending' || $importation->status == 'missing_file')
                                                     <button class="btn btn-secondary" type="button" data-bs-toggle="modal"
                                                         data-bs-target="#cardModal">Statut</button>
@@ -349,6 +355,13 @@
                                             data-bs-target="#cardModal">Statut</button>
                                         <button class="btn btn-info" type="button" data-bs-toggle="modal"
                                             data-bs-target="#cardModalView">Modifier</button>
+                                    @elseif ($importation->status == 'doing')
+                                        @hasPrivilige('VALIDER_IMPORTATION')
+                                            <button class="btn btn-secondary" type="button" data-bs-toggle="modal"
+                                                data-bs-target="#cardModal">Statut</button>
+                                            <button class="btn btn-info" type="button" data-bs-toggle="modal"
+                                                data-bs-target="#cardModalView">Modifier</button>
+                                        @endHasPrivilige
                                     @endif
                                 @endHasPrivilige
                                 @if ($importation->status == 'doing' || $importation->status == 'completed')

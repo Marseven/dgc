@@ -81,6 +81,12 @@
                                     <div class="col-md-8">
                                         <div class="text-md-end" id="project">
                                             @hasPrivilige('MODIFIER_IMPORTATION')
+                                                @hasPrivilige('VALIDER_IMPORTATION')
+                                                    <button class="btn btn-secondary" type="button" data-bs-toggle="modal"
+                                                        data-bs-target="#cardModal">Statut</button>
+                                                    <button class="btn btn-info" type="button" data-bs-toggle="modal"
+                                                        data-bs-target="#cardModalView">Modifier</button>
+                                                @endHasPrivilige
                                                 @if ($stock->status == 'pending' || $stock->status == 'missing_file')
                                                     <button class="btn btn-secondary" type="button" data-bs-toggle="modal"
                                                         data-bs-target="#cardModal">Statut</button>
@@ -273,6 +279,13 @@
                                             data-bs-target="#cardModal">Statut</button>
                                         <button class="btn btn-info" type="button" data-bs-toggle="modal"
                                             data-bs-target="#cardModalView">Modifier</button>
+                                    @elseif ($stock->status == 'doing')
+                                        @hasPrivilige('VALIDER_IMPORTATION')
+                                            <button class="btn btn-secondary" type="button" data-bs-toggle="modal"
+                                                data-bs-target="#cardModal">Statut</button>
+                                            <button class="btn btn-info" type="button" data-bs-toggle="modal"
+                                                data-bs-target="#cardModalView">Modifier</button>
+                                        @endHasPrivilige
                                     @endif
                                 @endHasPrivilige
                                 {{-- <button class="btn btn-success" type="button" data-bs-toggle="modal"
