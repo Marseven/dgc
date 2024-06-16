@@ -155,7 +155,7 @@ class FileController extends Controller
         }
     }
 
-    static function importation(UploadedFile $request)
+    static function importation(UploadedFile $request, $type)
     {
         $result = [];
 
@@ -172,7 +172,7 @@ class FileController extends Controller
             $extension = $request->getClientOriginalExtension();
 
             //filename to store
-            $filenametostore = $filename . '_' . time() . '_importation.' . $extension;
+            $filenametostore = $type . '_' . time() . '_importation.' . $extension;
 
             //Upload File
             $request->move(public_path('/upload/importation/'),  $filenametostore);

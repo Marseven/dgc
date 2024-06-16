@@ -142,7 +142,7 @@ class ImportationController extends Controller
         $importation->updated_by = Auth::user()->id;
 
         if ($request->file('facture_url')) {
-            $picture = FileController::importation($request->file('facture_url'));
+            $picture = FileController::importation($request->file('facture_url'), 'facture');
             if ($picture['state'] == false) {
                 return back()->withErrors($picture['message']);
             }
@@ -152,7 +152,7 @@ class ImportationController extends Controller
         }
 
         if ($request->file('business_url')) {
-            $picture = FileController::importation($request->file('business_url'));
+            $picture = FileController::importation($request->file('business_url'), 'fiche');
             if ($picture['state'] == false) {
                 return back()->withErrors($picture['message'])->withInput();
             }
@@ -162,7 +162,7 @@ class ImportationController extends Controller
         }
 
         if ($request->file('cni_url')) {
-            $picture = FileController::importation($request->file('cni_url'));
+            $picture = FileController::importation($request->file('cni_url'), 'cni');
             if ($picture['state'] == false) {
                 return back()->withErrors($picture['message'])->withInput();
             }
@@ -172,7 +172,7 @@ class ImportationController extends Controller
         }
 
         if ($request->file('tresor_url')) {
-            $picture = FileController::importation($request->file('tresor_url'));
+            $picture = FileController::importation($request->file('tresor_url'), 'tresor');
             if ($picture['state'] == false) {
                 return back()->withErrors($picture['message'])->withInput();
             }
