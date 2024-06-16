@@ -359,7 +359,13 @@
                                         <option value="pending">En cours</option>
                                         <option value="rejected">Rejetté</option>
                                         <option value="missing_file">Document manquant</option>
-                                        <option value="completed">Validé</option>
+                                        @if ($stock->status == 'pending' || $stock->status == 'missing_file')
+                                            <option value="doing">Traité</option>
+                                        @elseif ($stock->status == 'doing')
+                                            @hasPrivilige('VALIDER_IMPORTATION')
+                                                <option value="completed">Validé</option>
+                                            @endHasPrivilige
+                                        @endif
                                     </select>
                                 </div>
                             </div>

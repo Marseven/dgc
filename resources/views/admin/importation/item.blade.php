@@ -404,10 +404,9 @@
                                         <option value="pending">En cours</option>
                                         <option value="rejected">Rejetté</option>
                                         <option value="missing_file">Document manquant</option>
-
-                                        @if ($importation->status != 'completed' || $importation->status != 'doing')
+                                        @if ($importation->status == 'pending' || $importation->status == 'missing_file')
                                             <option value="doing">Traité</option>
-                                        @else
+                                        @elseif ($importation->status == 'doing')
                                             @hasPrivilige('VALIDER_IMPORTATION')
                                                 <option value="completed">Validé</option>
                                             @endHasPrivilige
