@@ -29,7 +29,7 @@ class StockController extends Controller
         $declarations = DeclarationType::where('deleted', NULL)->get();
         $products = ProductType::where('deleted', NULL)->get();
         $logistics = Logistic::where('deleted', NULL)->get();
-        $stock->load(['entreprise', 'type_declaration_st', 'type_product_st', 'logistic_st', 'activity_st', 'user']);
+        $stock->load(['entreprise', 'type_declaration_st', 'type_product_st', 'logistic_st', 'activity_st', 'user', 'approved_by']);
         return view('admin.stock.item', compact('stock', 'activities_st', 'products', 'logistics', 'declarations'));
     }
 

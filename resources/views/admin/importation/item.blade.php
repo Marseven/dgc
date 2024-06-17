@@ -62,6 +62,12 @@
                                                         {{ $importation->user->lastname . ' ' . $importation->user->firstname }}
                                                     </p>
                                                 @endif
+
+                                                @if ($importation->approved_by != null)
+                                                    <p>Validé par :
+                                                        {{ $importation->approved_by->lastname . ' ' . $importation->approved_by->firstname }}
+                                                    </p>
+                                                @endif
                                             </div>
                                             <!-- End Title-->
                                         </div>

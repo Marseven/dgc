@@ -20,6 +20,11 @@ class Stock extends Model
         return $this->belongsTo(User::class, 'updated_by', 'id');
     }
 
+    public function approved_by(): BelongsTo
+    {
+        return $this->belongsTo(User::class, 'approved_by', 'id');
+    }
+
     public function activity_st(): BelongsTo
     {
         return $this->belongsTo(Activity::class, 'activity_id', 'id');

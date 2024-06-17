@@ -22,7 +22,7 @@ class ImportationController extends Controller
 
     public function item(Importation $importation)
     {
-        $importation->load(['entreprise', 'user']);
+        $importation->load(['entreprise', 'user', 'approved_by']);
         return view('admin.importation.item', compact('importation'));
     }
 

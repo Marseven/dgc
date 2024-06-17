@@ -60,6 +60,11 @@
                                                         {{ $stock->user->lastname . ' ' . $stock->user->firstname }}
                                                     </p>
                                                 @endif
+                                                @if ($stock->approved_by != null)
+                                                    <p>Validé par :
+                                                        {{ $stock->approved_by->lastname . ' ' . $stock->approved_by->firstname }}
+                                                    </p>
+                                                @endif
                                             </div>
                                             <!-- End Title-->
                                         </div>
