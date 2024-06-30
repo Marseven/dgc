@@ -165,6 +165,7 @@
                             <ul class="rd-navbar-nav">
                                 <li><a href="{{ url('/') }}">Déclaration d'importation</a></li>
                                 <li><a href="{{ url('form/stock') }}">Déclaration de stock</a></li>
+                                <li><a href="{{ url('events') }}">Évènements</a></li>
                             </ul>
                         </div>
                     </div>

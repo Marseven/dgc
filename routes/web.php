@@ -1,11 +1,15 @@
 <?php
 
 use App\Http\Controllers\Admin\EntrepriseController;
+use App\Http\Controllers\Admin\EventController;
 use App\Http\Controllers\Admin\ImportationController as AdminImportationController;
+use App\Http\Controllers\Admin\RegistrationController;
 use App\Http\Controllers\Admin\RoleController;
 use App\Http\Controllers\Admin\SettingController;
 use App\Http\Controllers\Admin\StockController as AdminStockController;
+use App\Http\Controllers\Admin\TicketController;
 use App\Http\Controllers\Admin\UserController;
+use App\Http\Controllers\Front\EventController as FrontEventController;
 use App\Http\Controllers\Front\ImportationController;
 use App\Http\Controllers\Front\StockController;
 use App\Http\Controllers\Front\WelcomeController;
@@ -25,6 +29,14 @@ Route::post('/stock', [StockController::class, 'create'])->name('stock');
 
 Route::get('/contact', [WelcomeController::class, 'contact'])->name('contact');
 Route::post('/contact', [WelcomeController::class, 'sendMessage'])->name('sendMessage');
+
+Route::get('/events', [FrontEventController::class, 'index'])->name('events');
+Route::get('/event/{event}', [FrontEventController::class, 'item'])->name('event');
+
+Route::post('/attendee/{event}', [FrontEventController::class, 'storeAttendee'])->name('event.attendee');
+Route::post('/compagnie/{event}', [FrontEventController::class, 'storeCompagnie'])->name('event.compagnie');
+
+Route::get('/print/{registration}', [FrontEventController::class, 'print'])->name('event.print.ticket');
 
 Route::get('/email/verify', function () {
     return view('auth.verify-email');
@@ -130,5 +142,27 @@ Route::middleware('auth')->group(function () {
         Route::get('/logistic', [SettingController::class, 'logistic'])->name('admin.logistic');
         Route::post('/logistic', [SettingController::class, 'createLogistic'])->name('create.logistic');
         Route::post('/logistic/update/{logistic}', [SettingController::class, 'updateLogistic'])->name('update.logistic');
+
+        //event
+        Route::get('/event', [EventController::class, 'index'])->name('admin.event');
+        Route::post('/get/event', [EventController::class, 'ajaxItem'])->name('get-event');
+        Route::get('/ajax/events', [EventController::class, 'ajaxList'])->name('list-event');
+        Route::post('/event', [EventController::class, 'create'])->name('create.event');
+        Route::post('/update/event/{event}', [EventController::class, 'update'])->name('update.event');
+
+
+        //ticket
+        Route::get('/ticket', [TicketController::class, 'index'])->name('admin.ticket');
+        Route::post('/get/ticket', [TicketController::class, 'ajaxItem'])->name('get-ticket');
+        Route::get('/ajax/tickets', [TicketController::class, 'ajaxList'])->name('list-ticket');
+        Route::post('/ticket', [TicketController::class, 'create'])->name('create.ticket');
+        Route::post('/update/ticket/{ticket}', [TicketController::class, 'update'])->name('update.ticket');
+
+        //registration
+        Route::get('/registration/{event}', [RegistrationController::class, 'index'])->name('admin.registration');
+        Route::post('/get/registration', [RegistrationController::class, 'ajaxItem'])->name('get-registration');
+        Route::post('/update/registration/{registration}', [RegistrationController::class, 'update'])->name('update.registration');
+        Route::get('/ajax/compagnie/registrations/{event}', [RegistrationController::class, 'ajaxListCompagnie'])->name('list-compagnie-registration');
+        Route::get('/ajax/attendee/registrations/{event}', [RegistrationController::class, 'ajaxListAttendee'])->name('list-attendee-registration');
     });
 });

@@ -205,6 +205,20 @@
                                     </li>
                                 @endHasPrivilige
 
+                                <li class="sidebar-main-title">
+                                    <h6 class="">Evenements</h6>
+                                </li>
+                                <li class="sidebar-list"><i class="fa fa-thumb-tack"> </i>
+                                    <a class="sidebar-link sidebar-title" href="{{ route('admin.event') }}">
+                                        <i data-feather="calendar" class="mx-1"></i><span>Évènements
+                                        </span></a>
+                                </li>
+                                <li class="sidebar-list"><i class="fa fa-thumb-tack"> </i>
+                                    <a class="sidebar-link sidebar-title" href="{{ route('admin.ticket') }}">
+                                        <i data-feather="printer" class="mx-1"></i><span>Tickets </span></a>
+                                </li>
+
+
                                 @hasPrivilige('VOIR_UTILISATEUR')
                                     <li class="sidebar-main-title">
 

@@ -73,6 +73,16 @@ class Controller extends BaseController
                 $message['message'] = "Payée Partiellement";
                 return $message;
                 break;
+            case 'active':
+                $message['type'] = "success";
+                $message['message'] = "Actif";
+                return $message;
+                break;
+            case 'inactive':
+                $message['type'] = "danger";
+                $message['message'] = "Inactif";
+                return $message;
+                break;
             default:
                 $message['type'] = "info";
                 $message['message'] = $status;

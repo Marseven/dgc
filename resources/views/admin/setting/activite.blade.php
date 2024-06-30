@@ -121,9 +121,10 @@
 
                         </button>
                     </div>
-                    <div class="modal-body">
-                        <form action="{{ url('admin/activite/update/' . $activite->id) }}" method="POST">
-                            @csrf
+                    <form action="{{ url('admin/activite/update/' . $activite->id) }}" method="POST">
+                        @csrf
+                        <div class="modal-body">
+
 
                             <div class="mb-3">
                                 <label for="name" class="col-form-label">Nom</label>
@@ -140,11 +141,11 @@
                                     </option>
                                 </select>
                             </div>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-dark" data-bs-dismiss="modal">Fermer</button>
-                        <button type="submit" class="btn btn-primary">Enregistrer</button>
-                    </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-dark" data-bs-dismiss="modal">Fermer</button>
+                            <button type="submit" class="btn btn-primary">Enregistrer</button>
+                        </div>
                     </form>
                 </div>
             </div>

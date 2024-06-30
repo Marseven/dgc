@@ -41,23 +41,15 @@ class FileController extends Controller
                 //get file extension
                 $extension = $request->getClientOriginalExtension();
 
+
                 //filename to store
-                $filenametostore = $filename . '_' . time() . '_300x300.' . $extension;
+                $filenametostore = $filename . '_' . time() . '_dgc.' . $extension;
 
                 //Upload File
-                $request->move(public_path('/upload/photo/original/'),  $filename . '.' . $extension);
+                $request->move(public_path('/upload/photo/'),  $filenametostore);
 
-                //Resize image here
-                $originalpath = public_path('/upload/photo/original/' . $filename . '.' . $extension);
-                $thumbnailpath = public_path('/upload/photo/traite/' . $filenametostore);
+                $filePath_traite = '/upload/photo/' . $filenametostore;
 
-                $img = Image::make($originalpath)->fit(970, 1000, function ($constraint) {
-                    $constraint->aspectRatio();
-                })->interlace(true);
-                $img->save($thumbnailpath);
-
-                $filePath_originale = '/upload/photo/original/' . $filename . '.' . $extension;
-                $filePath_traite = '/upload/photo/traite/' . $filenametostore;
 
                 $result['state'] = true;
                 $result['url'] =  $filePath_traite;
