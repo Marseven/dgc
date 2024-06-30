@@ -17,7 +17,6 @@ return new class extends Migration
             $table->string('last_name');
             $table->string('email');
             $table->string('phone')->nullable();
-            $table->foreignId('company_id')->nullable()->references('id')->on('compagnies');
             $table->boolean('deleted')->nullable();
             $table->dateTime('deleted_at')->nullable();
             $table->timestamps();
