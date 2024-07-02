@@ -140,6 +140,6 @@ class EventController extends Controller
         $pdf = PDF::loadView('pdf.ticket', $data)->setPaper(array(0, 0, 300, 500), 'landscape');
 
         // Télécharger le PDF
-        return $pdf->download('Ticket_' . $registration->id . '.pdf');
+        return $pdf->download($registration->event->title . '_' . $registration->id . '_' . date('dmY') . '.pdf');
     }
 }
