@@ -28198,7 +28198,7 @@ p + .group {
 	background-repeat: no-repeat;
 	min-height: 280px;
 	padding: 35px 20px;
-	box-shadow: inset 300px 0 500px rgba(0, 0, 0, 0.8);
+	box-shadow: inset 300px 0 500px rgba(0, 0, 0, 0.9);
 	color: #fff;
 }
 

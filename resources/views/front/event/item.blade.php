@@ -100,7 +100,8 @@
                                     <select class="form-input" id="entreprise_id" name="ticket_id">
                                         <option value="0">Choisissez votre société</option>
                                         @foreach ($tickets as $ticket)
-                                            <option value="{{ $ticket->id }}">{{ $ticket->name }} - {{ $ticket->price }}
+                                            <option value="{{ $ticket->id }}">{{ $ticket->name }} -
+                                                {{ round($ticket->price) }}
                                                 FCFA</option>
                                         @endforeach
                                     </select>

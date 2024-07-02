@@ -25,8 +25,8 @@
                                     <h5 class="box-info-custom-title"><a href="{{ url('event/' . $event->id) }}">
                                             {{ $event->title }}</a></h5>
                                     <p>{{ $event->description }}</p>
-                                    <p>Début : {{ date_format(date_create($event->start_time), 'd-m-Y H:i:s') }} <br> Fin :
-                                        {{ date_format(date_create($event->end_time), 'd-m-Y H:i:s') }}</p>
+                                    <p>Début : {{ date_format(date_create($event->start_time), 'd-m-Y H:i') }} <br> Fin :
+                                        {{ date_format(date_create($event->end_time), 'd-m-Y H:i') }}</p>
                                     <p>Lieu : {{ $event->place }}</p>
                                 </div>
                             </div>
