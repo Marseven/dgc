@@ -23,7 +23,7 @@
             width: 100%;
             height: 100%;
             z-index: -1;
-            background: url('{{ asset('front/images/dgc_wb.png') }}') no-repeat center;
+            background: url('{{ asset($registration->event->picture) }}') no-repeat center;
             background-size: contain;
             opacity: 0.05;
             /* Adjust the opacity as needed */
