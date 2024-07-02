@@ -221,6 +221,31 @@
             });
         });
 
+        $(document).on("click", ".modal_view_action", function() {
+            var id = $(this).data('id');
+
+            $.ajax({
+                headers: {
+                    'X-CSRF-TOKEN': jQuery('meta[name="csrf-token"]').attr('content')
+                },
+                type: "POST",
+                url: "{{ route('get-registration') }}",
+                dataType: 'json',
+                data: {
+                    "id": id,
+                    "action": "view",
+                },
+                success: function(data) {
+                    //get data value params
+                    var body = data.body;
+                    //dynamic title
+                    $('#cardModalView .modal-content').html(body); //url to delete item
+                    $('#cardModalView').modal('show');
+                }
+            });
+
+        });
+
         $(document).on("click", ".modal_edit_action", function() {
             var id = $(this).data('id');
 

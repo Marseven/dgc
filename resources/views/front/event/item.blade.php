@@ -133,7 +133,7 @@
                             </div>
                         </div>
                         <br>
-                        <button class="btn btn-form btn-default" type="submit">Payer</button>
+                        <button class="btn btn-form btn-default" type="submit">Valider</button>
                     </form>
 
                 </div>

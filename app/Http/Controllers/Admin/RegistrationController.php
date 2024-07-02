@@ -145,21 +145,25 @@ class RegistrationController extends Controller
 
             $status = '<span class="badge badge-' . Controller::status($record->status)['type'] . '">' . Controller::status($record->status)['message'] . '</span>';
 
-            $actions = '<a href="' . url('admin/ticket/' . $record->id) . '">
-                            <button style="padding: 10px !important" type="button" class="btn btn-info">
-                                <i class="icon-eye"></i>
-                            </button>
-                        </a>
-                        <button style="padding: 10px !important" type="button" class="btn btn-primary modal_edit_action" data-bs-toggle="modal"
-            data-id="' . $record->id . '"
-            data-bs-target="#cardModalView">
-                                <i class="icon-pencil"></i>
-                            </button>
-                            <button style="padding: 10px !important" type="button" class="btn btn-danger modal_delete_action" data-bs-toggle="modal"
-            data-id="' . $record->id . '"
-            data-bs-target="#cardModalView">
-                                <i class="icon-trash"></i>
-                            </button>';
+            $actions = '<button style="padding: 10px !important" type="button" class="btn btn-info modal_view_action" data-bs-toggle="modal"
+                        data-id="' . $record->id . '"
+                        data-bs-target="#cardModalView">
+                                            <i class="icon-eye"></i>
+                                        </button> ';
+
+            if ($record->status == 'pending') {
+                $actions .= ' <button style="padding: 10px !important" type="button" class="btn btn-primary modal_edit_action" data-bs-toggle="modal"
+                            data-id="' . $record->id . '"
+                            data-bs-target="#cardModalView">
+                                                <i class="icon-pencil"></i>
+                                            </button>';
+            }
+
+            $actions .= ' <button style="padding: 10px !important" type="button" class="btn btn-danger modal_delete_action" data-bs-toggle="modal"
+                        data-id="' . $record->id . '"
+                        data-bs-target="#cardModalView">
+                                            <i class="icon-trash"></i>
+                                        </button>';
 
             $data_arr[] = array(
                 "id" => $id,
@@ -182,5 +186,169 @@ class RegistrationController extends Controller
         );
 
         return response()->json($response);
+    }
+
+    public function ajaxItem(Request $request)
+    {
+        $compagnie = Compagnie::find($request->id);
+
+        $title = "";
+        if ($request->action == "view") {
+            $body = '<div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabelOne">La Demande N° : ' . $compagnie->id . '</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+
+                </button>
+            </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-6 mb-5">
+                            <h6 class="text-uppercase fs-5 ls-2">Nom de l\'entreprise </h6>
+                            <p class="text-uppercase mb-0">' . $compagnie->name . '</p>
+                        </div>
+                        <div class="col-6 mb-5">
+                            <h6 class="text-uppercase fs-5 ls-2">Représentant </h6>
+                            <p class="mb-0">' . $compagnie->manager . '</p>
+                        </div>
+                        <div class="col-6 mb-5">
+                            <h6 class="text-uppercase fs-5 ls-2">Email</h6>
+                            <p class="mb-0">' . $compagnie->email . '</p>
+                        </div>
+                        <div class="col-6 mb-5">
+                            <h6 class="text-uppercase fs-5 ls-2">Téléphone</h6>
+                            <p class="mb-0">' . $compagnie->phone . '</p>
+                        </div>
+                        <div class="col-6 mb-5">
+                            <h6 class="text-uppercase fs-5 ls-2">Activité</h6>
+                            <p class="mb-0">' . $compagnie->activity . '</p>
+                        </div>
+                        <div class="col-6 mb-5">
+                            <h6 class="text-uppercase fs-5 ls-2">Forme juridique</h6>
+                            <p class="mb-0">' . $compagnie->legal_status . '</p>
+                        </div>
+                        <div class="col-6 mb-5">
+                            <h6 class="text-uppercase fs-5 ls-2">Site Web</h6>
+                            <p class="mb-0"><a target="_blank"
+                            href="' . $compagnie->website . '">' . $compagnie->website . '<a></p>
+                        </div>
+                        <div class="col-6 mb-5">
+                            <h6 class="text-uppercase fs-5 ls-2">N° Fiche Circuit</h6>
+                            <p class="mb-0">' . $compagnie->business_circuit . '</p>
+                        </div>
+                        <div class="col-6 mb-5">
+                            <h6 class="text-uppercase fs-5 ls-2">Fiche Circuit</h6>
+                            <p class="mb-0"><a target="_blank"
+                            href="' . asset($compagnie->business_url) . '">Voir la fiche circuit<a></p>
+                        </div>
+                        <div class="row">
+                            <div class="col-6 mb-5">
+                                <h6 class="text-uppercase fs-5 ls-2">Adresse</h6>
+                                <p class="mb-0">' . $compagnie->address . '</p>
+                            </div>
+                            <div class="col-6 mb-5">
+                                <h6 class="text-uppercase fs-5 ls-2">Ville</h6>
+                                <p class="mb-0">' . $compagnie->city . '</p>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-6 mb-5">
+                                <h6 class="text-uppercase fs-5 ls-2">Province</h6>
+                                <p class="mb-0">' . $compagnie->state . '</p>
+                            </div>
+                            <div class="col-6 mb-5">
+                                <h6 class="text-uppercase fs-5 ls-2">Pays</h6>
+                                <p class="mb-0">' . $compagnie->country . '</p>
+                            </div>
+                        </div>
+                        <div class="row">
+                             <div class="col-6 mb-5">
+                                <h6 class="text-uppercase fs-5 ls-2">BP</h6>
+                                <p class="mb-0">' . $compagnie->postal_code . '</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-dark" data-bs-dismiss="modal">Fermer</button>
+                </div>';
+        } elseif ($request->action == "edit") {
+
+            $body = '<div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabelOne">Mettre à jour la demande N° : ' . $compagnie->id . '</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+
+                </button>
+            </div>
+
+            <form action="' . url('admin/update/registration/' . $compagnie->id) . '" method="POST">
+                <div class="modal-body">
+                        <input type="hidden" name="_token" value="' . csrf_token() . '">
+                        <div class="mb-3">
+                            <label for="recipient-name" class="col-form-label">Statut</label>
+                            <select id="selectOne" class="form-control" name="status">
+                                <option value="accepted">Accepté</option>
+                                <option value="rejected">Rejetté</option>
+                                <option value="missing_file">Dossier incomplet</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-dark" data-bs-dismiss="modal">Fermer</button>
+                        <button type="submit" class="btn btn-success">Enregistrer</button>
+                    </div>
+            </form>';
+        } else {
+
+            $body = '
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabelOne">Supprimer la demande N° : ' . $compagnie->id . '</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+
+                </button>
+            </div>
+
+            <form action="' . url('admin/update/registration/' . $compagnie->id) . '" method="POST">
+                <div class="modal-body">
+                    <input type="hidden" name="_token" value="' . csrf_token() . '">
+                    <input type="hidden" name="delete" value="true">
+                    Êtes-vous sûr de vouloir supprimer cette demande ?
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-dark" data-bs-dismiss="modal">Fermer</button>
+                    <button type="submit" class="btn btn-danger">Supprimer</button>
+                </div>
+            </form>
+            ';
+        }
+
+        $response = array(
+            "title" => $title,
+            "body" => $body,
+        );
+
+        return response()->json($response);
+    }
+
+    public function update(Request $request, $compagnie)
+    {
+        $compagnie = Compagnie::find($compagnie);
+
+        if (isset($_POST['delete'])) {
+            $compagnie->deleted = true;
+            $compagnie->deleted_at = now();
+            if ($compagnie->save()) {
+                return back()->with('success', "La demande a été supprimée.");
+            } else {
+                return back()->with('error', "La demande n'a pas été supprimée.");
+            }
+        } else {
+            $compagnie->status = $request->status;
+
+            if ($compagnie->save()) {
+                return back()->with('success', 'Demande mis à jour avec succès.');
+            } else {
+                return back()->with('error', 'Un problème est survenu.');
+            }
+        }
     }
 }

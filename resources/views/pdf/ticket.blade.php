@@ -4,155 +4,87 @@
     <meta http-equiv="content-type" content="text/html; charset=utf-8" />
     <style>
         html {
-            margin-top: 0.2in !important;
-            margin-left: 0.2in !important;
+            margin-top: 0.4in !important;
+            margin-left: 0.6in !important;
         }
 
         body {
-            font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-            font-size: 13px;
-            line-height: 1.4em;
-            font-weight: bold;
-        }
-
-        .ticket {
-            width: 8in;
-            height: 2.7in;
-            background-size: cover;
-            background-repeat: no-repeat;
-            position: relative;
-            margin-bottom: 0.2in;
-        }
-
-        .ticket-img {
-            max-width: 100%;
-            height: auto;
-            position: relative;
-            /*display: inline-block;*/
-        }
-
-        #event-info {
-            display: inline-block;
-            position: absolute;
-            left: 0.1in;
-            top: 0.12in;
-            width: 4.7in;
-        }
-
-        .label {
-            color: #768690;
-            display: block;
-            text-transform: uppercase;
+            font-family: Arial, Helvetica, sans-serif;
         }
 
         .value {
-            display: block;
-            color: #121212;
-            text-transform: uppercase;
-            overflow: hidden;
-            font-size: 16px;
+            font-weight: bold;
         }
 
-        #title {
-            height: 0.4in;
-        }
-
-        #location {
-            height: 0.8in;
-        }
-
-        #stub-info {
-            display: block;
-            position: absolute;
-            top: 0.06in;
-            left: 3in;
-            width: 1.9in;
-            text-align: center;
-        }
-
-        #purchased-on {
-            display: inline-block;
-            color: #fff;
-            text-transform: uppercase;
-            font-size: 9px;
-            text-align: center;
-            width: 100%;
-            position: relative;
-        }
-
-        #qrcode {
-            position: relative;
-            width: 70%;
-            height: auto;
-            margin-top: 0.3in;
-            margin-left: -1.9in;
-        }
-
-        #ticket-num {
-            display: block;
-            text-transform: uppercase;
-            text-align: center;
-            width: 100%;
-            position: relative;
+        .watermark {
+            position: fixed;
             top: 0;
             left: 0;
-            font-weight: bold;
-            font-size: 12px;
-        }
-
-        #attendee-info {
-            text-align: left;
-            font-size: 10px;
-            position: relative;
-            top: 0.18in;
-            line-height: 1.6em;
-        }
-
-        #attendee-info .value {
-            font-size: 10px;
-        }
-
-
-
-        #purchased-on {
-            display: block;
-        }
-
-        #qrcode {
-            display: inline;
-            margin: -0.1in 0 0 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            background: url('{{ asset('front/images/dgc_wb.png') }}') no-repeat center;
+            background-size: contain;
+            opacity: 0.05;
+            /* Adjust the opacity as needed */
         }
     </style>
 </head>
 
 <body>
-    <div class="ticket">
-        {{-- <img class="ticket-img" style="widht:100px; height:auto" src="{{ asset($registration->event->picture) }}" /> --}}
+    <div class="watermark"></div>
 
-        <div id="event-info">
-            <span class="label">EVENEMENT</span>
+    <div class="header" style="margin-bottom:40px;">
+        <div class="logo-left" style="display: inline-block; width:40%">
+            <img style="width: 27%; height:auto;" class="ticket-img" src="{{ asset('front/images/dgc_wb.png') }}" />
+        </div>
+        <div class="logo-right" style="display: inline-block; width:50%; text-align:right;">
+            <img style="width: 30%; height:auto;" class="ticket-img" src="{{ asset('front/images/blason.jpg') }}" />
+        </div>
+    </div>
+
+    <div class="ticket" style="width:100%">
+        <div id="event-info"
+            style="display: inline-block; border: 2px solid #ccc; width:60%; padding:10px; font-size:10px;">
+            <span class="label">EVENEMENT : </span>
             <span id="title" class="value">{{ $registration->event->title }}</span>
-
-            <span class="label">DATE DE DEBUT</span>
+            <br>
+            <span class="label">DATE DE DEBUT : </span>
             <span class="value">{{ $registration->event->start_time }}</span>
             <br>
-            <span class="label">DATE DE FIN</span>
+            <span class="label">DATE DE FIN : </span>
             <span class="value">{{ $registration->event->end_time }}</span>
-        </div>
-
-        <div id="stub-info">
-            {{-- <img id="logo" style="widht:100px; height:auto" src="{{ asset('front/images/dgc_wb.png') }}" /> --}}
-            <span id="ticket-num" class="value">#{{ $registration->id }}</span>
-
+            <br>
+            <span class="label">LIEU : </span>
+            <span class="value">{{ $registration->event->place }}</span>
+            <br><br>
             <div id="attendee-info">
-                <span class="label">Ticket : {{ $registration->ticket->name }}</span>
+                <span class="label">TICKET : <span class="value">{{ $registration->ticket->name }} -
+                        {{ $registration->ticket->price }} FCFA</span>
+                </span>
+                <br><br>
 
+                <span class="label">COMMANDER PAR : </span><br>
                 <span id="name" class="value">{{ $registration->attendee->first_name }}
-                    {{ $registration->attendee->last_name }}</span>
-                <span id="email" class="value">{{ $registration->attendee->email }}</span>
-                <span id="phone" class="value">{{ $registration->attendee->phone }}</span>
+                    {{ $registration->attendee->last_name }}</span><br>
+                <span id="email" class="value">{{ $registration->attendee->email }}</span><br>
+                <span id="phone" class="value">{{ $registration->attendee->phone }}</span><br>
             </div>
         </div>
+
+        <div id="stub-info"
+            style="display: inline-block; border: 2px solid #ccc; width:25%; text-align:center; padding:13px; margin-left:-5px;">
+            <img class="qrcode" style="width: 90%; height:auto;" src="{{ asset('front/images/qr_code.png') }}" />
+        </div>
+    </div>
+
+    <div class="footer">
+        <p id="disclaimer" style="text-align: justify; font-size: 10px; margin-top:-15px;">
+            Ce billet est non-remboursable et non-transférable. L'accès à l'événement est soumis à la présentation de ce
+            billet valide. Les organisateurs ne sont pas responsables des pertes, dommages ou blessures survenus lors de
+            l'événement. En participant, vous acceptez l'utilisation de votre image à des fins promotionnelles. Veuillez
+            respecter le règlement intérieur de l'événement. Merci de votre compréhension.
+        </p>
     </div>
 </body>
 

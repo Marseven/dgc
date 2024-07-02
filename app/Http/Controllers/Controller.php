@@ -58,6 +58,11 @@ class Controller extends BaseController
                 $message['message'] = "Approuvé";
                 return $message;
                 break;
+            case 'accepted':
+                $message['type'] = "success";
+                $message['message'] = "Approuvé";
+                return $message;
+                break;
             case 'unpaid':
                 $message['type'] = "danger";
                 $message['message'] = "Impayée";
