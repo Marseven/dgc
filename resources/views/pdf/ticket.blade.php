@@ -25,7 +25,7 @@
             z-index: -1;
             background: url('{{ asset($registration->event->picture) }}') no-repeat center;
             background-size: contain;
-            opacity: 0.05;
+            opacity: 0.1;
             /* Adjust the opacity as needed */
         }
     </style>
@@ -50,17 +50,17 @@
             <span id="title" class="value">{{ $registration->event->title }}</span>
             <br>
             <span class="label">DATE DE DEBUT : </span>
-            <span class="value">{{ $registration->event->start_time }}</span>
+            <span class="value">{{ date_format(date_create($registration->event->start_time), 'd-m-Y H:i') }}</span>
             <br>
             <span class="label">DATE DE FIN : </span>
-            <span class="value">{{ $registration->event->end_time }}</span>
+            <span class="value">{{ date_format(date_create($registration->event->end_time), 'd-m-Y H:i') }}</span>
             <br>
             <span class="label">LIEU : </span>
             <span class="value">{{ $registration->event->place }}</span>
             <br><br>
             <div id="attendee-info">
                 <span class="label">TICKET : <span class="value">{{ $registration->ticket->name }} -
-                        {{ $registration->ticket->price }} FCFA</span>
+                        {{ round($registration->ticket->price) }} FCFA</span>
                 </span>
                 <br><br>
 
