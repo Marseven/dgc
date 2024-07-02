@@ -11,7 +11,7 @@
         <div class="page-title">
             <div class="row">
                 <div class="col-6">
-                    <h4>Liste des Inscriptions</h4>
+                    <h4>{{ $event->title }}</h4>
                 </div>
                 <div class="col-6">
                     <ol class="breadcrumb">
@@ -20,7 +20,7 @@
                                     <use href="{{ asset('admin/svg/icon-sprite.svg#stroke-home') }}"></use>
                                 </svg></a></li>
                         <li class="breadcrumb-item">Évènement</li>
-                        <li class="breadcrumb-item active">Inscriptions</li>
+                        <li class="breadcrumb-item active">{{ $event->title }}</li>
                     </ol>
                 </div>
             </div>
