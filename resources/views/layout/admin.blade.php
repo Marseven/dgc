@@ -205,7 +205,7 @@
                                     </li>
                                 @endHasPrivilige
 
-                                <li class="sidebar-main-title">
+                                {{-- <li class="sidebar-main-title">
                                     <h6 class="">Evenements</h6>
                                 </li>
                                 <li class="sidebar-list"><i class="fa fa-thumb-tack"> </i>
@@ -216,7 +216,7 @@
                                 <li class="sidebar-list"><i class="fa fa-thumb-tack"> </i>
                                     <a class="sidebar-link sidebar-title" href="{{ route('admin.ticket') }}">
                                         <i data-feather="printer" class="mx-1"></i><span>Tickets </span></a>
-                                </li>
+                                </li> --}}
 
 
                                 @hasPrivilige('VOIR_UTILISATEUR')
